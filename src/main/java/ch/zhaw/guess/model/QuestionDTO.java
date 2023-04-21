@@ -11,4 +11,5 @@ import lombok.Setter;
 @Setter
 public class QuestionDTO {
     private String questionText;
+    private double correctAnswer;
 }

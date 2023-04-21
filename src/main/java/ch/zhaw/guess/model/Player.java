@@ -1,7 +1,6 @@
 package ch.zhaw.guess.model;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,5 +22,4 @@ public class Player {
     @NonNull
     private String username;
     private List<AnsweredQuestion> answeredQuestions;
-    private Map<Integer, LevelState> levelStates;
 }

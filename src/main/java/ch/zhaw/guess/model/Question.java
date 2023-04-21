@@ -15,5 +15,5 @@ import lombok.Setter;
 public class Question {
     private String id;
     private String questionText;
-    private int correctAnswer;
+    private double correctAnswer;
 }
