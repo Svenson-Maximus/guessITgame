@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ch.zhaw.guess.model.Player;
 import ch.zhaw.guess.model.PlayerDTO;
-import ch.zhaw.guess.model.PlayerLevelState;
+import ch.zhaw.guess.model.PlayerLevelStateDTO;
 import ch.zhaw.guess.repository.PlayerRepository;
 import ch.zhaw.guess.service.PlayerService;
 
@@ -61,10 +61,8 @@ public class PlayerController {
 
     @PutMapping("/player/{id}/levelstate")
     public ResponseEntity<Player> updatePlayerLevelState(@PathVariable String id,
-                                                          @RequestBody PlayerLevelState newLevelState) {
-        Player updatedPlayer = playerService.updatePlayerLevelState(id, newLevelState);
+                                                          @RequestBody PlayerLevelStateDTO newLevelStateDTO) {
+        Player updatedPlayer = playerService.updatePlayerLevelState(id, newLevelStateDTO);
         return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
     }
 }
-
-
