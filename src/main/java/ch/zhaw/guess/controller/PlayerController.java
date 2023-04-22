@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ch.zhaw.guess.model.Player;
 import ch.zhaw.guess.model.PlayerDTO;
+import ch.zhaw.guess.model.PlayerLevelState;
 import ch.zhaw.guess.repository.PlayerRepository;
+import ch.zhaw.guess.service.PlayerService;
 
 @RestController
 @RequestMapping("/api")
@@ -52,4 +55,16 @@ public class PlayerController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @Autowired
+    private PlayerService playerService;
+
+    @PutMapping("/player/{id}/levelstate")
+    public ResponseEntity<Player> updatePlayerLevelState(@PathVariable String id,
+                                                          @RequestBody PlayerLevelState newLevelState) {
+        Player updatedPlayer = playerService.updatePlayerLevelState(id, newLevelState);
+        return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+    }
 }
+
+
