@@ -17,5 +17,5 @@ import lombok.Setter;
 public class Level {
     private String id;
     private int levelNumber;
-    private List<Question> questionIDList;
+    private List<String> questionIDList;
 }

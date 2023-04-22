@@ -21,5 +21,6 @@ public class Player {
     private String email;
     @NonNull
     private String username;
+    private PlayerLevelState playerLevelState = PlayerLevelState.LEVEL_1;
     private List<AnsweredQuestion> answeredQuestions;
 }
