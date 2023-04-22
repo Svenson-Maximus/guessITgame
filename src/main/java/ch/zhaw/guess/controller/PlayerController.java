@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ch.zhaw.guess.model.AnsweredQuestionDTO;
 import ch.zhaw.guess.model.Player;
 import ch.zhaw.guess.model.PlayerDTO;
 import ch.zhaw.guess.model.PlayerLevelStateDTO;
 import ch.zhaw.guess.repository.PlayerRepository;
+import ch.zhaw.guess.service.AnswerQuestionService;
 import ch.zhaw.guess.service.PlayerService;
 
 @RestController
@@ -27,6 +29,9 @@ import ch.zhaw.guess.service.PlayerService;
 public class PlayerController {
     @Autowired
     PlayerRepository playerRepository;
+
+    @Autowired
+    private AnswerQuestionService answerQuestionService;
 
     @PostMapping("/player")
     public ResponseEntity<Player> createPlayer(
@@ -56,12 +61,19 @@ public class PlayerController {
         }
     }
 
+    @PostMapping("/player/{id}/answer")
+    public ResponseEntity<Player> answerQuestion(@PathVariable String playerId,
+            @RequestBody AnsweredQuestionDTO answeredQuestionDTO) {
+        Player updatedPlayer = answerQuestionService.answerQuestion(playerId, answeredQuestionDTO);
+        return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+    }
+
     @Autowired
     private PlayerService playerService;
 
     @PutMapping("/player/{id}/levelstate")
     public ResponseEntity<Player> updatePlayerLevelState(@PathVariable String id,
-                                                          @RequestBody PlayerLevelStateDTO newLevelStateDTO) {
+            @RequestBody PlayerLevelStateDTO newLevelStateDTO) {
         Player updatedPlayer = playerService.updatePlayerLevelState(id, newLevelStateDTO);
         return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
     }
