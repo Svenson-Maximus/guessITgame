@@ -7,14 +7,17 @@ import ch.zhaw.guess.repository.PlayerRepository;
 import ch.zhaw.guess.repository.QuestionRepository;
 import ch.zhaw.guess.service.AnswerQuestionService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -48,11 +51,18 @@ public class AnswerQuestionServiceTest {
         when(playerRepository.save(any(Player.class))).thenAnswer(i -> i.getArguments()[0]);
     }
 
-    @Test
-    public void answerQuestionTest() {
-        AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", 50);
+    private static Stream<Arguments> provideTestData() {
+        return Stream.of(
+                Arguments.of(50, 8),
+                Arguments.of(40, 2),
+                Arguments.of(30, 12)
+        );
+    }
 
-        int expectedDifference = 8;
+    @ParameterizedTest
+    @MethodSource("provideTestData")
+    public void answerQuestionTest(int playerAnswer, int expectedDifference) {
+        AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
 
         Player updatedPlayer = answerQuestionService.answerQuestion("1", answeredQuestionDTO);
 
