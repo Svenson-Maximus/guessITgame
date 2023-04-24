@@ -1,0 +1,18 @@
+/* global.css */
+/* ...other global styles... */
+
+.gradient-background {
+    background-color: #e758ff;
+    opacity: 0.8;
+    background-image: radial-gradient(circle at center center, #45a3f7, #e758ff),
+      repeating-radial-gradient(circle at center center, #45a3f7, #45a3f7, 10px, transparent 20px, transparent 10px);
+    background-blend-mode: multiply;
+  
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+  }
+  
