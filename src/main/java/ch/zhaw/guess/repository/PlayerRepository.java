@@ -6,4 +6,5 @@ import ch.zhaw.guess.model.Player;
 
 
 public interface PlayerRepository extends MongoRepository<Player, String> {
+    Player findFirstByEmail(String email);
 }

@@ -8,6 +8,7 @@
     "dev": "rollup -c -w",
     "watch": "rollup -c rollup.config.watch.js -w",
     "start": "sirv public --no-clear --port 8081"
+
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",

@@ -1,10 +1,11 @@
 import Home from "./pages/Home.svelte";
-import Jobs from "./pages/Jobs.svelte";
+import Play from "./pages/Play.svelte";
+import Players from "./pages/Players.svelte";
+
 
 export default {
     '/': Home,
     '/home': Home,
-    
-
-    '/jobs': Jobs
+    '/play': Play,
+    '/players': Players,
 }

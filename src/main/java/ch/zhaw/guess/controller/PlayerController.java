@@ -3,10 +3,13 @@ package ch.zhaw.guess.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +37,7 @@ public class PlayerController {
     private AnswerQuestionService answerQuestionService;
 
     @PostMapping("/player")
+    @Secured("ROLE_admin")
     public ResponseEntity<Player> createPlayer(
             @RequestBody PlayerDTO pDTO) {
         Player pDAO = new Player(pDTO.getEmail(), pDTO.getUsername());
@@ -42,6 +46,7 @@ public class PlayerController {
     }
 
     @GetMapping("/player")
+    @Secured("ROLE_admin")
     public ResponseEntity<Page<Player>> getAllPlayer(
             @RequestParam(required = false, defaultValue = "1") Integer pageNumber,
             @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
@@ -50,6 +55,7 @@ public class PlayerController {
     }
 
     @GetMapping("/player/{id}")
+    @Secured("ROLE_admin")
     public ResponseEntity<Player> getPlayerById(@PathVariable String id) {
         Optional<Player> optPlayer = playerRepository.findById(id);
 
@@ -76,5 +82,16 @@ public class PlayerController {
             @RequestBody PlayerLevelStateDTO newLevelStateDTO) {
         Player updatedPlayer = playerService.updatePlayerLevelState(id, newLevelStateDTO);
         return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+    }
+
+    @GetMapping("/me/player")
+    @Secured("ROLE_admin")
+    public ResponseEntity<Player> assignToMe(@AuthenticationPrincipal Jwt jwt) {
+        String userEmail = jwt.getClaimAsString("email");
+        Player freelancer = playerRepository.findFirstByEmail(userEmail);
+        if (freelancer != null) {
+            return new ResponseEntity<>(freelancer, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }
