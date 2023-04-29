@@ -37,7 +37,6 @@ public class PlayerController {
     private AnswerQuestionService answerQuestionService;
 
     @PostMapping("/player")
-    @Secured("ROLE_admin")
     public ResponseEntity<Player> createPlayer(
             @RequestBody PlayerDTO pDTO) {
         Player pDAO = new Player(pDTO.getEmail(), pDTO.getUsername());

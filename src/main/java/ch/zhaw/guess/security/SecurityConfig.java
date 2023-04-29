@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .requestMatchers("/*").permitAll()
                 .requestMatchers("/api/**").authenticated()
                 .requestMatchers("/build/**").permitAll()
+                .requestMatchers("/images/**").permitAll()
                 .and().cors(withDefaults())
                 .oauth2ResourceServer(server -> server.jwt()
                     .decoder(jwtDecoder())

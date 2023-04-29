@@ -104,6 +104,7 @@
         <tr>
             <th scope="col">Name</th>
             <th scope="col">E-Mail</th>
+            <th scope="col">Current Level</th>
         </tr>
     </thead>
     <tbody>
@@ -111,6 +112,7 @@
             <tr>
                 <td>{player.username}</td>
                 <td>{player.email}</td>
+                <td>{player.playerLevelState}</td>
             </tr>
         {/each}
     </tbody>

@@ -31,7 +31,7 @@
         <div class="guessit">
             <img
                 class="guessit-logo"
-                src="/static/background.gif"
+                src="/images/background.gif"
                 alt="GuessITLogo"
             />
             {#if $isAuthenticated}

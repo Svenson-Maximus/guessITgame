@@ -3,8 +3,8 @@
 	import routes from "./routes";
 	import { isAuthenticated, user } from "./store";
 	import auth from "./auth.service";
-</script>
-
+</script>	
+<title>GuessIt</title>
 <div id="app">
 	<nav class="navbar navbar-expand-lg" style="background-color: transparent; border-bottom: 1px solid white;">
 		<div class="container-fluid">
