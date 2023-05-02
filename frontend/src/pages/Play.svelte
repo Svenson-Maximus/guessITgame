@@ -5,60 +5,120 @@
 
   const api_root = window.location.origin;
 
-  let questionText = "";
-  let correctAnswer = 0.0;
+  let allQuestions = []; // Array to store all questions
+  let questions = []; // Array to store filtered questions
   let userAnswer = "";
-
-  let playerId;
+  let playerDetails;
   let playerLevel;
-
-
+  let currentQuestionIndex = 0;
 
   onMount(async () => {
-      // Fetch the question from backend and set the questionText and correctAnswer
-      try {
-          const response = await axios.get("/api/question");
-          questionText = response.data.questionText;
-          correctAnswer = response.data.correctAnswer;
-      } catch (error) {
-          console.error("Failed to fetch question:", error);
-      }
+    try {
+      await getPlayerDetails();
+      await getQuestions();
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
   });
 
-  function getPlayerId() {
-        var config = {
-            method: "get",
-            url: api_root + "/api/me/freelancer",
-            headers: { Authorization: "Bearer " + $jwt_token },
-        };
+  async function getQuestions() {
+    var config = {
+      method: "get",
+      url: api_root + "/api/question",
+      headers: { Authorization: "Bearer " + $jwt_token },
+    };
 
-        axios(config)
-            .then(function (response) {
-                playerId = response.data.id;
-            })
-            .catch(function (error) {
-                alert("Could not get Player associated to current user");
-                console.log(error);
-            });
+    try {
+      const response = await axios(config);
+      allQuestions = response.data.content;
+      questions = allQuestions.filter(
+        (question) => question.level === playerLevel
+      );
+
+      console.log("Questions:", questions);
+
+    } catch (error) {
+      alert("Could not get questions");
+      console.log(error);
     }
-    getPlayerId();
+  }
+
+  async function getPlayerDetails() {
+    
+    var config = {
+      method: "get",
+      url: api_root + "/api/me/player",
+      headers: { Authorization: "Bearer " + $jwt_token },
+    };
+
+    try {
+      const response = await axios(config);
+      playerDetails = response.data;
+      playerLevel = response.data.playerLevelState;
+
+      console.log("playerDetails:", response.data);
+      console.log("playerLevel:", playerLevel);
+      console.log("QuestionIndex:", currentQuestionIndex);
+      
+    } catch (error) {
+      alert("Could not get Player associated to current user");
+      console.log(error);
+    }
+  }
+
+  async function handleSubmit() {
+    await submitAnswer();
+    await getPlayerDetails();
+    await getQuestions();
+
+    userAnswer = ""; // clear the input
+    if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++; // move to the next question
+    }
+  }
 
   async function submitAnswer() {
-      // Submit the answer to your backend
-      try {
-          const response = await axios.post("/api/answer", {
-              user: $user,
-              answer: userAnswer
-          });
-          // Handle response
-      } catch (error) {
-          console.error("Failed to submit answer:", error);
-      }
+  const config = {
+    method: "post",
+    url: `${api_root}/api/player/answer`,
+    headers: {
+      "Player-Id": playerDetails.id,
+      Authorization: `Bearer ${$jwt_token}`,
+      "Content-Type": "application/json",
+    },
+    data: {
+      questionId: questions[currentQuestionIndex].id,
+      playerAnswer: userAnswer,
+    },
+  };
+
+    try {
+      const response = await axios(config);
+      playerDetails = response.data; // Update playerDetails with the updated player returned from the server
+      userAnswer = ""; // Reset the answer input field
+    } catch (error) {
+      console.error("Failed to submit answer:", error);
+    }
   }
 </script>
 
 <div>
-  <h2>{questionText}</h2>
-  <input bind:value={userAnswer} placeholder="Enter your answer here" />
-  <button on:click={submitAnswer}>Submit Answer</button>
+  {#if questions.length > 0}
+    <h2>{questions[currentQuestionIndex].questionText}</h2>
+    <form on:submit|preventDefault={handleSubmit}>
+      <div class="form-group">
+        <input
+          class="form-control"
+          type="number"
+          bind:value={userAnswer}
+          placeholder="Enter your answer here"
+          min="0"
+          step="1"
+        />
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  {:else}
+    <p>Loading questions...</p>
+  {/if}
 </div>

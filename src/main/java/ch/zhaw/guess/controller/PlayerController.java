@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,12 +67,13 @@ public class PlayerController {
         }
     }
 
-    @PostMapping("/player/{id}/answer")
-    public ResponseEntity<Player> answerQuestion(@PathVariable String playerId,
-            @RequestBody AnsweredQuestionDTO answeredQuestionDTO) {
-        Player updatedPlayer = answerQuestionService.answerQuestion(playerId, answeredQuestionDTO);
-        return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
-    }
+    @PostMapping("/player/answer")
+public ResponseEntity<Player> answerQuestion(@RequestHeader("Player-Id") String playerId,
+        @RequestBody AnsweredQuestionDTO answeredQuestionDTO) {
+    Player updatedPlayer = answerQuestionService.answerQuestion(playerId, answeredQuestionDTO);
+    return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+}
+
 
     @Autowired
     private PlayerService playerService;
@@ -84,12 +86,11 @@ public class PlayerController {
     }
 
     @GetMapping("/me/player")
-    @Secured("ROLE_admin")
     public ResponseEntity<Player> assignToMe(@AuthenticationPrincipal Jwt jwt) {
-        String userEmail = jwt.getClaimAsString("email");
-        Player freelancer = playerRepository.findFirstByEmail(userEmail);
-        if (freelancer != null) {
-            return new ResponseEntity<>(freelancer, HttpStatus.OK);
+        String email = jwt.getClaimAsString("email");
+        Player player = playerRepository.findFirstByEmail(email);
+        if (player != null) {
+            return new ResponseEntity<>(player, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

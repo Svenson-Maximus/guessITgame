@@ -1,5 +1,5 @@
 <script>
-    import { isAuthenticated, user } from "../store";
+    import { isAuthenticated, user, jwt_token } from "../store";
 </script>
 
 <div class="row">
@@ -20,9 +20,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Account Infos</h5>
                     <p class="card-text" />
-                    <p><b>Name:</b> {$user.name}</p>
-                    <p><b>Nickname:</b> {$user.nickname}</p>
+                    <p><b>Username:</b> {$user.nickname}</p>
                     <p><b>Email:</b> {$user.email}</p>
+                    
                 </div>
             </div>
         </div>

@@ -87,11 +87,21 @@ var app = (function () {
         node.addEventListener(event, handler, options);
         return () => node.removeEventListener(event, handler, options);
     }
+    function prevent_default(fn) {
+        return function (event) {
+            event.preventDefault();
+            // @ts-ignore
+            return fn.call(this, event);
+        };
+    }
     function attr(node, attribute, value) {
         if (value == null)
             node.removeAttribute(attribute);
         else if (node.getAttribute(attribute) !== value)
             node.setAttribute(attribute, value);
+    }
+    function to_number(value) {
+        return value === '' ? null : +value;
     }
     function children(element) {
         return Array.from(element.childNodes);
@@ -849,7 +859,7 @@ var app = (function () {
     const { Error: Error_1, Object: Object_1, console: console_1$2 } = globals;
 
     // (267:0) {:else}
-    function create_else_block$1(ctx) {
+    function create_else_block$2(ctx) {
     	let switch_instance;
     	let switch_instance_anchor;
     	let current;
@@ -931,7 +941,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_else_block$1.name,
+    		id: create_else_block$2.name,
     		type: "else",
     		source: "(267:0) {:else}",
     		ctx
@@ -941,7 +951,7 @@ var app = (function () {
     }
 
     // (260:0) {#if componentParams}
-    function create_if_block$2(ctx) {
+    function create_if_block$3(ctx) {
     	let switch_instance;
     	let switch_instance_anchor;
     	let current;
@@ -1026,7 +1036,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$2.name,
+    		id: create_if_block$3.name,
     		type: "if",
     		source: "(260:0) {#if componentParams}",
     		ctx
@@ -1040,7 +1050,7 @@ var app = (function () {
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block$2, create_else_block$1];
+    	const if_block_creators = [create_if_block$3, create_else_block$2];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -1813,20 +1823,14 @@ var app = (function () {
     	let p1;
     	let b0;
     	let t5;
-    	let t6_value = /*$user*/ ctx[1].name + "";
+    	let t6_value = /*$user*/ ctx[1].nickname + "";
     	let t6;
     	let t7;
     	let p2;
     	let b1;
     	let t9;
-    	let t10_value = /*$user*/ ctx[1].nickname + "";
+    	let t10_value = /*$user*/ ctx[1].email + "";
     	let t10;
-    	let t11;
-    	let p3;
-    	let b2;
-    	let t13;
-    	let t14_value = /*$user*/ ctx[1].email + "";
-    	let t14;
 
     	const block = {
     		c: function create() {
@@ -1843,44 +1847,36 @@ var app = (function () {
     			t3 = space();
     			p1 = element("p");
     			b0 = element("b");
-    			b0.textContent = "Name:";
+    			b0.textContent = "Username:";
     			t5 = space();
     			t6 = text(t6_value);
     			t7 = space();
     			p2 = element("p");
     			b1 = element("b");
-    			b1.textContent = "Nickname:";
+    			b1.textContent = "Email:";
     			t9 = space();
     			t10 = text(t10_value);
-    			t11 = space();
-    			p3 = element("p");
-    			b2 = element("b");
-    			b2.textContent = "Email:";
-    			t13 = space();
-    			t14 = text(t14_value);
     			attr_dev(img, "class", "card-img-top robohash-img svelte-d72n7i");
     			attr_dev(img, "alt", "robohash");
     			if (!src_url_equal(img.src, img_src_value = "https://robohash.org/" + /*$user*/ ctx[1].name + ".png")) attr_dev(img, "src", img_src_value);
-    			add_location(img, file$3, 13, 20, 412);
+    			add_location(img, file$3, 13, 20, 423);
     			attr_dev(div0, "class", "card-header");
-    			add_location(div0, file$3, 12, 16, 365);
+    			add_location(div0, file$3, 12, 16, 376);
     			attr_dev(h5, "class", "card-title");
-    			add_location(h5, file$3, 20, 20, 695);
+    			add_location(h5, file$3, 20, 20, 706);
     			attr_dev(p0, "class", "card-text");
-    			add_location(p0, file$3, 21, 20, 758);
-    			add_location(b0, file$3, 22, 23, 806);
-    			add_location(p1, file$3, 22, 20, 803);
-    			add_location(b1, file$3, 23, 23, 860);
-    			add_location(p2, file$3, 23, 20, 857);
-    			add_location(b2, file$3, 24, 23, 922);
-    			add_location(p3, file$3, 24, 20, 919);
+    			add_location(p0, file$3, 21, 20, 769);
+    			add_location(b0, file$3, 22, 23, 817);
+    			add_location(p1, file$3, 22, 20, 814);
+    			add_location(b1, file$3, 23, 23, 879);
+    			add_location(p2, file$3, 23, 20, 876);
     			attr_dev(div1, "class", "card-body");
-    			add_location(div1, file$3, 19, 16, 650);
+    			add_location(div1, file$3, 19, 16, 661);
     			attr_dev(div2, "class", "card text-white bg-transparent border-light mb-3");
     			set_style(div2, "max-width", "18rem");
-    			add_location(div2, file$3, 8, 12, 211);
+    			add_location(div2, file$3, 8, 12, 222);
     			attr_dev(div3, "class", "col col-fixed svelte-d72n7i");
-    			add_location(div3, file$3, 6, 8, 133);
+    			add_location(div3, file$3, 6, 8, 144);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -1902,20 +1898,14 @@ var app = (function () {
     			append_dev(p2, b1);
     			append_dev(p2, t9);
     			append_dev(p2, t10);
-    			append_dev(div1, t11);
-    			append_dev(div1, p3);
-    			append_dev(p3, b2);
-    			append_dev(p3, t13);
-    			append_dev(p3, t14);
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*$user*/ 2 && !src_url_equal(img.src, img_src_value = "https://robohash.org/" + /*$user*/ ctx[1].name + ".png")) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*$user*/ 2 && t6_value !== (t6_value = /*$user*/ ctx[1].name + "")) set_data_dev(t6, t6_value);
-    			if (dirty & /*$user*/ 2 && t10_value !== (t10_value = /*$user*/ ctx[1].nickname + "")) set_data_dev(t10, t10_value);
-    			if (dirty & /*$user*/ 2 && t14_value !== (t14_value = /*$user*/ ctx[1].email + "")) set_data_dev(t14, t14_value);
+    			if (dirty & /*$user*/ 2 && t6_value !== (t6_value = /*$user*/ ctx[1].nickname + "")) set_data_dev(t6, t6_value);
+    			if (dirty & /*$user*/ 2 && t10_value !== (t10_value = /*$user*/ ctx[1].email + "")) set_data_dev(t10, t10_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div3);
@@ -1945,9 +1935,9 @@ var app = (function () {
     			a.textContent = "Play";
     			attr_dev(a, "href", "#/play/");
     			attr_dev(a, "class", "btn btn-primary svelte-d72n7i");
-    			add_location(a, file$3, 39, 20, 1403);
+    			add_location(a, file$3, 39, 20, 1382);
     			attr_dev(div, "class", "play-button-container svelte-d72n7i");
-    			add_location(div, file$3, 38, 16, 1346);
+    			add_location(div, file$3, 38, 16, 1325);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1970,7 +1960,7 @@ var app = (function () {
     }
 
     // (45:4) {#if $isAuthenticated}
-    function create_if_block$1(ctx) {
+    function create_if_block$2(ctx) {
     	let div2;
     	let div1;
     	let div0;
@@ -1981,11 +1971,11 @@ var app = (function () {
     			div1 = element("div");
     			div0 = element("div");
     			attr_dev(div0, "class", "card-body levels svelte-d72n7i");
-    			add_location(div0, file$3, 48, 16, 1695);
+    			add_location(div0, file$3, 48, 16, 1674);
     			attr_dev(div1, "class", "card bg-dark text-white");
-    			add_location(div1, file$3, 47, 12, 1640);
+    			add_location(div1, file$3, 47, 12, 1619);
     			attr_dev(div2, "class", "col col-fixed svelte-d72n7i");
-    			add_location(div2, file$3, 45, 8, 1562);
+    			add_location(div2, file$3, 45, 8, 1541);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -1999,7 +1989,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$1.name,
+    		id: create_if_block$2.name,
     		type: "if",
     		source: "(45:4) {#if $isAuthenticated}",
     		ctx
@@ -2019,7 +2009,7 @@ var app = (function () {
     	let t2;
     	let if_block0 = /*$isAuthenticated*/ ctx[0] && create_if_block_2(ctx);
     	let if_block1 = /*$isAuthenticated*/ ctx[0] && create_if_block_1$1(ctx);
-    	let if_block2 = /*$isAuthenticated*/ ctx[0] && create_if_block$1(ctx);
+    	let if_block2 = /*$isAuthenticated*/ ctx[0] && create_if_block$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -2036,13 +2026,13 @@ var app = (function () {
     			attr_dev(img, "class", "guessit-logo svelte-d72n7i");
     			if (!src_url_equal(img.src, img_src_value = "/images/background.gif")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "GuessITLogo");
-    			add_location(img, file$3, 31, 12, 1115);
+    			add_location(img, file$3, 31, 12, 1094);
     			attr_dev(div0, "class", "guessit");
-    			add_location(div0, file$3, 30, 8, 1080);
+    			add_location(div0, file$3, 30, 8, 1059);
     			attr_dev(div1, "class", "col col-fixed empty-column svelte-d72n7i");
-    			add_location(div1, file$3, 29, 4, 1030);
+    			add_location(div1, file$3, 29, 4, 1009);
     			attr_dev(div2, "class", "row");
-    			add_location(div2, file$3, 4, 0, 78);
+    			add_location(div2, file$3, 4, 0, 89);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2086,7 +2076,7 @@ var app = (function () {
 
     			if (/*$isAuthenticated*/ ctx[0]) {
     				if (if_block2) ; else {
-    					if_block2 = create_if_block$1(ctx);
+    					if_block2 = create_if_block$2(ctx);
     					if_block2.c();
     					if_block2.m(div2, null);
     				}
@@ -2134,6 +2124,7 @@ var app = (function () {
     	$$self.$capture_state = () => ({
     		isAuthenticated,
     		user,
+    		jwt_token,
     		$isAuthenticated,
     		$user
     	});
@@ -5349,11 +5340,44 @@ var app = (function () {
     const { console: console_1$1 } = globals;
     const file$2 = "src\\pages\\Play.svelte";
 
-    function create_fragment$2(ctx) {
-    	let div;
+    // (121:2) {:else}
+    function create_else_block$1(ctx) {
+    	let p;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			p.textContent = "Loading questions...";
+    			add_location(p, file$2, 121, 4, 3282);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    		},
+    		p: noop$1,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_else_block$1.name,
+    		type: "else",
+    		source: "(121:2) {:else}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (106:2) {#if questions.length > 0}
+    function create_if_block$1(ctx) {
     	let h2;
+    	let t0_value = /*questions*/ ctx[0][/*currentQuestionIndex*/ ctx[2]].questionText + "";
     	let t0;
     	let t1;
+    	let form;
+    	let div;
     	let input;
     	let t2;
     	let button;
@@ -5362,28 +5386,35 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div = element("div");
     			h2 = element("h2");
-    			t0 = text(/*questionText*/ ctx[0]);
+    			t0 = text(t0_value);
     			t1 = space();
+    			form = element("form");
+    			div = element("div");
     			input = element("input");
     			t2 = space();
     			button = element("button");
-    			button.textContent = "Submit Answer";
-    			add_location(h2, file$2, 60, 2, 1611);
+    			button.textContent = "Submit";
+    			add_location(h2, file$2, 106, 4, 2821);
+    			attr_dev(input, "class", "form-control");
+    			attr_dev(input, "type", "number");
     			attr_dev(input, "placeholder", "Enter your answer here");
-    			add_location(input, file$2, 61, 2, 1638);
-    			add_location(button, file$2, 62, 2, 1712);
-    			add_location(div, file$2, 59, 0, 1602);
-    		},
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    			attr_dev(input, "min", "0");
+    			attr_dev(input, "step", "1");
+    			add_location(input, file$2, 109, 8, 2970);
+    			attr_dev(button, "type", "submit");
+    			attr_dev(button, "class", "btn btn-primary");
+    			add_location(button, file$2, 117, 8, 3177);
+    			attr_dev(div, "class", "form-group");
+    			add_location(div, file$2, 108, 6, 2936);
+    			add_location(form, file$2, 107, 4, 2882);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			append_dev(div, h2);
+    			insert_dev(target, h2, anchor);
     			append_dev(h2, t0);
-    			append_dev(div, t1);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, form, anchor);
+    			append_dev(form, div);
     			append_dev(div, input);
     			set_input_value(input, /*userAnswer*/ ctx[1]);
     			append_dev(div, t2);
@@ -5391,26 +5422,82 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[3]),
-    					listen_dev(button, "click", /*submitAnswer*/ ctx[2], false, false, false, false)
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[4]),
+    					listen_dev(form, "submit", prevent_default(/*handleSubmit*/ ctx[3]), false, true, false, false)
     				];
 
     				mounted = true;
     			}
     		},
-    		p: function update(ctx, [dirty]) {
-    			if (dirty & /*questionText*/ 1) set_data_dev(t0, /*questionText*/ ctx[0]);
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*questions, currentQuestionIndex*/ 5 && t0_value !== (t0_value = /*questions*/ ctx[0][/*currentQuestionIndex*/ ctx[2]].questionText + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty & /*userAnswer*/ 2 && input.value !== /*userAnswer*/ ctx[1]) {
+    			if (dirty & /*userAnswer*/ 2 && to_number(input.value) !== /*userAnswer*/ ctx[1]) {
     				set_input_value(input, /*userAnswer*/ ctx[1]);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h2);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(form);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$1.name,
+    		type: "if",
+    		source: "(106:2) {#if questions.length > 0}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$2(ctx) {
+    	let div;
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*questions*/ ctx[0].length > 0) return create_if_block$1;
+    		return create_else_block$1;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block = current_block_type(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			if_block.c();
+    			add_location(div, file$2, 104, 0, 2780);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			if_block.m(div, null);
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
+    				if_block.p(ctx, dirty);
+    			} else {
+    				if_block.d(1);
+    				if_block = current_block_type(ctx);
+
+    				if (if_block) {
+    					if_block.c();
+    					if_block.m(div, null);
+    				}
     			}
     		},
     		i: noop$1,
     		o: noop$1,
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
-    			mounted = false;
-    			run_all(dispose);
+    			if_block.d();
     		}
     	};
 
@@ -5426,55 +5513,98 @@ var app = (function () {
     }
 
     function instance$2($$self, $$props, $$invalidate) {
-    	let $user;
     	let $jwt_token;
-    	validate_store(user, 'user');
-    	component_subscribe($$self, user, $$value => $$invalidate(6, $user = $$value));
     	validate_store(jwt_token, 'jwt_token');
-    	component_subscribe($$self, jwt_token, $$value => $$invalidate(7, $jwt_token = $$value));
+    	component_subscribe($$self, jwt_token, $$value => $$invalidate(8, $jwt_token = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Play', slots, []);
     	const api_root = window.location.origin;
-    	let questionText = "";
-    	let correctAnswer = 0.0;
+    	let allQuestions = []; // Array to store all questions
+    	let questions = []; // Array to store filtered questions
     	let userAnswer = "";
-    	let playerId;
+    	let playerDetails;
     	let playerLevel;
+    	let currentQuestionIndex = 0;
 
     	onMount(async () => {
-    		// Fetch the question from backend and set the questionText and correctAnswer
     		try {
-    			const response = await axios$1.get("/api/question");
-    			$$invalidate(0, questionText = response.data.questionText);
-    			correctAnswer = response.data.correctAnswer;
+    			await getPlayerDetails();
+    			await getQuestions();
     		} catch(error) {
-    			console.error("Failed to fetch question:", error);
+    			console.error("Failed to fetch data:", error);
     		}
     	});
 
-    	function getPlayerId() {
+    	async function getQuestions() {
     		var config = {
     			method: "get",
-    			url: api_root + "/api/me/freelancer",
+    			url: api_root + "/api/question",
     			headers: { Authorization: "Bearer " + $jwt_token }
     		};
 
-    		axios$1(config).then(function (response) {
-    			playerId = response.data.id;
-    		}).catch(function (error) {
-    			alert("Could not get Player associated to current user");
+    		try {
+    			const response = await axios$1(config);
+    			allQuestions = response.data.content;
+    			$$invalidate(0, questions = allQuestions.filter(question => question.level === playerLevel));
+    			console.log("Questions:", questions);
+    		} catch(error) {
+    			alert("Could not get questions");
     			console.log(error);
-    		});
+    		}
     	}
 
-    	getPlayerId();
+    	async function getPlayerDetails() {
+    		var config = {
+    			method: "get",
+    			url: api_root + "/api/me/player",
+    			headers: { Authorization: "Bearer " + $jwt_token }
+    		};
+
+    		try {
+    			const response = await axios$1(config);
+    			playerDetails = response.data;
+    			playerLevel = response.data.playerLevelState;
+    			console.log("playerDetails:", response.data);
+    			console.log("playerLevel:", playerLevel);
+    			console.log("QuestionIndex:", currentQuestionIndex);
+    		} catch(error) {
+    			alert("Could not get Player associated to current user");
+    			console.log(error);
+    		}
+    	}
+
+    	async function handleSubmit() {
+    		await submitAnswer();
+    		await getPlayerDetails();
+    		await getQuestions();
+    		$$invalidate(1, userAnswer = ""); // clear the input
+
+    		if (currentQuestionIndex < questions.length - 1) {
+    			$$invalidate(2, currentQuestionIndex++, currentQuestionIndex); // move to the next question
+    		}
+    	}
 
     	async function submitAnswer() {
-    		// Submit the answer to your backend
+    		const config = {
+    			method: "post",
+    			url: `${api_root}/api/player/answer`,
+    			headers: {
+    				"Player-Id": playerDetails.id,
+    				Authorization: `Bearer ${$jwt_token}`,
+    				"Content-Type": "application/json"
+    			},
+    			data: {
+    				questionId: questions[currentQuestionIndex].id,
+    				playerAnswer: userAnswer
+    			}
+    		};
+
     		try {
-    			const response = await axios$1.post("/api/answer", { user: $user, answer: userAnswer });
+    			const response = await axios$1(config);
+    			playerDetails = response.data; // Update playerDetails with the updated player returned from the server
+    			$$invalidate(1, userAnswer = ""); // Reset the answer input field
     		} catch(error) {
-    			console.error("Failed to submit answer:", error); // Handle response
+    			console.error("Failed to submit answer:", error);
     		}
     	}
 
@@ -5485,7 +5615,7 @@ var app = (function () {
     	});
 
     	function input_input_handler() {
-    		userAnswer = this.value;
+    		userAnswer = to_number(this.value);
     		$$invalidate(1, userAnswer);
     	}
 
@@ -5495,30 +5625,33 @@ var app = (function () {
     		jwt_token,
     		axios: axios$1,
     		api_root,
-    		questionText,
-    		correctAnswer,
+    		allQuestions,
+    		questions,
     		userAnswer,
-    		playerId,
+    		playerDetails,
     		playerLevel,
-    		getPlayerId,
+    		currentQuestionIndex,
+    		getQuestions,
+    		getPlayerDetails,
+    		handleSubmit,
     		submitAnswer,
-    		$user,
     		$jwt_token
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('questionText' in $$props) $$invalidate(0, questionText = $$props.questionText);
-    		if ('correctAnswer' in $$props) correctAnswer = $$props.correctAnswer;
+    		if ('allQuestions' in $$props) allQuestions = $$props.allQuestions;
+    		if ('questions' in $$props) $$invalidate(0, questions = $$props.questions);
     		if ('userAnswer' in $$props) $$invalidate(1, userAnswer = $$props.userAnswer);
-    		if ('playerId' in $$props) playerId = $$props.playerId;
+    		if ('playerDetails' in $$props) playerDetails = $$props.playerDetails;
     		if ('playerLevel' in $$props) playerLevel = $$props.playerLevel;
+    		if ('currentQuestionIndex' in $$props) $$invalidate(2, currentQuestionIndex = $$props.currentQuestionIndex);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [questionText, userAnswer, submitAnswer, input_input_handler];
+    	return [questions, userAnswer, currentQuestionIndex, handleSubmit, input_input_handler];
     }
 
     class Play extends SvelteComponentDev {
@@ -5581,10 +5714,10 @@ var app = (function () {
     			td2 = element("td");
     			t4 = text(t4_value);
     			t5 = space();
-    			add_location(td0, file$1, 112, 16, 3038);
-    			add_location(td1, file$1, 113, 16, 3082);
-    			add_location(td2, file$1, 114, 16, 3123);
-    			add_location(tr, file$1, 111, 12, 3016);
+    			add_location(td0, file$1, 112, 16, 3034);
+    			add_location(td1, file$1, 113, 16, 3078);
+    			add_location(td2, file$1, 114, 16, 3119);
+    			add_location(tr, file$1, 111, 12, 3012);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -5636,9 +5769,9 @@ var app = (function () {
     			attr_dev(a, "class", "page-link");
     			attr_dev(a, "href", "#/players?page=" + (/*i*/ ctx[14] + 1));
     			toggle_class(a, "active", /*currentPage*/ ctx[0] == /*i*/ ctx[14] + 1);
-    			add_location(a, file$1, 123, 16, 3349);
+    			add_location(a, file$1, 123, 16, 3345);
     			attr_dev(li, "class", "page-item");
-    			add_location(li, file$1, 122, 12, 3309);
+    			add_location(li, file$1, 122, 12, 3305);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -5771,49 +5904,49 @@ var app = (function () {
     			}
 
     			attr_dev(h10, "class", "mt-3");
-    			add_location(h10, file$1, 73, 0, 1913);
+    			add_location(h10, file$1, 73, 0, 1909);
     			attr_dev(label0, "class", "form-label");
     			attr_dev(label0, "for", "name");
-    			add_location(label0, file$1, 77, 12, 2038);
+    			add_location(label0, file$1, 77, 12, 2034);
     			attr_dev(input0, "class", "form-control");
     			attr_dev(input0, "id", "username");
     			attr_dev(input0, "type", "text");
-    			add_location(input0, file$1, 78, 12, 2105);
+    			add_location(input0, file$1, 78, 12, 2101);
     			attr_dev(div0, "class", "col");
-    			add_location(div0, file$1, 76, 8, 2007);
+    			add_location(div0, file$1, 76, 8, 2003);
     			attr_dev(div1, "class", "row mb-3");
-    			add_location(div1, file$1, 75, 4, 1975);
+    			add_location(div1, file$1, 75, 4, 1971);
     			attr_dev(label1, "class", "form-label");
     			attr_dev(label1, "for", "email");
-    			add_location(label1, file$1, 88, 12, 2368);
+    			add_location(label1, file$1, 88, 12, 2364);
     			attr_dev(input1, "class", "form-control");
     			attr_dev(input1, "id", "email");
     			attr_dev(input1, "type", "email");
-    			add_location(input1, file$1, 89, 12, 2434);
+    			add_location(input1, file$1, 89, 12, 2430);
     			attr_dev(div2, "class", "col");
-    			add_location(div2, file$1, 87, 8, 2337);
+    			add_location(div2, file$1, 87, 8, 2333);
     			attr_dev(div3, "class", "row mb-3");
-    			add_location(div3, file$1, 86, 4, 2305);
+    			add_location(div3, file$1, 86, 4, 2301);
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$1, 97, 4, 2629);
+    			add_location(button, file$1, 97, 4, 2625);
     			attr_dev(form, "class", "mb-5");
-    			add_location(form, file$1, 74, 0, 1950);
-    			add_location(h11, file$1, 100, 0, 2727);
+    			add_location(form, file$1, 74, 0, 1946);
+    			add_location(h11, file$1, 100, 0, 2723);
     			attr_dev(th0, "scope", "col");
-    			add_location(th0, file$1, 104, 12, 2811);
+    			add_location(th0, file$1, 104, 12, 2807);
     			attr_dev(th1, "scope", "col");
-    			add_location(th1, file$1, 105, 12, 2850);
+    			add_location(th1, file$1, 105, 12, 2846);
     			attr_dev(th2, "scope", "col");
-    			add_location(th2, file$1, 106, 12, 2891);
-    			add_location(tr, file$1, 103, 8, 2793);
-    			add_location(thead, file$1, 102, 4, 2776);
-    			add_location(tbody, file$1, 109, 4, 2960);
+    			add_location(th2, file$1, 106, 12, 2887);
+    			add_location(tr, file$1, 103, 8, 2789);
+    			add_location(thead, file$1, 102, 4, 2772);
+    			add_location(tbody, file$1, 109, 4, 2956);
     			attr_dev(table, "class", "table");
-    			add_location(table, file$1, 101, 0, 2749);
+    			add_location(table, file$1, 101, 0, 2745);
     			attr_dev(ul, "class", "pagination");
-    			add_location(ul, file$1, 120, 4, 3230);
-    			add_location(nav, file$1, 119, 0, 3219);
+    			add_location(ul, file$1, 120, 4, 3226);
+    			add_location(nav, file$1, 119, 0, 3215);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -6011,7 +6144,7 @@ var app = (function () {
 
     		axios$1(config).then(function (response) {
     			alert("Player created");
-    			getFreelancers();
+    			getPlayers();
     		}).catch(function (error) {
     			alert("Could not create Player");
     			console.log(error);
@@ -6161,7 +6294,7 @@ var app = (function () {
     /* src\App.svelte generated by Svelte v3.58.0 */
     const file = "src\\App.svelte";
 
-    // (12:3) {#if $isAuthenticated && $user.user_roles && $user.user_roles.includes("admin") }
+    // (12:3) {#if $isAuthenticated && $user.user_roles && $user.user_roles.includes("admin")}
     function create_if_block_1(ctx) {
     	let a;
 
@@ -6171,7 +6304,7 @@ var app = (function () {
     			a.textContent = "Players";
     			attr_dev(a, "class", "navbar-brand");
     			attr_dev(a, "href", "#/players");
-    			add_location(a, file, 12, 3, 509);
+    			add_location(a, file, 12, 3, 508);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -6185,7 +6318,7 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(12:3) {#if $isAuthenticated && $user.user_roles && $user.user_roles.includes(\\\"admin\\\") }",
+    		source: "(12:3) {#if $isAuthenticated && $user.user_roles && $user.user_roles.includes(\\\"admin\\\")}",
     		ctx
     	});
 
@@ -6204,7 +6337,7 @@ var app = (function () {
     			button.textContent = "Log In";
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file, 37, 6, 1193);
+    			add_location(button, file, 37, 6, 1192);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -6251,10 +6384,10 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Log Out";
     			attr_dev(span, "class", "navbar-text me-2");
-    			add_location(span, file, 28, 6, 979);
+    			add_location(span, file, 28, 6, 978);
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file, 31, 6, 1054);
+    			add_location(button, file, 31, 6, 1053);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -6347,7 +6480,7 @@ var app = (function () {
     			attr_dev(a, "href", "#/home");
     			add_location(a, file, 10, 3, 372);
     			attr_dev(span, "class", "navbar-toggler-icon");
-    			add_location(span, file, 23, 4, 800);
+    			add_location(span, file, 23, 4, 799);
     			attr_dev(button, "class", "navbar-toggler");
     			attr_dev(button, "type", "button");
     			attr_dev(button, "data-bs-toggle", "collapse");
@@ -6355,12 +6488,12 @@ var app = (function () {
     			attr_dev(button, "aria-controls", "navbarNav");
     			attr_dev(button, "aria-expanded", "false");
     			attr_dev(button, "aria-label", "Toggle navigation");
-    			add_location(button, file, 14, 3, 576);
+    			add_location(button, file, 14, 3, 575);
     			attr_dev(div0, "class", "d-flex ms-auto");
-    			add_location(div0, file, 26, 4, 914);
+    			add_location(div0, file, 26, 4, 913);
     			attr_dev(div1, "class", "collapse navbar-collapse");
     			attr_dev(div1, "id", "navbarNav");
-    			add_location(div1, file, 25, 3, 855);
+    			add_location(div1, file, 25, 3, 854);
     			attr_dev(div2, "class", "container-fluid");
     			add_location(div2, file, 9, 2, 338);
     			attr_dev(nav, "class", "navbar navbar-expand-lg");
@@ -6370,7 +6503,7 @@ var app = (function () {
     			attr_dev(div3, "id", "app");
     			add_location(div3, file, 7, 0, 209);
     			attr_dev(div4, "class", "container mt-3");
-    			add_location(div4, file, 49, 0, 1383);
+    			add_location(div4, file, 49, 0, 1382);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");

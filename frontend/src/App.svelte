@@ -9,7 +9,7 @@
 	<nav class="navbar navbar-expand-lg" style="background-color: transparent; border-bottom: 1px solid white;">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#/home">Home</a>
-			{#if $isAuthenticated && $user.user_roles && $user.user_roles.includes("admin") }
+			{#if $isAuthenticated && $user.user_roles && $user.user_roles.includes("admin")}
 			<a class="navbar-brand" href="#/players">Players</a>
 			{/if}
 			<button

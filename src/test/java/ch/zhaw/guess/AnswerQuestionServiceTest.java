@@ -44,7 +44,7 @@ public class AnswerQuestionServiceTest {
         testPlayer.setId("1");
         testPlayer.setAnsweredQuestions(new ArrayList<>());
 
-        testQuestion = new Question("1", "Test question", 42);
+        testQuestion = new Question("1", "Test question", 42, "LEVEL_1");
 
         when(playerRepository.findById("1")).thenReturn(Optional.of(testPlayer));
         when(questionRepository.findById("1")).thenReturn(Optional.of(testQuestion));

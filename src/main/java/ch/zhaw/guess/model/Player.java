@@ -25,4 +25,8 @@ public class Player {
     private String username;
     private PlayerLevelState playerLevelState = PlayerLevelState.LEVEL_1;
     private List<AnsweredQuestion> answeredQuestions;
+
+    public void setAnsweredQuestions(List<AnsweredQuestion> answeredQuestions) {
+        this.answeredQuestions = answeredQuestions;
+    }
 }
