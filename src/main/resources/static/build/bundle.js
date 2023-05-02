@@ -5342,20 +5342,25 @@ var app = (function () {
 
     // (121:2) {:else}
     function create_else_block$1(ctx) {
-    	let p;
+    	let div1;
+    	let div0;
 
     	const block = {
     		c: function create() {
-    			p = element("p");
-    			p.textContent = "Loading questions...";
-    			add_location(p, file$2, 121, 4, 3282);
+    			div1 = element("div");
+    			div0 = element("div");
+    			attr_dev(div0, "class", "loader svelte-1rzykio");
+    			add_location(div0, file$2, 122, 4, 3316);
+    			attr_dev(div1, "class", "loader-container svelte-1rzykio");
+    			add_location(div1, file$2, 121, 2, 3280);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, p, anchor);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
     		},
     		p: noop$1,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(p);
+    			if (detaching) detach_dev(div1);
     		}
     	};
 
