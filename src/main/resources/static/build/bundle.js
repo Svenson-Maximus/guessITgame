@@ -1924,7 +1924,7 @@ var app = (function () {
     }
 
     // (37:12) {#if $isAuthenticated}
-    function create_if_block_1$1(ctx) {
+    function create_if_block_1$2(ctx) {
     	let div;
     	let a;
 
@@ -1950,7 +1950,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_1$1.name,
+    		id: create_if_block_1$2.name,
     		type: "if",
     		source: "(37:12) {#if $isAuthenticated}",
     		ctx
@@ -2008,7 +2008,7 @@ var app = (function () {
     	let t1;
     	let t2;
     	let if_block0 = /*$isAuthenticated*/ ctx[0] && create_if_block_2(ctx);
-    	let if_block1 = /*$isAuthenticated*/ ctx[0] && create_if_block_1$1(ctx);
+    	let if_block1 = /*$isAuthenticated*/ ctx[0] && create_if_block_1$2(ctx);
     	let if_block2 = /*$isAuthenticated*/ ctx[0] && create_if_block$2(ctx);
 
     	const block = {
@@ -2065,7 +2065,7 @@ var app = (function () {
 
     			if (/*$isAuthenticated*/ ctx[0]) {
     				if (if_block1) ; else {
-    					if_block1 = create_if_block_1$1(ctx);
+    					if_block1 = create_if_block_1$2(ctx);
     					if_block1.c();
     					if_block1.m(div0, null);
     				}
@@ -5340,7 +5340,7 @@ var app = (function () {
     const { console: console_1$1 } = globals;
     const file$2 = "src\\pages\\Play.svelte";
 
-    // (121:2) {:else}
+    // (176:2) {:else}
     function create_else_block$1(ctx) {
     	let div1;
     	let div0;
@@ -5349,10 +5349,10 @@ var app = (function () {
     		c: function create() {
     			div1 = element("div");
     			div0 = element("div");
-    			attr_dev(div0, "class", "loader svelte-1rzykio");
-    			add_location(div0, file$2, 122, 4, 3316);
-    			attr_dev(div1, "class", "loader-container svelte-1rzykio");
-    			add_location(div1, file$2, 121, 2, 3280);
+    			attr_dev(div0, "class", "loader svelte-xau1lg");
+    			add_location(div0, file$2, 177, 6, 5027);
+    			attr_dev(div1, "class", "loader-container svelte-xau1lg");
+    			add_location(div1, file$2, 176, 4, 4989);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -5368,15 +5368,15 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(121:2) {:else}",
+    		source: "(176:2) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (106:2) {#if questions.length > 0}
-    function create_if_block$1(ctx) {
+    // (161:33) 
+    function create_if_block_1$1(ctx) {
     	let h2;
     	let t0_value = /*questions*/ ctx[0][/*currentQuestionIndex*/ ctx[2]].questionText + "";
     	let t0;
@@ -5400,19 +5400,19 @@ var app = (function () {
     			t2 = space();
     			button = element("button");
     			button.textContent = "Submit";
-    			add_location(h2, file$2, 106, 4, 2821);
+    			add_location(h2, file$2, 161, 4, 4528);
     			attr_dev(input, "class", "form-control");
     			attr_dev(input, "type", "number");
     			attr_dev(input, "placeholder", "Enter your answer here");
     			attr_dev(input, "min", "0");
     			attr_dev(input, "step", "1");
-    			add_location(input, file$2, 109, 8, 2970);
+    			add_location(input, file$2, 164, 8, 4677);
     			attr_dev(button, "type", "submit");
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$2, 117, 8, 3177);
+    			add_location(button, file$2, 172, 8, 4884);
     			attr_dev(div, "class", "form-group");
-    			add_location(div, file$2, 108, 6, 2936);
-    			add_location(form, file$2, 107, 4, 2882);
+    			add_location(div, file$2, 163, 6, 4643);
+    			add_location(form, file$2, 162, 4, 4589);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -5427,8 +5427,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[4]),
-    					listen_dev(form, "submit", prevent_default(/*handleSubmit*/ ctx[3]), false, true, false, false)
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[5]),
+    					listen_dev(form, "submit", prevent_default(/*handleSubmit*/ ctx[4]), false, true, false, false)
     				];
 
     				mounted = true;
@@ -5452,9 +5452,39 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
+    		id: create_if_block_1$1.name,
+    		type: "if",
+    		source: "(161:33) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (159:2) {#if levelCompleted}
+    function create_if_block$1(ctx) {
+    	let h2;
+
+    	const block = {
+    		c: function create() {
+    			h2 = element("h2");
+    			h2.textContent = "Level Completed!";
+    			add_location(h2, file$2, 159, 4, 4462);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h2, anchor);
+    		},
+    		p: noop$1,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h2);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(106:2) {#if questions.length > 0}",
+    		source: "(159:2) {#if levelCompleted}",
     		ctx
     	});
 
@@ -5465,7 +5495,8 @@ var app = (function () {
     	let div;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*questions*/ ctx[0].length > 0) return create_if_block$1;
+    		if (/*levelCompleted*/ ctx[3]) return create_if_block$1;
+    		if (/*questions*/ ctx[0].length > 0) return create_if_block_1$1;
     		return create_else_block$1;
     	}
 
@@ -5476,7 +5507,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			if_block.c();
-    			add_location(div, file$2, 104, 0, 2780);
+    			add_location(div, file$2, 157, 0, 4427);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5517,10 +5548,23 @@ var app = (function () {
     	return block;
     }
 
+    function getNextLevel(currentLevel) {
+    	const levels = ["LEVEL_1", "LEVEL_2", "LEVEL_3", "LEVEL_4", "LEVEL_5", "LEVEL_6", "LEVEL_7"];
+    	const currentIndex = levels.indexOf(currentLevel);
+
+    	// Check if we're at the last level
+    	if (currentIndex === levels.length - 1) {
+    		// You can handle this case as you see fit; for now, we'll return the same level
+    		return currentLevel;
+    	} else {
+    		return levels[currentIndex + 1];
+    	}
+    }
+
     function instance$2($$self, $$props, $$invalidate) {
     	let $jwt_token;
     	validate_store(jwt_token, 'jwt_token');
-    	component_subscribe($$self, jwt_token, $$value => $$invalidate(8, $jwt_token = $$value));
+    	component_subscribe($$self, jwt_token, $$value => $$invalidate(10, $jwt_token = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Play', slots, []);
     	const api_root = window.location.origin;
@@ -5530,6 +5574,8 @@ var app = (function () {
     	let playerDetails;
     	let playerLevel;
     	let currentQuestionIndex = 0;
+    	let levelCompleted = false;
+    	let playerId;
 
     	onMount(async () => {
     		try {
@@ -5569,7 +5615,9 @@ var app = (function () {
     			const response = await axios$1(config);
     			playerDetails = response.data;
     			playerLevel = response.data.playerLevelState;
-    			console.log("playerDetails:", response.data);
+    			playerId = response.data.id;
+    			console.log("playerDetails:", playerDetails);
+    			console.log("Player Id:", playerId);
     			console.log("playerLevel:", playerLevel);
     			console.log("QuestionIndex:", currentQuestionIndex);
     		} catch(error) {
@@ -5584,7 +5632,11 @@ var app = (function () {
     		await getQuestions();
     		$$invalidate(1, userAnswer = ""); // clear the input
 
-    		if (currentQuestionIndex < questions.length - 1) {
+    		// If the player has answered all the questions, update the level and redirect to home
+    		if (currentQuestionIndex >= questions.length - 1) {
+    			await updatePlayerLevel();
+    			$$invalidate(3, levelCompleted = true);
+    		} else {
     			$$invalidate(2, currentQuestionIndex++, currentQuestionIndex); // move to the next question
     		}
     	}
@@ -5613,6 +5665,32 @@ var app = (function () {
     		}
     	}
 
+    	async function updatePlayerLevel() {
+    		const playerLeveStateDTO = {
+    			level: getNextLevel(playerLevel), // Update the player's level
+    			
+    		};
+
+    		const config = {
+    			method: "put",
+    			url: `${api_root}/api/player/levelstate`,
+    			headers: {
+    				"Player-Id": playerId,
+    				Authorization: `Bearer ${$jwt_token}`,
+    				"Content-Type": "application/json"
+    			},
+    			data: playerLeveStateDTO
+    		};
+
+    		try {
+    			const response = await axios$1(config);
+    			playerDetails = response.data; // Update playerDetails with the updated player returned from the server
+    			playerLevel = playerDetails.playerLevelState; // Update the player's level in our local state
+    		} catch(error) {
+    			console.error("Failed to update player level:", error);
+    		}
+    	}
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -5626,7 +5704,6 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		onMount,
-    		user,
     		jwt_token,
     		axios: axios$1,
     		api_root,
@@ -5636,10 +5713,14 @@ var app = (function () {
     		playerDetails,
     		playerLevel,
     		currentQuestionIndex,
+    		levelCompleted,
+    		playerId,
     		getQuestions,
     		getPlayerDetails,
     		handleSubmit,
     		submitAnswer,
+    		updatePlayerLevel,
+    		getNextLevel,
     		$jwt_token
     	});
 
@@ -5650,13 +5731,22 @@ var app = (function () {
     		if ('playerDetails' in $$props) playerDetails = $$props.playerDetails;
     		if ('playerLevel' in $$props) playerLevel = $$props.playerLevel;
     		if ('currentQuestionIndex' in $$props) $$invalidate(2, currentQuestionIndex = $$props.currentQuestionIndex);
+    		if ('levelCompleted' in $$props) $$invalidate(3, levelCompleted = $$props.levelCompleted);
+    		if ('playerId' in $$props) playerId = $$props.playerId;
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [questions, userAnswer, currentQuestionIndex, handleSubmit, input_input_handler];
+    	return [
+    		questions,
+    		userAnswer,
+    		currentQuestionIndex,
+    		levelCompleted,
+    		handleSubmit,
+    		input_input_handler
+    	];
     }
 
     class Play extends SvelteComponentDev {
@@ -6299,7 +6389,7 @@ var app = (function () {
     /* src\App.svelte generated by Svelte v3.58.0 */
     const file = "src\\App.svelte";
 
-    // (12:3) {#if $isAuthenticated && $user.user_roles && $user.user_roles.includes("admin")}
+    // (16:3) {#if $isAuthenticated && $user.user_roles && $user.user_roles.includes("admin")}
     function create_if_block_1(ctx) {
     	let a;
 
@@ -6309,7 +6399,7 @@ var app = (function () {
     			a.textContent = "Players";
     			attr_dev(a, "class", "navbar-brand");
     			attr_dev(a, "href", "#/players");
-    			add_location(a, file, 12, 3, 508);
+    			add_location(a, file, 16, 4, 519);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, a, anchor);
@@ -6323,14 +6413,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(12:3) {#if $isAuthenticated && $user.user_roles && $user.user_roles.includes(\\\"admin\\\")}",
+    		source: "(16:3) {#if $isAuthenticated && $user.user_roles && $user.user_roles.includes(\\\"admin\\\")}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (37:5) {:else}
+    // (41:5) {:else}
     function create_else_block(ctx) {
     	let button;
     	let mounted;
@@ -6342,7 +6432,7 @@ var app = (function () {
     			button.textContent = "Log In";
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file, 37, 6, 1192);
+    			add_location(button, file, 41, 6, 1203);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -6364,14 +6454,14 @@ var app = (function () {
     		block,
     		id: create_else_block.name,
     		type: "else",
-    		source: "(37:5) {:else}",
+    		source: "(41:5) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (28:5) {#if $isAuthenticated}
+    // (32:5) {#if $isAuthenticated}
     function create_if_block(ctx) {
     	let span;
     	let t0_value = /*$user*/ ctx[1].name + "";
@@ -6389,10 +6479,10 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Log Out";
     			attr_dev(span, "class", "navbar-text me-2");
-    			add_location(span, file, 28, 6, 978);
+    			add_location(span, file, 32, 6, 989);
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file, 31, 6, 1053);
+    			add_location(button, file, 35, 6, 1064);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -6421,7 +6511,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(28:5) {#if $isAuthenticated}",
+    		source: "(32:5) {#if $isAuthenticated}",
     		ctx
     	});
 
@@ -6480,12 +6570,12 @@ var app = (function () {
     			t6 = space();
     			div4 = element("div");
     			create_component(router.$$.fragment);
-    			add_location(title, file, 6, 0, 185);
+    			add_location(title, file, 7, 0, 186);
     			attr_dev(a, "class", "navbar-brand");
     			attr_dev(a, "href", "#/home");
-    			add_location(a, file, 10, 3, 372);
+    			add_location(a, file, 14, 3, 382);
     			attr_dev(span, "class", "navbar-toggler-icon");
-    			add_location(span, file, 23, 4, 799);
+    			add_location(span, file, 27, 4, 810);
     			attr_dev(button, "class", "navbar-toggler");
     			attr_dev(button, "type", "button");
     			attr_dev(button, "data-bs-toggle", "collapse");
@@ -6493,22 +6583,22 @@ var app = (function () {
     			attr_dev(button, "aria-controls", "navbarNav");
     			attr_dev(button, "aria-expanded", "false");
     			attr_dev(button, "aria-label", "Toggle navigation");
-    			add_location(button, file, 14, 3, 575);
+    			add_location(button, file, 18, 3, 586);
     			attr_dev(div0, "class", "d-flex ms-auto");
-    			add_location(div0, file, 26, 4, 913);
+    			add_location(div0, file, 30, 4, 924);
     			attr_dev(div1, "class", "collapse navbar-collapse");
     			attr_dev(div1, "id", "navbarNav");
-    			add_location(div1, file, 25, 3, 854);
+    			add_location(div1, file, 29, 3, 865);
     			attr_dev(div2, "class", "container-fluid");
-    			add_location(div2, file, 9, 2, 338);
+    			add_location(div2, file, 13, 2, 348);
     			attr_dev(nav, "class", "navbar navbar-expand-lg");
     			set_style(nav, "background-color", "transparent");
     			set_style(nav, "border-bottom", "1px solid white");
-    			add_location(nav, file, 8, 1, 226);
+    			add_location(nav, file, 9, 1, 227);
     			attr_dev(div3, "id", "app");
-    			add_location(div3, file, 7, 0, 209);
+    			add_location(div3, file, 8, 0, 210);
     			attr_dev(div4, "class", "container mt-3");
-    			add_location(div4, file, 49, 0, 1382);
+    			add_location(div4, file, 53, 0, 1393);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");

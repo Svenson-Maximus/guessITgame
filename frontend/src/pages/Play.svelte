@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { user, jwt_token } from "../store";
+  import { jwt_token } from "../store";
   import axios from "axios";
 
   const api_root = window.location.origin;
@@ -11,6 +11,8 @@
   let playerDetails;
   let playerLevel;
   let currentQuestionIndex = 0;
+  let levelCompleted = false;
+  let playerId;
 
   onMount(async () => {
     try {
@@ -36,7 +38,6 @@
       );
 
       console.log("Questions:", questions);
-
     } catch (error) {
       alert("Could not get questions");
       console.log(error);
@@ -44,7 +45,6 @@
   }
 
   async function getPlayerDetails() {
-    
     var config = {
       method: "get",
       url: api_root + "/api/me/player",
@@ -55,11 +55,12 @@
       const response = await axios(config);
       playerDetails = response.data;
       playerLevel = response.data.playerLevelState;
+      playerId = response.data.id;
 
-      console.log("playerDetails:", response.data);
+      console.log("playerDetails:", playerDetails);
+      console.log("Player Id:", playerId);
       console.log("playerLevel:", playerLevel);
       console.log("QuestionIndex:", currentQuestionIndex);
-      
     } catch (error) {
       alert("Could not get Player associated to current user");
       console.log(error);
@@ -72,25 +73,30 @@
     await getQuestions();
 
     userAnswer = ""; // clear the input
-    if (currentQuestionIndex < questions.length - 1) {
+
+    // If the player has answered all the questions, update the level and redirect to home
+    if (currentQuestionIndex >= questions.length - 1) {
+      await updatePlayerLevel();
+      levelCompleted = true;
+    } else {
       currentQuestionIndex++; // move to the next question
     }
   }
 
   async function submitAnswer() {
-  const config = {
-    method: "post",
-    url: `${api_root}/api/player/answer`,
-    headers: {
-      "Player-Id": playerDetails.id,
-      Authorization: `Bearer ${$jwt_token}`,
-      "Content-Type": "application/json",
-    },
-    data: {
-      questionId: questions[currentQuestionIndex].id,
-      playerAnswer: userAnswer,
-    },
-  };
+    const config = {
+      method: "post",
+      url: `${api_root}/api/player/answer`,
+      headers: {
+        "Player-Id": playerDetails.id,
+        Authorization: `Bearer ${$jwt_token}`,
+        "Content-Type": "application/json",
+      },
+      data: {
+        questionId: questions[currentQuestionIndex].id,
+        playerAnswer: userAnswer,
+      },
+    };
 
     try {
       const response = await axios(config);
@@ -100,10 +106,59 @@
       console.error("Failed to submit answer:", error);
     }
   }
+
+  async function updatePlayerLevel() {
+    const playerLeveStateDTO = {
+      level: getNextLevel(playerLevel), // Update the player's level
+    };
+
+    const config = {
+      method: "put",
+      url: `${api_root}/api/player/levelstate`,
+      headers: {
+        "Player-Id": playerId,
+        Authorization: `Bearer ${$jwt_token}`,
+        "Content-Type": "application/json",
+      },
+      data: playerLeveStateDTO,
+    };
+
+    try {
+      const response = await axios(config);
+      playerDetails = response.data; // Update playerDetails with the updated player returned from the server
+      playerLevel = playerDetails.playerLevelState; // Update the player's level in our local state
+    } catch (error) {
+      console.error("Failed to update player level:", error);
+    }
+  }
+
+  function getNextLevel(currentLevel) {
+    const levels = [
+      "LEVEL_1",
+      "LEVEL_2",
+      "LEVEL_3",
+      "LEVEL_4",
+      "LEVEL_5",
+      "LEVEL_6",
+      "LEVEL_7",
+    ];
+    const currentIndex = levels.indexOf(currentLevel);
+
+    // Check if we're at the last level
+    if (currentIndex === levels.length - 1) {
+      // You can handle this case as you see fit; for now, we'll return the same level
+      return currentLevel;
+    } else {
+      return levels[currentIndex + 1];
+    }
+  }
+  
 </script>
 
 <div>
-  {#if questions.length > 0}
+  {#if levelCompleted}
+    <h2>Level Completed!</h2>
+  {:else if questions.length > 0}
     <h2>{questions[currentQuestionIndex].questionText}</h2>
     <form on:submit|preventDefault={handleSubmit}>
       <div class="form-group">
@@ -119,9 +174,9 @@
       </div>
     </form>
   {:else}
-  <div class="loader-container">
-    <div class="loader"></div>
-  </div>
+    <div class="loader-container">
+      <div class="loader" />
+    </div>
   {/if}
 </div>
 
@@ -143,10 +198,12 @@
   }
 
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 </style>
-
-
 

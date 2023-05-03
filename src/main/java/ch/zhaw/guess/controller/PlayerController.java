@@ -78,10 +78,10 @@ public ResponseEntity<Player> answerQuestion(@RequestHeader("Player-Id") String 
     @Autowired
     private PlayerService playerService;
 
-    @PutMapping("/player/{id}/levelstate")
-    public ResponseEntity<Player> updatePlayerLevelState(@PathVariable String id,
+    @PutMapping("/player/levelstate")
+    public ResponseEntity<Player> updatePlayerLevelState(@RequestHeader("Player-Id") String playerId,
             @RequestBody PlayerLevelStateDTO newLevelStateDTO) {
-        Player updatedPlayer = playerService.updatePlayerLevelState(id, newLevelStateDTO);
+        Player updatedPlayer = playerService.updatePlayerLevelState(playerId, newLevelStateDTO);
         return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
     }
 
