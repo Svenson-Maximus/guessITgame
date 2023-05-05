@@ -33,7 +33,7 @@ public class AnswerQuestionService {
         AnsweredQuestion answeredQuestion = new AnsweredQuestion(
                 answeredQuestionDTO.getQuestionId(),
                 answeredQuestionDTO.getPlayerAnswer(),
-                difference
+                difference, question.getCorrectAnswer()
         );
 
         if (player.getAnsweredQuestions() == null) {

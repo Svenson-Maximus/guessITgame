@@ -13,6 +13,8 @@
   let currentQuestionIndex = 0;
   let levelCompleted = false;
   let playerId;
+  let correctAnswer = null;
+  let showNextButton = false;
 
   onMount(async () => {
     try {
@@ -58,9 +60,6 @@
       playerId = response.data.id;
 
       console.log("playerDetails:", playerDetails);
-      console.log("Player Id:", playerId);
-      console.log("playerLevel:", playerLevel);
-      console.log("QuestionIndex:", currentQuestionIndex);
     } catch (error) {
       alert("Could not get Player associated to current user");
       console.log(error);
@@ -69,20 +68,23 @@
 
   async function handleSubmit() {
     await submitAnswer();
-    await getPlayerDetails();
-    await getQuestions();
+    correctAnswer = questions[currentQuestionIndex].correctAnswer;
+    showNextButton = true;
+  }
 
+  function handleNextQuestion() {
     userAnswer = ""; // clear the input
+    showNextButton = false;
+    correctAnswer = null;
 
     // If the player has answered all the questions, update the level and redirect to home
     if (currentQuestionIndex >= questions.length - 1) {
-      await updatePlayerLevel();
+      updatePlayerLevel();
       levelCompleted = true;
     } else {
       currentQuestionIndex++; // move to the next question
     }
   }
-
   async function submitAnswer() {
     const config = {
       method: "post",
@@ -146,13 +148,12 @@
 
     // Check if we're at the last level
     if (currentIndex === levels.length - 1) {
-      // You can handle this case as you see fit; for now, we'll return the same level
+      // noch ändern
       return currentLevel;
     } else {
       return levels[currentIndex + 1];
     }
   }
-  
 </script>
 
 <div>
@@ -160,19 +161,25 @@
     <h2>Level Completed!</h2>
   {:else if questions.length > 0}
     <h2>{questions[currentQuestionIndex].questionText}</h2>
-    <form on:submit|preventDefault={handleSubmit}>
-      <div class="form-group">
-        <input
-          class="form-control"
-          type="number"
-          bind:value={userAnswer}
-          placeholder="Enter your answer here"
-          min="0"
-          step="1"
-        />
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>
+    {#if !showNextButton}
+      <form on:submit|preventDefault={handleSubmit}>
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="number"
+            bind:value={userAnswer}
+            placeholder="Enter your answer here"
+            min="0"
+            step="1"
+          />
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    {:else}
+      <p>The correct answer was: {correctAnswer}</p>
+      <button on:click={handleNextQuestion} class="btn btn-primary">Next</button
+      >
+    {/if}
   {:else}
     <div class="loader-container">
       <div class="loader" />
@@ -206,4 +213,3 @@
     }
   }
 </style>
-

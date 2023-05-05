@@ -13,4 +13,5 @@ public class AnsweredQuestion {
     private String questionId;
     private int playerAnswer;
     private int difference;
+    private int correctAnswer;
 }

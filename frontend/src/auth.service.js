@@ -21,6 +21,9 @@ async function loginWithPopup() {
     const id_token = await claims.__raw;
     jwt_token.set(id_token);
     console.log(id_token);
+
+    
+
   } catch (e) {
     console.error(e);
   } 

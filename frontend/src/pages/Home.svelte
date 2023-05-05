@@ -1,5 +1,49 @@
 <script>
     import { isAuthenticated, user, jwt_token } from "../store";
+    import { onMount } from "svelte";
+    import axios from "axios";
+
+    const api_root = window.location.origin;
+
+    let playerDetails;
+    let answeredQuestions = [];
+    let username;
+    let playerLevel;
+    let averageDifference;
+    
+
+    onMount(async () => {
+        try {
+            await getPlayerDetails();
+            
+        } catch (error) {
+            console.error("Failed to fetch data:", error);
+        }
+    });
+
+    async function getPlayerDetails() {
+        var config = {
+            method: "get",
+            url: api_root + "/api/me/player",
+            headers: { Authorization: "Bearer " + $jwt_token },
+        };
+
+        try {
+            const response = await axios(config);
+            playerDetails = response.data;
+            playerLevel = response.data.playerLevelState;
+            username = response.data.username;
+            answeredQuestions = response.data.answeredQuestions;
+
+            
+
+            console.log("playerDetails:", answeredQuestions);
+        } catch (error) {
+            alert("Signup to see more");
+            console.log(error);
+        }
+    }
+    
 </script>
 
 <div class="row">
@@ -20,9 +64,9 @@
                 <div class="card-body">
                     <h5 class="card-title">Account Infos</h5>
                     <p class="card-text" />
-                    <p><b>Username:</b> {$user.nickname}</p>
+                    <p><b>Username:</b> {username}</p>
                     <p><b>Email:</b> {$user.email}</p>
-                    
+                    <p><b>Average Difference:</b> {averageDifference}%</p>
                 </div>
             </div>
         </div>
@@ -45,9 +89,20 @@
     {#if $isAuthenticated}
         <div class="col col-fixed">
             <!-- Bootstrap Card -->
-            <div class="card bg-dark text-white">
+            <div class="card text-white bg-transparent border-light mb-3">
                 <div class="card-body levels">
                     <!-- Levels Here -->
+                    <div class="level-boxes">
+                        {#each ["LEVEL_7", "LEVEL_6", "LEVEL_5", "LEVEL_4", "LEVEL_3", "LEVEL_2", "LEVEL_1"] as level (level)}
+                            <div
+                                class="level-box {level === playerLevel
+                                    ? 'active'
+                                    : ''}"
+                            >
+                                {level}
+                            </div>
+                        {/each}
+                    </div>
                 </div>
             </div>
         </div>
@@ -121,5 +176,28 @@
 
     .col-fixed {
         width: 33.3333%;
+    }
+
+    .level-boxes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    .level-box {
+        background-color: transparent;
+        color: #fff;
+        border: 1px solid #fff;
+        padding: 1rem;
+        margin: 0.5rem;
+        text-align: center;
+        width: 100%;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .level-box.active {
+        background-color: #45a3f7;
     }
 </style>

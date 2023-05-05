@@ -46,7 +46,6 @@ public class PlayerController {
     }
 
     @GetMapping("/player")
-    @Secured("ROLE_admin")
     public ResponseEntity<Page<Player>> getAllPlayer(
             @RequestParam(required = false, defaultValue = "1") Integer pageNumber,
             @RequestParam(required = false, defaultValue = "10") Integer pageSize) {

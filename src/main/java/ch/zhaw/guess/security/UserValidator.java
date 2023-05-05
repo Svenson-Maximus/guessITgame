@@ -23,10 +23,9 @@ class UserValidator implements OAuth2TokenValidator<Jwt> {
         OAuth2Error error = new OAuth2Error("invalid_token", "The required email is missing", null);
 
         String email = jwt.getClaimAsString("email");
-        List<String> userRoles = jwt.getClaimAsStringList("user_roles");
         if (email != null && !email.equals("")) { 
             Player f = playerRepository.findFirstByEmail(email);
-            if (f==null && (userRoles==null || userRoles.isEmpty())) {     
+            if (f==null ) {     
                 String username = jwt.getClaimAsString("nickname");
                 playerRepository.save(new Player(email, username));
             }
