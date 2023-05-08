@@ -75,7 +75,7 @@
                 src="/images/background.gif"
                 alt="GuessITLogo"
             />
-            {#if $isAuthenticated}
+            {#if $isAuthenticated && playerLevel !== "COMPLETED"}
                 <!-- Play Button -->
                 <div class="play-button-container">
                     <a href="#/play/" class="btn btn-primary">Play</a>

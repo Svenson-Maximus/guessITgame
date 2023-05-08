@@ -20,8 +20,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import ch.zhaw.guess.repository.PlayerRepository;
 
-
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
@@ -38,15 +36,15 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers("/*").permitAll()
                 .requestMatchers("/api/me/player").permitAll()
+                .requestMatchers("/api/player").permitAll() // <-- Move this line up
                 .requestMatchers("/api/**").authenticated()
                 .requestMatchers("/build/**").permitAll()
                 .requestMatchers("/images/**").permitAll()
-                
                 .and().cors(withDefaults())
                 .oauth2ResourceServer(server -> server.jwt()
-                    .decoder(jwtDecoder())
-                    .jwtAuthenticationConverter(new RoleExtractor()));
-               
+                        .decoder(jwtDecoder())
+                        .jwtAuthenticationConverter(new RoleExtractor()));
+
         return http.build();
     }
 
@@ -60,4 +58,3 @@ public class SecurityConfig {
         return jwtDecoder;
     }
 }
-

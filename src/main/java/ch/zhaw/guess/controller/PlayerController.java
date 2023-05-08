@@ -67,12 +67,11 @@ public class PlayerController {
     }
 
     @PostMapping("/player/answer")
-public ResponseEntity<Player> answerQuestion(@RequestHeader("Player-Id") String playerId,
-        @RequestBody AnsweredQuestionDTO answeredQuestionDTO) {
-    Player updatedPlayer = answerQuestionService.answerQuestion(playerId, answeredQuestionDTO);
-    return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
-}
-
+    public ResponseEntity<Player> answerQuestion(@RequestHeader("Player-Id") String playerId,
+            @RequestBody AnsweredQuestionDTO answeredQuestionDTO) {
+        Player updatedPlayer = answerQuestionService.answerQuestion(playerId, answeredQuestionDTO);
+        return new ResponseEntity<>(updatedPlayer, HttpStatus.OK);
+    }
 
     @Autowired
     private PlayerService playerService;

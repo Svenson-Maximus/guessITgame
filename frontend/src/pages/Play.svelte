@@ -76,15 +76,15 @@
     userAnswer = ""; // clear the input
     showNextButton = false;
     correctAnswer = null;
+    currentQuestionIndex++; // move to the next question
 
-    // If the player has answered all the questions, update the level and redirect to home
-    if (currentQuestionIndex >= questions.length - 1) {
-      updatePlayerLevel();
+    // If the player has answered all the questions, update the level
+    if (currentQuestionIndex >= questions.length) {
       levelCompleted = true;
-    } else {
-      currentQuestionIndex++; // move to the next question
+      updatePlayerLevel();
     }
   }
+
   async function submitAnswer() {
     const config = {
       method: "post",
@@ -147,17 +147,14 @@
     ];
     const currentIndex = levels.indexOf(currentLevel);
 
-    // Check if we're at the last level
-    if (currentIndex === levels.length - 1) {
-      return { nextLevel: currentLevel, gameCompleted: true };
-    } else {
-      return { nextLevel: levels[currentIndex + 1], gameCompleted: false };
-    }
+    return levels[currentIndex + 1];
   }
 
   function redirectToLeaderboard() {
-    // Replace this with the actual leaderboard route
     window.location.assign("#/leaderboards");
+  }
+  function redirectToHome() {
+    window.location.assign("#/home");
   }
 </script>
 
@@ -166,14 +163,11 @@
     <div class="col-md-12 text-center">
       {#if levelCompleted}
         <h2>Level Completed!</h2>
-        {#if getNextLevel(playerLevel).gameCompleted}
-          <button on:click={redirectToLeaderboard} class="btn btn-primary"
-            >Leaderboard</button
-          >
-        {:else}
-          <button on:click={updatePlayerLevel} class="btn btn-primary">Play</button>
-        {/if}
-      {:else if questions.length > 0}
+        <button on:click={redirectToHome} class="btn btn-primary">Home</button>
+        <button on:click={redirectToLeaderboard} class="btn btn-primary"
+          >Leaderboard</button
+        >
+      {:else if questions.length > 0 && currentQuestionIndex < questions.length}
         <h2>{questions[currentQuestionIndex].questionText}</h2>
         {#if !showNextButton}
           <form on:submit|preventDefault={handleSubmit}>
@@ -191,7 +185,8 @@
           </form>
         {:else}
           <p>The correct answer was: {correctAnswer}</p>
-          <button on:click={handleNextQuestion} class="btn btn-primary">Next</button
+          <button on:click={handleNextQuestion} class="btn btn-primary"
+            >Next</button
           >
         {/if}
       {:else}
@@ -226,6 +221,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 50px;
   }
 
   .btn-primary:hover {
@@ -258,4 +254,3 @@
     }
   }
 </style>
-
