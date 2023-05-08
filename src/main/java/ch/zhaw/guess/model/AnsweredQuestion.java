@@ -14,4 +14,5 @@ public class AnsweredQuestion {
     private int playerAnswer;
     private int difference;
     private int correctAnswer;
+    private double deviation;
 }

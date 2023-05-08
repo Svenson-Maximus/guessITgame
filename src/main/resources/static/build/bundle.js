@@ -5097,7 +5097,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (50:4) {#if $isAuthenticated}
+    // (54:4) {#if $isAuthenticated}
     function create_if_block_2$2(ctx) {
     	let div3;
     	let div2;
@@ -5107,25 +5107,21 @@ var app = (function () {
     	let t0;
     	let div1;
     	let h5;
+    	let t1;
     	let t2;
     	let p0;
     	let t3;
     	let p1;
     	let b0;
     	let t5;
+    	let t6_value = /*$user*/ ctx[4].email + "";
     	let t6;
     	let t7;
     	let p2;
     	let b1;
     	let t9;
-    	let t10_value = /*$user*/ ctx[3].email + "";
     	let t10;
     	let t11;
-    	let p3;
-    	let b2;
-    	let t13;
-    	let t14;
-    	let t15;
 
     	const block = {
     		c: function create() {
@@ -5136,51 +5132,44 @@ var app = (function () {
     			t0 = space();
     			div1 = element("div");
     			h5 = element("h5");
-    			h5.textContent = "Account Infos";
+    			t1 = text(/*username*/ ctx[0]);
     			t2 = space();
     			p0 = element("p");
     			t3 = space();
     			p1 = element("p");
     			b0 = element("b");
-    			b0.textContent = "Username:";
+    			b0.textContent = "Email:";
     			t5 = space();
-    			t6 = text(/*username*/ ctx[0]);
+    			t6 = text(t6_value);
     			t7 = space();
     			p2 = element("p");
     			b1 = element("b");
-    			b1.textContent = "Email:";
+    			b1.textContent = "Average Deviation:";
     			t9 = space();
-    			t10 = text(t10_value);
-    			t11 = space();
-    			p3 = element("p");
-    			b2 = element("b");
-    			b2.textContent = "Average Difference:";
-    			t13 = space();
-    			t14 = text(/*averageDifference*/ ctx[4]);
-    			t15 = text("%");
+    			t10 = text(/*averageDeviation*/ ctx[2]);
+    			t11 = text("%");
     			attr_dev(img, "class", "card-img-top robohash-img svelte-f4m5m4");
     			attr_dev(img, "alt", "robohash");
-    			if (!src_url_equal(img.src, img_src_value = "https://robohash.org/" + /*$user*/ ctx[3].name + ".png")) attr_dev(img, "src", img_src_value);
-    			add_location(img, file$5, 57, 20, 1591);
+    			if (!src_url_equal(img.src, img_src_value = "https://robohash.org/" + /*$user*/ ctx[4].name + ".png")) attr_dev(img, "src", img_src_value);
+    			add_location(img, file$5, 61, 20, 1657);
     			attr_dev(div0, "class", "card-header");
-    			add_location(div0, file$5, 56, 16, 1544);
+    			add_location(div0, file$5, 60, 16, 1610);
     			attr_dev(h5, "class", "card-title");
-    			add_location(h5, file$5, 64, 20, 1874);
+    			set_style(h5, "text-decoration", "underline");
+    			add_location(h5, file$5, 68, 20, 1940);
     			attr_dev(p0, "class", "card-text");
-    			add_location(p0, file$5, 65, 20, 1937);
-    			add_location(b0, file$5, 66, 23, 1985);
-    			add_location(p1, file$5, 66, 20, 1982);
-    			add_location(b1, file$5, 67, 23, 2041);
-    			add_location(p2, file$5, 67, 20, 2038);
-    			add_location(b2, file$5, 68, 23, 2097);
-    			add_location(p3, file$5, 68, 20, 2094);
+    			add_location(p0, file$5, 69, 20, 2036);
+    			add_location(b0, file$5, 70, 23, 2084);
+    			add_location(p1, file$5, 70, 20, 2081);
+    			add_location(b1, file$5, 71, 23, 2140);
+    			add_location(p2, file$5, 71, 20, 2137);
     			attr_dev(div1, "class", "card-body");
-    			add_location(div1, file$5, 63, 16, 1829);
+    			add_location(div1, file$5, 67, 16, 1895);
     			attr_dev(div2, "class", "card text-white bg-transparent border-light mb-3");
     			set_style(div2, "max-width", "18rem");
-    			add_location(div2, file$5, 52, 12, 1390);
+    			add_location(div2, file$5, 56, 12, 1456);
     			attr_dev(div3, "class", "col col-fixed svelte-f4m5m4");
-    			add_location(div3, file$5, 50, 8, 1312);
+    			add_location(div3, file$5, 54, 8, 1378);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -5190,6 +5179,7 @@ var app = (function () {
     			append_dev(div2, t0);
     			append_dev(div2, div1);
     			append_dev(div1, h5);
+    			append_dev(h5, t1);
     			append_dev(div1, t2);
     			append_dev(div1, p0);
     			append_dev(div1, t3);
@@ -5202,20 +5192,16 @@ var app = (function () {
     			append_dev(p2, b1);
     			append_dev(p2, t9);
     			append_dev(p2, t10);
-    			append_dev(div1, t11);
-    			append_dev(div1, p3);
-    			append_dev(p3, b2);
-    			append_dev(p3, t13);
-    			append_dev(p3, t14);
-    			append_dev(p3, t15);
+    			append_dev(p2, t11);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*$user*/ 8 && !src_url_equal(img.src, img_src_value = "https://robohash.org/" + /*$user*/ ctx[3].name + ".png")) {
+    			if (dirty & /*$user*/ 16 && !src_url_equal(img.src, img_src_value = "https://robohash.org/" + /*$user*/ ctx[4].name + ".png")) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*username*/ 1) set_data_dev(t6, /*username*/ ctx[0]);
-    			if (dirty & /*$user*/ 8 && t10_value !== (t10_value = /*$user*/ ctx[3].email + "")) set_data_dev(t10, t10_value);
+    			if (dirty & /*username*/ 1) set_data_dev(t1, /*username*/ ctx[0]);
+    			if (dirty & /*$user*/ 16 && t6_value !== (t6_value = /*$user*/ ctx[4].email + "")) set_data_dev(t6, t6_value);
+    			if (dirty & /*averageDeviation*/ 4) set_data_dev(t10, /*averageDeviation*/ ctx[2]);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div3);
@@ -5226,14 +5212,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2$2.name,
     		type: "if",
-    		source: "(50:4) {#if $isAuthenticated}",
+    		source: "(54:4) {#if $isAuthenticated}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (81:12) {#if $isAuthenticated}
+    // (84:12) {#if $isAuthenticated}
     function create_if_block_1$2(ctx) {
     	let div;
     	let a;
@@ -5245,9 +5231,9 @@ var app = (function () {
     			a.textContent = "Play";
     			attr_dev(a, "href", "#/play/");
     			attr_dev(a, "class", "btn btn-primary svelte-f4m5m4");
-    			add_location(a, file$5, 83, 20, 2598);
+    			add_location(a, file$5, 86, 20, 2639);
     			attr_dev(div, "class", "play-button-container svelte-f4m5m4");
-    			add_location(div, file$5, 82, 16, 2541);
+    			add_location(div, file$5, 85, 16, 2582);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -5262,14 +5248,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$2.name,
     		type: "if",
-    		source: "(81:12) {#if $isAuthenticated}",
+    		source: "(84:12) {#if $isAuthenticated}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (89:4) {#if $isAuthenticated}
+    // (92:4) {#if $isAuthenticated}
     function create_if_block$3(ctx) {
     	let div3;
     	let div2;
@@ -5300,13 +5286,13 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "level-boxes svelte-f4m5m4");
-    			add_location(div0, file$5, 94, 20, 3009);
+    			add_location(div0, file$5, 97, 20, 3050);
     			attr_dev(div1, "class", "card-body levels svelte-f4m5m4");
-    			add_location(div1, file$5, 92, 16, 2915);
+    			add_location(div1, file$5, 95, 16, 2956);
     			attr_dev(div2, "class", "card text-white bg-transparent border-light mb-3");
-    			add_location(div2, file$5, 91, 12, 2835);
+    			add_location(div2, file$5, 94, 12, 2876);
     			attr_dev(div3, "class", "col col-fixed svelte-f4m5m4");
-    			add_location(div3, file$5, 89, 8, 2757);
+    			add_location(div3, file$5, 92, 8, 2798);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -5350,14 +5336,14 @@ var app = (function () {
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(89:4) {#if $isAuthenticated}",
+    		source: "(92:4) {#if $isAuthenticated}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (96:24) {#each ["LEVEL_7", "LEVEL_6", "LEVEL_5", "LEVEL_4", "LEVEL_3", "LEVEL_2", "LEVEL_1"] as level (level)}
+    // (99:24) {#each ["LEVEL_7", "LEVEL_6", "LEVEL_5", "LEVEL_4", "LEVEL_3", "LEVEL_2", "LEVEL_1"] as level (level)}
     function create_each_block$1(key_1, ctx) {
     	let div;
     	let t0;
@@ -5376,7 +5362,7 @@ var app = (function () {
     			? 'active'
     			: '') + " svelte-f4m5m4");
 
-    			add_location(div, file$5, 96, 28, 3192);
+    			add_location(div, file$5, 99, 28, 3233);
     			this.first = div;
     		},
     		m: function mount(target, anchor) {
@@ -5402,7 +5388,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(96:24) {#each [\\\"LEVEL_7\\\", \\\"LEVEL_6\\\", \\\"LEVEL_5\\\", \\\"LEVEL_4\\\", \\\"LEVEL_3\\\", \\\"LEVEL_2\\\", \\\"LEVEL_1\\\"] as level (level)}",
+    		source: "(99:24) {#each [\\\"LEVEL_7\\\", \\\"LEVEL_6\\\", \\\"LEVEL_5\\\", \\\"LEVEL_4\\\", \\\"LEVEL_3\\\", \\\"LEVEL_2\\\", \\\"LEVEL_1\\\"] as level (level)}",
     		ctx
     	});
 
@@ -5418,9 +5404,9 @@ var app = (function () {
     	let img_src_value;
     	let t1;
     	let t2;
-    	let if_block0 = /*$isAuthenticated*/ ctx[2] && create_if_block_2$2(ctx);
-    	let if_block1 = /*$isAuthenticated*/ ctx[2] && create_if_block_1$2(ctx);
-    	let if_block2 = /*$isAuthenticated*/ ctx[2] && create_if_block$3(ctx);
+    	let if_block0 = /*$isAuthenticated*/ ctx[3] && create_if_block_2$2(ctx);
+    	let if_block1 = /*$isAuthenticated*/ ctx[3] && create_if_block_1$2(ctx);
+    	let if_block2 = /*$isAuthenticated*/ ctx[3] && create_if_block$3(ctx);
 
     	const block = {
     		c: function create() {
@@ -5437,13 +5423,13 @@ var app = (function () {
     			attr_dev(img, "class", "guessit-logo svelte-f4m5m4");
     			if (!src_url_equal(img.src, img_src_value = "/images/background.gif")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "GuessITLogo");
-    			add_location(img, file$5, 75, 12, 2310);
+    			add_location(img, file$5, 78, 12, 2351);
     			attr_dev(div0, "class", "guessit");
-    			add_location(div0, file$5, 74, 8, 2275);
+    			add_location(div0, file$5, 77, 8, 2316);
     			attr_dev(div1, "class", "col col-fixed empty-column svelte-f4m5m4");
-    			add_location(div1, file$5, 73, 4, 2225);
+    			add_location(div1, file$5, 76, 4, 2266);
     			attr_dev(div2, "class", "row");
-    			add_location(div2, file$5, 48, 0, 1257);
+    			add_location(div2, file$5, 52, 0, 1323);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5461,7 +5447,7 @@ var app = (function () {
     			if (if_block2) if_block2.m(div2, null);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (/*$isAuthenticated*/ ctx[2]) {
+    			if (/*$isAuthenticated*/ ctx[3]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
@@ -5474,7 +5460,7 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (/*$isAuthenticated*/ ctx[2]) {
+    			if (/*$isAuthenticated*/ ctx[3]) {
     				if (if_block1) ; else {
     					if_block1 = create_if_block_1$2(ctx);
     					if_block1.c();
@@ -5485,7 +5471,7 @@ var app = (function () {
     				if_block1 = null;
     			}
 
-    			if (/*$isAuthenticated*/ ctx[2]) {
+    			if (/*$isAuthenticated*/ ctx[3]) {
     				if (if_block2) {
     					if_block2.p(ctx, dirty);
     				} else {
@@ -5526,9 +5512,9 @@ var app = (function () {
     	validate_store(jwt_token, 'jwt_token');
     	component_subscribe($$self, jwt_token, $$value => $$invalidate(7, $jwt_token = $$value));
     	validate_store(isAuthenticated, 'isAuthenticated');
-    	component_subscribe($$self, isAuthenticated, $$value => $$invalidate(2, $isAuthenticated = $$value));
+    	component_subscribe($$self, isAuthenticated, $$value => $$invalidate(3, $isAuthenticated = $$value));
     	validate_store(user, 'user');
-    	component_subscribe($$self, user, $$value => $$invalidate(3, $user = $$value));
+    	component_subscribe($$self, user, $$value => $$invalidate(4, $user = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Home', slots, []);
     	const api_root = window.location.origin;
@@ -5536,7 +5522,7 @@ var app = (function () {
     	let answeredQuestions = [];
     	let username;
     	let playerLevel;
-    	let averageDifference;
+    	let averageDeviation;
 
     	onMount(async () => {
     		try {
@@ -5559,9 +5545,10 @@ var app = (function () {
     			$$invalidate(1, playerLevel = response.data.playerLevelState);
     			$$invalidate(0, username = response.data.username);
     			answeredQuestions = response.data.answeredQuestions;
-    			console.log("playerDetails:", answeredQuestions);
+    			$$invalidate(2, averageDeviation = response.data.averageDeviation);
+    			console.log("playerQuestions:", answeredQuestions);
     		} catch(error) {
-    			alert("Signup to see more");
+    			alert("Signup again");
     			console.log(error);
     		}
     	}
@@ -5583,7 +5570,7 @@ var app = (function () {
     		answeredQuestions,
     		username,
     		playerLevel,
-    		averageDifference,
+    		averageDeviation,
     		getPlayerDetails,
     		$jwt_token,
     		$isAuthenticated,
@@ -5595,14 +5582,14 @@ var app = (function () {
     		if ('answeredQuestions' in $$props) answeredQuestions = $$props.answeredQuestions;
     		if ('username' in $$props) $$invalidate(0, username = $$props.username);
     		if ('playerLevel' in $$props) $$invalidate(1, playerLevel = $$props.playerLevel);
-    		if ('averageDifference' in $$props) $$invalidate(4, averageDifference = $$props.averageDifference);
+    		if ('averageDeviation' in $$props) $$invalidate(2, averageDeviation = $$props.averageDeviation);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [username, playerLevel, $isAuthenticated, $user, averageDifference];
+    	return [username, playerLevel, averageDeviation, $isAuthenticated, $user];
     }
 
     class Home extends SvelteComponentDev {
@@ -5624,7 +5611,7 @@ var app = (function () {
     const { console: console_1$1 } = globals;
     const file$4 = "src\\pages\\Play.svelte";
 
-    // (183:2) {:else}
+    // (184:2) {:else}
     function create_else_block_1(ctx) {
     	let div1;
     	let div0;
@@ -5634,9 +5621,9 @@ var app = (function () {
     			div1 = element("div");
     			div0 = element("div");
     			attr_dev(div0, "class", "loader svelte-xau1lg");
-    			add_location(div0, file$4, 184, 6, 5212);
+    			add_location(div0, file$4, 185, 6, 5231);
     			attr_dev(div1, "class", "loader-container svelte-xau1lg");
-    			add_location(div1, file$4, 183, 4, 5174);
+    			add_location(div1, file$4, 184, 4, 5193);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -5652,14 +5639,14 @@ var app = (function () {
     		block,
     		id: create_else_block_1.name,
     		type: "else",
-    		source: "(183:2) {:else}",
+    		source: "(184:2) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (162:33) 
+    // (163:33) 
     function create_if_block_1$1(ctx) {
     	let h2;
     	let t0_value = /*questions*/ ctx[0][/*currentQuestionIndex*/ ctx[2]].questionText + "";
@@ -5682,7 +5669,7 @@ var app = (function () {
     			t1 = space();
     			if_block.c();
     			if_block_anchor = empty();
-    			add_location(h2, file$4, 162, 4, 4491);
+    			add_location(h2, file$4, 163, 4, 4510);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -5718,14 +5705,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(162:33) ",
+    		source: "(163:33) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (160:2) {#if levelCompleted}
+    // (161:2) {#if levelCompleted}
     function create_if_block$2(ctx) {
     	let h2;
 
@@ -5733,7 +5720,7 @@ var app = (function () {
     		c: function create() {
     			h2 = element("h2");
     			h2.textContent = "Level Completed!";
-    			add_location(h2, file$4, 160, 4, 4425);
+    			add_location(h2, file$4, 161, 4, 4444);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -5748,14 +5735,14 @@ var app = (function () {
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(160:2) {#if levelCompleted}",
+    		source: "(161:2) {#if levelCompleted}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (178:4) {:else}
+    // (179:4) {:else}
     function create_else_block$1(ctx) {
     	let p;
     	let t0;
@@ -5773,9 +5760,9 @@ var app = (function () {
     			t2 = space();
     			button = element("button");
     			button.textContent = "Next";
-    			add_location(p, file$4, 178, 6, 5009);
+    			add_location(p, file$4, 179, 6, 5028);
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$4, 179, 6, 5063);
+    			add_location(button, file$4, 180, 6, 5082);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -5805,14 +5792,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(178:4) {:else}",
+    		source: "(179:4) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (164:4) {#if !showNextButton}
+    // (165:4) {#if !showNextButton}
     function create_if_block_2$1(ctx) {
     	let form;
     	let div;
@@ -5835,13 +5822,13 @@ var app = (function () {
     			attr_dev(input, "placeholder", "Enter your answer here");
     			attr_dev(input, "min", "0");
     			attr_dev(input, "step", "1");
-    			add_location(input, file$4, 166, 10, 4673);
+    			add_location(input, file$4, 167, 10, 4692);
     			attr_dev(button, "type", "submit");
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$4, 174, 10, 4896);
+    			add_location(button, file$4, 175, 10, 4915);
     			attr_dev(div, "class", "form-group");
-    			add_location(div, file$4, 165, 8, 4637);
-    			add_location(form, file$4, 164, 6, 4581);
+    			add_location(div, file$4, 166, 8, 4656);
+    			add_location(form, file$4, 165, 6, 4600);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -5876,7 +5863,7 @@ var app = (function () {
     		block,
     		id: create_if_block_2$1.name,
     		type: "if",
-    		source: "(164:4) {#if !showNextButton}",
+    		source: "(165:4) {#if !showNextButton}",
     		ctx
     	});
 
@@ -5899,7 +5886,7 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			if_block.c();
-    			add_location(div, file$4, 158, 0, 4390);
+    			add_location(div, file$4, 159, 0, 4409);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5941,7 +5928,17 @@ var app = (function () {
     }
 
     function getNextLevel(currentLevel) {
-    	const levels = ["LEVEL_1", "LEVEL_2", "LEVEL_3", "LEVEL_4", "LEVEL_5", "LEVEL_6", "LEVEL_7"];
+    	const levels = [
+    		"LEVEL_1",
+    		"LEVEL_2",
+    		"LEVEL_3",
+    		"LEVEL_4",
+    		"LEVEL_5",
+    		"LEVEL_6",
+    		"LEVEL_7",
+    		"COMPLETED"
+    	];
+
     	const currentIndex = levels.indexOf(currentLevel);
 
     	// Check if we're at the last level

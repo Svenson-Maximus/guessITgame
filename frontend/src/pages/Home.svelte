@@ -9,13 +9,11 @@
     let answeredQuestions = [];
     let username;
     let playerLevel;
-    let averageDifference;
-    
+    let averageDeviation;
 
     onMount(async () => {
         try {
             await getPlayerDetails();
-            
         } catch (error) {
             console.error("Failed to fetch data:", error);
         }
@@ -34,16 +32,14 @@
             playerLevel = response.data.playerLevelState;
             username = response.data.username;
             answeredQuestions = response.data.answeredQuestions;
+            averageDeviation = response.data.averageDeviation;
 
-            
-
-            console.log("playerDetails:", answeredQuestions);
+            console.log("playerQuestions:", answeredQuestions);
         } catch (error) {
-            alert("Signup to see more");
+            alert("Signup again");
             console.log(error);
         }
     }
-    
 </script>
 
 <div class="row">
@@ -62,11 +58,12 @@
                     />
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Account Infos</h5>
+                    <h5 class="card-title" style="text-decoration: underline;">
+                        {username}
+                    </h5>
                     <p class="card-text" />
-                    <p><b>Username:</b> {username}</p>
                     <p><b>Email:</b> {$user.email}</p>
-                    <p><b>Average Difference:</b> {averageDifference}%</p>
+                    <p><b>Average Deviation:</b> {averageDeviation}%</p>
                 </div>
             </div>
         </div>
@@ -93,7 +90,7 @@
                 <div class="card-body levels">
                     <!-- Levels Here -->
                     <div class="level-boxes">
-                        {#each ["LEVEL_7", "LEVEL_6", "LEVEL_5", "LEVEL_4", "LEVEL_3", "LEVEL_2", "LEVEL_1"] as level (level)}
+                        {#each ["COMPLETED", "LEVEL_7", "LEVEL_6", "LEVEL_5", "LEVEL_4", "LEVEL_3", "LEVEL_2", "LEVEL_1"] as level (level)}
                             <div
                                 class="level-box {level === playerLevel
                                     ? 'active'

@@ -143,51 +143,96 @@
       "LEVEL_5",
       "LEVEL_6",
       "LEVEL_7",
+      "COMPLETED",
     ];
     const currentIndex = levels.indexOf(currentLevel);
 
     // Check if we're at the last level
     if (currentIndex === levels.length - 1) {
-      // noch ändern
-      return currentLevel;
+      return { nextLevel: currentLevel, gameCompleted: true };
     } else {
-      return levels[currentIndex + 1];
+      return { nextLevel: levels[currentIndex + 1], gameCompleted: false };
     }
+  }
+
+  function redirectToLeaderboard() {
+    // Replace this with the actual leaderboard route
+    window.location.assign("#/leaderboards");
   }
 </script>
 
-<div>
-  {#if levelCompleted}
-    <h2>Level Completed!</h2>
-  {:else if questions.length > 0}
-    <h2>{questions[currentQuestionIndex].questionText}</h2>
-    {#if !showNextButton}
-      <form on:submit|preventDefault={handleSubmit}>
-        <div class="form-group">
-          <input
-            class="form-control"
-            type="number"
-            bind:value={userAnswer}
-            placeholder="Enter your answer here"
-            min="0"
-            step="1"
-          />
-          <button type="submit" class="btn btn-primary">Submit</button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      {#if levelCompleted}
+        <h2>Level Completed!</h2>
+        {#if getNextLevel(playerLevel).gameCompleted}
+          <button on:click={redirectToLeaderboard} class="btn btn-primary"
+            >Leaderboard</button
+          >
+        {:else}
+          <button on:click={updatePlayerLevel} class="btn btn-primary">Play</button>
+        {/if}
+      {:else if questions.length > 0}
+        <h2>{questions[currentQuestionIndex].questionText}</h2>
+        {#if !showNextButton}
+          <form on:submit|preventDefault={handleSubmit}>
+            <div class="form-group">
+              <input
+                class="form-control"
+                type="number"
+                bind:value={userAnswer}
+                placeholder="Enter your answer here"
+                min="0"
+                step="1"
+              />
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        {:else}
+          <p>The correct answer was: {correctAnswer}</p>
+          <button on:click={handleNextQuestion} class="btn btn-primary">Next</button
+          >
+        {/if}
+      {:else}
+        <div class="loader-container">
+          <div class="loader" />
         </div>
-      </form>
-    {:else}
-      <p>The correct answer was: {correctAnswer}</p>
-      <button on:click={handleNextQuestion} class="btn btn-primary">Next</button
-      >
-    {/if}
-  {:else}
-    <div class="loader-container">
-      <div class="loader" />
+      {/if}
     </div>
-  {/if}
+  </div>
 </div>
 
 <style>
+  .container {
+    max-width: 100%;
+    padding: 3rem 1rem;
+  }
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  form {
+    margin-bottom: 1rem;
+  }
+
+  .btn-primary {
+    font-family: "Arial Black", Arial, sans-serif;
+    font-size: 24px;
+    padding: 16px 32px;
+    background-color: #45a3f7;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0px 0px 100px 0px rgba(251, 44, 237, 0.75);
+    color: rgb(62, 17, 209);
+  }
+
   .loader-container {
     display: flex;
     justify-content: center;
@@ -213,3 +258,4 @@
     }
   }
 </style>
+
