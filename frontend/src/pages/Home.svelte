@@ -54,7 +54,7 @@
                     <img
                         class="card-img-top robohash-img"
                         alt="robohash"
-                        src="https://robohash.org/{$user.name}.png"
+                        src="https://robohash.org/{username}.png"
                     />
                 </div>
                 <div class="card-body">

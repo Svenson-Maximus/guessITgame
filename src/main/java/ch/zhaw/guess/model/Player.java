@@ -25,6 +25,7 @@ public class Player {
     private String username;
     private PlayerLevelState playerLevelState = PlayerLevelState.LEVEL_1;
     private double averageDeviation;
+    private int score;
     private List<AnsweredQuestion> answeredQuestions;
 
     public void setAnsweredQuestions(List<AnsweredQuestion> answeredQuestions) {
