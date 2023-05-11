@@ -74,7 +74,7 @@
                         <p class="card-text" />
                         <p><b>Score:</b> {score}</p>
                         <p><b>Average Deviation:</b> {averageDeviation}%</p>
-                        <p><b>Mail:</b> {$user.email}</p>
+                        <p><b>Email:</b> {$user.email}</p>
                     </div>
                 </div>
             </div>
