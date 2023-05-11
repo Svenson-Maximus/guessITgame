@@ -1,16 +1,18 @@
-FROM openjdk:19-jdk-slim
+FROM openjdk:17-jdk-slim
 
 RUN apt-get update && apt-get install -y curl \
-  && curl -sL https://deb.nodesource.com/setup_18.x | bash - \
-  && apt-get install -y nodejs \
-  && curl -L https://www.npmjs.com/install.sh | npm_install="8.19.2" | sh
+  && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+  && apt-get install -y nodejs
 
 WORKDIR /usr/src/app
 COPY . .
 
-RUN cd freelancer4u-frontend && npm install
-RUN cd freelancer4u-frontend && npm run build
-RUN rm -r freelancer4u-frontend
+WORKDIR /usr/src/app/frontend
+RUN npm install
+RUN npm run build
+WORKDIR /usr/src/app
+
+RUN rm -r frontend
 
 RUN sed -i 's/\r$//' mvnw
 RUN chmod +x mvnw
