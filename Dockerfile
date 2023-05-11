@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 WORKDIR /usr/src/app/frontend
-RUN NODE_ENV=development npm i
+RUN npm install
 RUN npm run build
 WORKDIR /usr/src/app
 
