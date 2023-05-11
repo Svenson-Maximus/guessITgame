@@ -8,9 +8,9 @@ RUN apt-get update && apt-get install -y curl \
 WORKDIR /usr/src/app
 COPY . .
 
-RUN cd backend-frontend && npm install
-RUN cd backend-frontend && npm run build
-RUN rm -r backend-frontend
+RUN cd frontend && npm install
+RUN cd frontend && npm run build
+RUN rm -r frontend
 
 RUN sed -i 's/\r$//' mvnw
 RUN chmod +x mvnw
