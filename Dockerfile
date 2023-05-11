@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 WORKDIR /usr/src/app/frontend
-RUN npm install
+RUN npm install --verbose
 RUN npm run build
 WORKDIR /usr/src/app
 
