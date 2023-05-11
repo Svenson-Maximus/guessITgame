@@ -2,6 +2,7 @@
     import axios from "axios";
     import { querystring } from "svelte-spa-router";
     import { Confetti } from "svelte-confetti";
+    
 
     const api_root = window.location.origin;
 
@@ -35,12 +36,11 @@
         axios(config)
             .then(function (response) {
                 allPlayers = response.data.content.sort(
-                    (p1, p2) => p1.averageDeviation - p2.averageDeviation
+                    (p1, p2) => p2.score - p1.score
                 );
                 completedPlayers = allPlayers.filter(
                     (player) => player.playerLevelState === "COMPLETED"
                 );
-                nrOfPages = response.data.totalPages;
             })
             .catch(function (error) {
                 alert("Could not get players");
@@ -87,12 +87,12 @@
                 <h2>#2</h2>
                 <p>
                     {completedPlayers[1]?.username} - {completedPlayers[1]
-                        ?.averageDeviation}%
+                        ?.score} Points
                 </p>
             </div>
             <div
                 class="text-center top-players"
-                style="position: relative; bottom: -20px;"
+                style="position: relative; bottom: 20px;"
             >
                 <img
                     class="robohash-img"
@@ -105,7 +105,7 @@
                 <h2>#1</h2>
                 <p>
                     {completedPlayers[0]?.username} - {completedPlayers[0]
-                        ?.averageDeviation}%
+                        ?.score} Points
                 </p>
             </div>
             <div class="text-center top-players">
@@ -120,7 +120,7 @@
                 <h2>#3</h2>
                 <p>
                     {completedPlayers[2]?.username} - {completedPlayers[2]
-                        ?.averageDeviation}%
+                        ?.score} Points
                 </p>
             </div>
         </div>
@@ -138,6 +138,7 @@
                                 <th scope="col">Rank</th>
                                 <th scope="col">Avatar</th>
                                 <th scope="col">Username</th>
+                                <th scope="col">Score</th>
                                 <th scope="col">Average Deviation</th>
                             </tr>
                         </thead>
@@ -155,6 +156,7 @@
                                         />
                                     </td>
                                     <td>{player.username}</td>
+                                    <td>{player.score} Points</td>
                                     <td>{player.averageDeviation}%</td>
                                 </tr>
                             {/each}
@@ -163,6 +165,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-6">
             <div class="card text-white bg-transparent border-light mb-3">
                 <div class="card-body">
@@ -173,7 +176,7 @@
                                 <th scope="col">Rank</th>
                                 <th scope="col">Avatar</th>
                                 <th scope="col">Username</th>
-                                <th scope="col">Average Deviation</th>
+                                <th scope="col">Score</th>
                                 <th scope="col">Current Level</th>
                             </tr>
                         </thead>
@@ -191,7 +194,7 @@
                                         />
                                     </td>
                                     <td>{player.username}</td>
-                                    <td>{player.averageDeviation}%</td>
+                                    <td>{player.score} Points</td>
                                     <td>{player.playerLevelState}</td>
                                 </tr>
                             {/each}
@@ -224,5 +227,4 @@
     .leaderboard-container {
         margin-top: 40px;
     }
-
 </style>

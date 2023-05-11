@@ -26,6 +26,7 @@ public class Player {
     private PlayerLevelState playerLevelState = PlayerLevelState.LEVEL_1;
     private double averageDeviation;
     private int score;
+    private String roboHashUrl;
     private List<AnsweredQuestion> answeredQuestions;
 
     public void setAnsweredQuestions(List<AnsweredQuestion> answeredQuestions) {

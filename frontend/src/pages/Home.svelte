@@ -10,10 +10,14 @@
     let username;
     let playerLevel;
     let averageDeviation;
+    let score;
+
+    let loading = true;
 
     onMount(async () => {
         try {
             await getPlayerDetails();
+            loading = false;
         } catch (error) {
             console.error("Failed to fetch data:", error);
         }
@@ -33,8 +37,9 @@
             username = response.data.username;
             answeredQuestions = response.data.answeredQuestions;
             averageDeviation = response.data.averageDeviation;
+            score = response.data.score;
 
-            console.log("playerQuestions:", answeredQuestions);
+            console.log(playerDetails);
         } catch (error) {
             alert("Signup again");
             console.log(error);
@@ -42,69 +47,80 @@
     }
 </script>
 
-<div class="row">
-    {#if $isAuthenticated}
-        <div class="col col-fixed">
-            <!-- Bootstrap Card -->
-            <div
-                class="card text-white bg-transparent border-light mb-3"
-                style="max-width: 18rem;"
-            >
-                <div class="card-header">
-                    <img
-                        class="card-img-top robohash-img"
-                        alt="robohash"
-                        src="https://robohash.org/{username}.png"
-                    />
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title" style="text-decoration: underline;">
-                        {username}
-                    </h5>
-                    <p class="card-text" />
-                    <p><b>Email:</b> {$user.email}</p>
-                    <p><b>Average Deviation:</b> {averageDeviation}%</p>
-                </div>
-            </div>
-        </div>
-    {/if}
-    <div class="col col-fixed empty-column">
-        <div class="guessit">
-            <img
-                class="guessit-logo"
-                src="/images/background.gif"
-                alt="GuessITLogo"
-            />
-            {#if $isAuthenticated && playerLevel !== "COMPLETED"}
-                <!-- Play Button -->
-                <div class="play-button-container">
-                    <a href="#/play/" class="btn btn-primary">Play</a>
-                </div>
-            {/if}
-        </div>
-    </div>
-    {#if $isAuthenticated}
-        <div class="col col-fixed">
-            <!-- Bootstrap Card -->
-            <div class="card text-white bg-transparent border-light mb-3">
-                <div class="card-body levels">
-                    <!-- Levels Here -->
-                    <div class="level-boxes">
-                        {#each ["COMPLETED", "LEVEL_7", "LEVEL_6", "LEVEL_5", "LEVEL_4", "LEVEL_3", "LEVEL_2", "LEVEL_1"] as level (level)}
-                            <div
-                                class="level-box {level === playerLevel
-                                    ? 'active'
-                                    : ''}"
-                            >
-                                {level}
-                            </div>
-                        {/each}
+
+{#if !loading}
+    <div class="row">
+        {#if $isAuthenticated}
+            <div class="col col-fixed">
+                <!-- Bootstrap Card -->
+                <div
+                    class="card text-white bg-transparent border-light mb-3"
+                    style="max-width: 18rem;"
+                >
+                    <div class="card-header">
+                        <img
+                            class="card-img-top robohash-img"
+                            alt="robohash"
+                            src="https://robohash.org/{username}.png"
+                        />
+                    </div>
+                    <div class="card-body">
+                        <h5
+                            class="card-title"
+                            style="text-decoration: underline;"
+                        >
+                            {username}
+                        </h5>
+                        <p class="card-text" />
+                        <p><b>Score:</b> {score}</p>
+                        <p><b>Average Deviation:</b> {averageDeviation}%</p>
+                        <p><b>Email:</b> {$user.email}</p>
                     </div>
                 </div>
             </div>
+        {/if}
+        <div class="col col-fixed empty-column">
+            <div class="guessit">
+                <img
+                    class="guessit-logo"
+                    src="/images/background.gif"
+                    alt="GuessITLogo"
+                />
+                {#if $isAuthenticated && playerLevel !== "COMPLETED"}
+                    <!-- Play Button -->
+                    <div class="play-button-container">
+                        <a href="#/play/" class="btn btn-primary">Play</a>
+                    </div>
+                {/if}
+            </div>
         </div>
-    {/if}
-</div>
+        {#if $isAuthenticated}
+            <div class="col col-fixed">
+                <!-- Bootstrap Card -->
+                <div class="card text-white bg-transparent border-light mb-3">
+                    <div class="card-body levels">
+                        <!-- Levels Here -->
+                        <div class="level-boxes">
+                            {#each ["COMPLETED", "LEVEL_7", "LEVEL_6", "LEVEL_5", "LEVEL_4", "LEVEL_3", "LEVEL_2", "LEVEL_1"] as level (level)}
+                                <div
+                                    class="level-box {level === playerLevel
+                                        ? 'active'
+                                        : ''}"
+                                >
+                                    {level}
+                                </div>
+                            {/each}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {/if}
+    </div>
+{:else}
+    <div class="loader-container">
+        <div class="loader" />
+    </div>
+{/if}
 
 <style>
     :global(body) {
@@ -196,5 +212,30 @@
 
     .level-box.active {
         background-color: #45a3f7;
+    }
+
+    .loader-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 </style>

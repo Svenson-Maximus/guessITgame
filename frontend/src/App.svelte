@@ -3,11 +3,10 @@
 	import routes from "./routes";
 	import { isAuthenticated, user } from "./store";
 	import auth from "./auth.service";
-
-	
 </script>
 
 <title>GuessIt</title>
+
 <div id="app">
 	<nav
 		class="navbar navbar-expand-lg"
@@ -15,7 +14,7 @@
 	>
 		<div class="container-fluid">
 			{#if $isAuthenticated}
-			<a class="navbar-brand" href="#/home">Home</a>
+				<a class="navbar-brand" href="#/home">Home</a>
 			{/if}
 			{#if $isAuthenticated && $user.user_roles && $user.user_roles.includes("admin")}
 				<a class="navbar-brand" href="#/players">Players</a>

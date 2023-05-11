@@ -1,7 +1,7 @@
 <script>
     import axios from "axios";
-    import { jwt_token} from "../store";
     import { querystring } from "svelte-spa-router";
+    import { isAuthenticated, user, jwt_token } from "../store";
 
     const api_root = window.location.origin;
 

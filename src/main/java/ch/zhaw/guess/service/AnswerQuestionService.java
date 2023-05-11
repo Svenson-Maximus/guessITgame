@@ -28,7 +28,8 @@ public class AnswerQuestionService {
                 .orElseThrow(() -> new RuntimeException("Player not found with id: " + playerId));
 
         Question question = questionRepository.findById(answeredQuestionDTO.getQuestionId())
-                .orElseThrow(() -> new RuntimeException("Question not found with id: " + answeredQuestionDTO.getQuestionId()));
+                .orElseThrow(() -> new RuntimeException(
+                        "Question not found with id: " + answeredQuestionDTO.getQuestionId()));
 
         int difference = (int) Math.abs(question.getCorrectAnswer() - answeredQuestionDTO.getPlayerAnswer());
         double deviation = round(((double) difference / question.getCorrectAnswer()) * 100, 2);
@@ -37,27 +38,31 @@ public class AnswerQuestionService {
                 answeredQuestionDTO.getQuestionId(),
                 answeredQuestionDTO.getPlayerAnswer(),
                 difference, question.getCorrectAnswer(),
-                deviation
-        );
+                deviation);
 
         if (player.getAnsweredQuestions() == null) {
             player.setAnsweredQuestions(new ArrayList<>());
         }
 
         player.getAnsweredQuestions().add(answeredQuestion);
-        
+
         // Calculate the average deviation
         calculateAverageDeviation(player);
 
+        // Calculate the score
+        calculateScore(player);
+
         return playerRepository.save(player);
+
     }
 
     private double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
+        if (places < 0)
+            throw new IllegalArgumentException();
 
         BigDecimal bd = BigDecimal.valueOf(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
-        
+
         return bd.doubleValue();
     }
 
@@ -77,5 +82,28 @@ public class AnswerQuestionService {
 
         double averageDeviation = round(sumOfDeviations / numberOfAnsweredQuestions, 2);
         player.setAverageDeviation(averageDeviation);
+    }
+
+    // calculateScore
+    private void calculateScore(Player player) {
+        if (player.getAnsweredQuestions() == null || player.getAnsweredQuestions().isEmpty()) {
+            player.setScore(0);
+            return;
+        }
+
+        int totalScore = 0;
+
+        for (AnsweredQuestion answeredQuestion : player.getAnsweredQuestions()) {
+            double deviation = answeredQuestion.getDeviation();
+            int roundedDeviation = (int) Math.round(deviation);
+
+            if (roundedDeviation <= 1) {
+                totalScore += 100;
+            } else {
+                totalScore += (100 - (roundedDeviation - 1));
+            }
+        }
+
+        player.setScore(totalScore);
     }
 }

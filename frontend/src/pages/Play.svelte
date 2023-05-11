@@ -2,8 +2,7 @@
   import { onMount } from "svelte";
   import { jwt_token } from "../store";
   import axios from "axios";
-
-  const api_root = window.location.origin;
+  import Countup from "svelte-countup";
 
   let allQuestions = []; // Array to store all questions
   let questions = []; // Array to store filtered questions
@@ -15,6 +14,10 @@
   let playerId;
   let correctAnswer = null;
   let showNextButton = false;
+  let score = 0;
+
+  let countdown;
+  let timer = 60;
 
   onMount(async () => {
     try {
@@ -35,11 +38,17 @@
     try {
       const response = await axios(config);
       allQuestions = response.data.content;
-      questions = allQuestions.filter(
-        (question) => question.level === playerLevel
+      const answeredQuestionIds = playerDetails.answeredQuestions.map(
+        (q) => q.id
       );
 
-      console.log("Questions:", questions);
+      questions = allQuestions
+        .filter((question) => question.level === playerLevel)
+        .filter((question) => !answeredQuestionIds.includes(question.id));
+
+      // Set the currentQuestionIndex based on the player's progress
+      currentQuestionIndex = playerDetails.answeredQuestions.length;
+      startTimer();
     } catch (error) {
       alert("Could not get questions");
       console.log(error);
@@ -67,9 +76,26 @@
   }
 
   async function handleSubmit() {
-    await submitAnswer();
+    score = await submitAnswer();
     correctAnswer = questions[currentQuestionIndex].correctAnswer;
     showNextButton = true;
+  }
+
+  function startTimer() {
+    countdown = setInterval(() => {
+      timer--;
+
+      if (timer <= 0) {
+        clearInterval(countdown);
+        timer = 0;
+        handleSubmit();
+      }
+    }, 1000);
+  }
+
+  function resetTimer() {
+    clearInterval(countdown);
+    timer = 60;
   }
 
   function handleNextQuestion() {
@@ -82,6 +108,9 @@
     if (currentQuestionIndex >= questions.length) {
       levelCompleted = true;
       updatePlayerLevel();
+    } else {
+      resetTimer();
+      startTimer();
     }
   }
 
@@ -104,6 +133,7 @@
       const response = await axios(config);
       playerDetails = response.data; // Update playerDetails with the updated player returned from the server
       userAnswer = ""; // Reset the answer input field
+      return response.data.score; // Return the score points
     } catch (error) {
       console.error("Failed to submit answer:", error);
     }
@@ -168,10 +198,13 @@
           >Leaderboard</button
         >
       {:else if questions.length > 0 && currentQuestionIndex < questions.length}
-        <h2>{questions[currentQuestionIndex].questionText}</h2>
+        <div class="question-box">
+          <h2>{questions[currentQuestionIndex].questionText}</h2>
+        </div>
+
         {#if !showNextButton}
           <form on:submit|preventDefault={handleSubmit}>
-            <div class="form-group">
+            <div class="form-group answer-input">
               <input
                 class="form-control"
                 type="number"
@@ -180,11 +213,26 @@
                 min="0"
                 step="1"
               />
+              <p>Time remaining:</p>
+              <h2>{timer}</h2>
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
           </form>
         {:else}
-          <p>The correct answer was: {correctAnswer}</p>
+          <div class="answerClass">
+            <p>The correct answer was: {correctAnswer}</p>
+            <p>Your Highscore now is:</p>
+            <div class="highscore">
+              <Countup
+                initial={0}
+                value={score}
+                duration={3000}
+                step={1}
+                roundto={1}
+                format={true}
+              />
+            </div>
+          </div>
           <button on:click={handleNextQuestion} class="btn btn-primary"
             >Next</button
           >
@@ -252,5 +300,32 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+
+  .answerClass {
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    margin-top: 10px;
+  }
+
+  .highscore {
+    font-size: 3.5rem;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    margin-top: 10px;
+  }
+
+  .question-box {
+    display: inline-block;
+    padding: 1rem;
+    border: 3px solid white;
+    border-radius: 5px;
+  }
+
+  .answer-input {
+    margin-top: 10px;
   }
 </style>
