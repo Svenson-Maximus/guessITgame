@@ -48,7 +48,7 @@ public class PlayerController {
     @GetMapping("/player")
     public ResponseEntity<Page<Player>> getAllPlayer(
             @RequestParam(required = false, defaultValue = "1") Integer pageNumber,
-            @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
+            @RequestParam(required = false, defaultValue = "100") Integer pageSize) {
         Page<Player> allPlayers = playerRepository.findAll(PageRequest.of(pageNumber - 1, pageSize));
         return new ResponseEntity<>(allPlayers, HttpStatus.OK);
     }

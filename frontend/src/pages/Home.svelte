@@ -61,12 +61,12 @@
                         <img
                             class="card-img-top robohash-img"
                             alt="robohash"
-                            src="https://robohash.org/{username}.png"
+                            src="{playerDetails.roboHashUrl}"
                         />
                     </div>
                     <div class="card-body">
                         <h5
-                            class="card-title"
+                            class="card-title text-center"
                             style="text-decoration: underline;"
                         >
                             {username}

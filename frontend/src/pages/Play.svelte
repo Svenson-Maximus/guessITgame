@@ -19,6 +19,8 @@
   let countdown;
   let timer = 60;
 
+  const api_root = window.location.origin;
+
   onMount(async () => {
     try {
       await getPlayerDetails();
@@ -29,31 +31,37 @@
   });
 
   async function getQuestions() {
-    var config = {
-      method: "get",
-      url: api_root + "/api/question",
-      headers: { Authorization: "Bearer " + $jwt_token },
-    };
+  var config = {
+    method: "get",
+    url: api_root + "/api/question",
+    headers: { Authorization: "Bearer " + $jwt_token },
+  };
 
-    try {
-      const response = await axios(config);
-      allQuestions = response.data.content;
-      const answeredQuestionIds = playerDetails.answeredQuestions.map(
-        (q) => q.id
-      );
+  try {
+    const response = await axios(config);
+    allQuestions = response.data.content;
 
-      questions = allQuestions
-        .filter((question) => question.level === playerLevel)
-        .filter((question) => !answeredQuestionIds.includes(question.id));
+    // Handle the case when answeredQuestions is null
+    const answeredQuestionIds = playerDetails.answeredQuestions
+      ? playerDetails.answeredQuestions.map((q) => q.id)
+      : [];
 
-      // Set the currentQuestionIndex based on the player's progress
-      currentQuestionIndex = playerDetails.answeredQuestions.length;
-      startTimer();
-    } catch (error) {
-      alert("Could not get questions");
-      console.log(error);
-    }
+    questions = allQuestions
+      .filter((question) => question.level === playerLevel)
+      .filter((question) => !answeredQuestionIds.includes(question.id));
+
+    // Set the currentQuestionIndex based on the player's progress, handling the case when answeredQuestions is null
+    currentQuestionIndex = playerDetails.answeredQuestions
+      ? playerDetails.answeredQuestions.length
+      : 0;
+
+    startTimer();
+  } catch (error) {
+    alert("Could not get questions");
+    console.log(error);
   }
+}
+
 
   async function getPlayerDetails() {
     var config = {
@@ -226,7 +234,7 @@
               <Countup
                 initial={0}
                 value={score}
-                duration={3000}
+                duration={1000}
                 step={1}
                 roundto={1}
                 format={true}

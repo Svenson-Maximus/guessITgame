@@ -29,6 +29,11 @@ public class Player {
     private String roboHashUrl;
     private List<AnsweredQuestion> answeredQuestions;
 
+    public void setUsername(String username) {
+        this.username = username;
+        this.roboHashUrl = "https://robohash.org/" + username + ".png";
+    }
+
     public void setAnsweredQuestions(List<AnsweredQuestion> answeredQuestions) {
         this.answeredQuestions = answeredQuestions;
     }

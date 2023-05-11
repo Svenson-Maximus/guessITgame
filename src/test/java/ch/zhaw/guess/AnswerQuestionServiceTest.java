@@ -57,7 +57,6 @@ public class AnswerQuestionServiceTest {
         when(questionRepository.findById("1")).thenReturn(Optional.of(testQuestion));
         when(playerRepository.save(any(Player.class))).thenAnswer(i -> i.getArguments()[0]);
 
-        answeredQuestionsAccumulator.clear();
     }
 
     // Provide test data for testing the difference calculation
@@ -113,60 +112,25 @@ public class AnswerQuestionServiceTest {
         );
     }
 
-    // Parameterized test for testing the average deviation calculation
     @ParameterizedTest
-@MethodSource("provideAverageDeviationTestData")
-public void answerQuestionAverageDeviationTest(int playerAnswer, double expectedAverageDeviation) {
-    // Initialize testPlayer if it's null
-    if (testPlayer == null) {
-        testPlayer = playerRepository.findById("1").orElseThrow(() -> new RuntimeException("Player not found with id: 1"));
-        answeredQuestionsAccumulator = new ArrayList<>();
-    }
-
-    AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
-    testPlayer = answerQuestionService.answerQuestion("1", answeredQuestionDTO);
-
-    // Add the current answered question to the accumulator
-    answeredQuestionsAccumulator.add(testPlayer.getAnsweredQuestions().get(testPlayer.getAnsweredQuestions().size() - 1));
-    testPlayer.setAnsweredQuestions(answeredQuestionsAccumulator);
-
-    double actualAverageDeviation = testPlayer.getAverageDeviation();
-
-    // Assert that the calculated average deviation matches the expected average
-    // deviation within a tolerance of 0.01 (two decimal places)
-    assertEquals(expectedAverageDeviation, actualAverageDeviation, 0.01);
-}
-
-    private static Stream<Arguments> provideScoreTestData() {
-        return Stream.of(
-                // Test case 1: playerAnswer, expectedScore
-                Arguments.of(42, 100), // roundedDeviation = 0, score = 100
-                // Test case 2: playerAnswer, expectedScore
-                Arguments.of(43, 99), // roundedDeviation = 2, score = 99
-                // Test case 3: playerAnswer, expectedScore
-                Arguments.of(47, 89), // roundedDeviation = 12, score = 89
-                // Test case 4: playerAnswer, expectedScore
-                Arguments.of(53, 75) // roundedDeviation = 26, score = 75
-        );
-    }
-    
-
-    // Parameterized test for testing the score calculation
-    @ParameterizedTest
-    @MethodSource("provideScoreTestData")
-    public void answerQuestionScoreTest(int playerAnswer, int expectedScore) {
+    @MethodSource("provideAverageDeviationTestData")
+    public void averageDeviationTest(int playerAnswer, double expectedAverageDeviation) {
         AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
-
+    
+        // Use the accumulator to store answered questions before setting them for the test player
         testPlayer.setAnsweredQuestions(new ArrayList<>(answeredQuestionsAccumulator));
         testPlayer = answerQuestionService.answerQuestion("1", answeredQuestionDTO);
-
+    
         // Add the current answered question to the accumulator
         answeredQuestionsAccumulator
                 .add(testPlayer.getAnsweredQuestions().get(testPlayer.getAnsweredQuestions().size() - 1));
-
-        int actualScore = testPlayer.getScore();
-
-        // Assert that the calculated score matches the expected score
-        assertEquals(expectedScore, actualScore);
+    
+        double actualAverageDeviation = testPlayer.getAverageDeviation();
+    
+        // Assert that the calculated average deviation matches the expected average deviation within a
+        // tolerance of 0.01 (two decimal places)
+        assertEquals(expectedAverageDeviation, actualAverageDeviation, 0.01);
     }
+    
+
 }

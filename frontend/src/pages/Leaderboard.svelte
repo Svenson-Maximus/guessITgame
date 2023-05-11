@@ -1,36 +1,23 @@
 <script>
     import axios from "axios";
-    import { querystring } from "svelte-spa-router";
     import { Confetti } from "svelte-confetti";
     
 
     const api_root = window.location.origin;
 
-    let currentPage;
-    let nrOfPages = 0;
-    let defaultPageSize = 20;
-
     let completedPlayers = [];
     let allPlayers = [];
 
     $: {
-        let searchParams = new URLSearchParams($querystring);
-
-        if (searchParams.has("page")) {
-            currentPage = searchParams.get("page");
-        } else {
-            currentPage = "1";
-        }
+        
         getPlayer();
     }
 
     function getPlayer() {
-        let query =
-            "?pageSize=" + defaultPageSize + "&pageNumber=" + currentPage;
-
+       
         var config = {
             method: "get",
-            url: api_root + "/api/player" + query,
+            url: api_root + "/api/player",
         };
 
         axios(config)
@@ -41,6 +28,7 @@
                 completedPlayers = allPlayers.filter(
                     (player) => player.playerLevelState === "COMPLETED"
                 );
+                
             })
             .catch(function (error) {
                 alert("Could not get players");
@@ -79,8 +67,8 @@
                 <img
                     class="robohash-img"
                     alt="robohash"
-                    src="https://robohash.org/{completedPlayers[1]
-                        ?.username}.png"
+                    src="{completedPlayers[1]
+                        ?.roboHashUrl}"
                     width="150"
                     height="150"
                 />
@@ -97,8 +85,8 @@
                 <img
                     class="robohash-img"
                     alt="robohash"
-                    src="https://robohash.org/{completedPlayers[0]
-                        ?.username}.png"
+                    src="{completedPlayers[0]
+                        ?.roboHashUrl}"
                     width="200"
                     height="200"
                 />
@@ -112,8 +100,8 @@
                 <img
                     class="robohash-img"
                     alt="robohash"
-                    src="https://robohash.org/{completedPlayers[2]
-                        ?.username}.png"
+                    src="{completedPlayers[2]
+                        ?.roboHashUrl}"
                     width="150"
                     height="150"
                 />
@@ -150,7 +138,7 @@
                                         <img
                                             class="robohash-img"
                                             alt="robohash"
-                                            src="https://robohash.org/{player.username}.png"
+                                            src="{player.roboHashUrl}"
                                             width="50"
                                             height="50"
                                         />
@@ -188,7 +176,7 @@
                                         <img
                                             class="robohash-img"
                                             alt="robohash"
-                                            src="https://robohash.org/{player.username}.png"
+                                            src="{player.roboHashUrl}"
                                             width="50"
                                             height="50"
                                         />

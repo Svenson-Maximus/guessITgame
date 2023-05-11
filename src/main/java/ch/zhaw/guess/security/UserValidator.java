@@ -1,6 +1,5 @@
 package ch.zhaw.guess.security;
 
-
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2TokenValidator;
 import org.springframework.security.oauth2.core.OAuth2TokenValidatorResult;
@@ -8,8 +7,6 @@ import org.springframework.security.oauth2.jwt.Jwt;
 
 import ch.zhaw.guess.model.Player;
 import ch.zhaw.guess.repository.PlayerRepository;
-
-
 
 class UserValidator implements OAuth2TokenValidator<Jwt> {
 
@@ -23,16 +20,16 @@ class UserValidator implements OAuth2TokenValidator<Jwt> {
         OAuth2Error error = new OAuth2Error("invalid_token", "The required email is missing", null);
 
         String email = jwt.getClaimAsString("email");
-        if (email != null && !email.equals("")) { 
+        if (email != null && !email.equals("")) {
             Player f = playerRepository.findFirstByEmail(email);
-            if (f==null ) {     
+            if (f == null) {
                 String username = jwt.getClaimAsString("nickname");
-                playerRepository.save(new Player(email, username));
+                Player newPlayer = new Player(email, username); // Pass the required parameters
+                newPlayer.setUsername(username); // This will update the roboHashUrl
+                playerRepository.save(newPlayer);
             }
             return OAuth2TokenValidatorResult.success();
         }
         return OAuth2TokenValidatorResult.failure(error);
     }
 }
-
-
