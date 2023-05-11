@@ -19,6 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Dump matrix context
+        run: echo '${{ toJSON(github.actor) }}'
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
