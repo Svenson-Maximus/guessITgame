@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk:19-jdk-slim
 
 RUN apt-get update && apt-get install -y curl \
   && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 WORKDIR /usr/src/app/frontend
-RUN npm install --verbose
+RUN NODE_ENV=development npm i
 RUN npm run build
 WORKDIR /usr/src/app
 
