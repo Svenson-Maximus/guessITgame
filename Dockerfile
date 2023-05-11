@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM openjdk:19-jdk-slim
 WORKDIR /usr/src/app
 COPY . .
 RUN sed -i 's/\r$//' mvnw
