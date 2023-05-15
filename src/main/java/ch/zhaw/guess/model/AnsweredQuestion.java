@@ -15,4 +15,5 @@ public class AnsweredQuestion {
     private int difference;
     private int correctAnswer;
     private double deviation;
+    private int questionScore;
 }

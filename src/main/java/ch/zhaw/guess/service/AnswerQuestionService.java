@@ -32,13 +32,17 @@ public class AnswerQuestionService {
                         "Question not found with id: " + answeredQuestionDTO.getQuestionId()));
 
         int difference = (int) Math.abs(question.getCorrectAnswer() - answeredQuestionDTO.getPlayerAnswer());
+
         double deviation = round(((double) difference / question.getCorrectAnswer()) * 100, 2);
+
+        // Calculate the question score
+        int questionScore = calculateQuestionScore(deviation);
 
         AnsweredQuestion answeredQuestion = new AnsweredQuestion(
                 answeredQuestionDTO.getQuestionId(),
                 answeredQuestionDTO.getPlayerAnswer(),
                 difference, question.getCorrectAnswer(),
-                deviation);
+                deviation, questionScore);
 
         if (player.getAnsweredQuestions() == null) {
             player.setAnsweredQuestions(new ArrayList<>());
@@ -64,6 +68,20 @@ public class AnswerQuestionService {
         bd = bd.setScale(places, RoundingMode.HALF_UP);
 
         return bd.doubleValue();
+    }
+
+    // calculateQuestionScore
+    private int calculateQuestionScore(double deviation) {
+        int roundedDeviation = (int) Math.round(deviation);
+        int score;
+
+        if (roundedDeviation <= 1) {
+            score = 100;
+        } else {
+            score = 100 - (roundedDeviation - 1);
+        }
+
+        return score;
     }
 
     // calculateAverageDeviation

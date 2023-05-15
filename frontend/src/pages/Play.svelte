@@ -11,13 +11,17 @@
   let playerLevel;
   let currentQuestionIndex = 0;
   let levelCompleted = false;
+
   let playerId;
   let correctAnswer = null;
   let showNextButton = false;
   let score = 0;
+  let questionScore = 0;
 
   let countdown;
   let timer = 60;
+
+  let isLoading = true;
 
   const api_root = window.location.origin;
 
@@ -29,39 +33,6 @@
       console.error("Failed to fetch data:", error);
     }
   });
-
-  async function getQuestions() {
-  var config = {
-    method: "get",
-    url: api_root + "/api/question",
-    headers: { Authorization: "Bearer " + $jwt_token },
-  };
-
-  try {
-    const response = await axios(config);
-    allQuestions = response.data.content;
-
-    // Handle the case when answeredQuestions is null
-    const answeredQuestionIds = playerDetails.answeredQuestions
-      ? playerDetails.answeredQuestions.map((q) => q.id)
-      : [];
-
-    questions = allQuestions
-      .filter((question) => question.level === playerLevel)
-      .filter((question) => !answeredQuestionIds.includes(question.id));
-
-    // Set the currentQuestionIndex based on the player's progress, handling the case when answeredQuestions is null
-    currentQuestionIndex = playerDetails.answeredQuestions
-      ? playerDetails.answeredQuestions.length
-      : 0;
-
-    startTimer();
-  } catch (error) {
-    alert("Could not get questions");
-    console.log(error);
-  }
-}
-
 
   async function getPlayerDetails() {
     var config = {
@@ -83,10 +54,40 @@
     }
   }
 
-  async function handleSubmit() {
-    score = await submitAnswer();
-    correctAnswer = questions[currentQuestionIndex].correctAnswer;
-    showNextButton = true;
+  async function getQuestions() {
+    var config = {
+      method: "get",
+      url: api_root + "/api/question",
+      headers: { Authorization: "Bearer " + $jwt_token },
+    };
+
+    try {
+      const response = await axios(config);
+
+      allQuestions = response.data;
+
+      // Handle the case when answeredQuestions is null
+      const answeredQuestionIds = playerDetails.answeredQuestions
+        ? playerDetails.answeredQuestions.map((q) => q.questionId)
+        : [];
+
+      questions = allQuestions
+        .filter((question) => question.level === playerLevel)
+        .filter((question) => !answeredQuestionIds.includes(question.id));
+
+      //console.log
+      console.log("Answered question IDs:", answeredQuestionIds);
+      console.log("Player level:", playerLevel);
+      console.log("All questions:", allQuestions);
+
+      console.log("Filtered questions for level", playerLevel, ":", questions);
+
+      isLoading = false;
+      startTimer();
+    } catch (error) {
+      alert("Could not get questions");
+      console.log(error);
+    }
   }
 
   function startTimer() {
@@ -112,14 +113,26 @@
     correctAnswer = null;
     currentQuestionIndex++; // move to the next question
 
+    console.log("currentQuestionIndex:" + currentQuestionIndex);
+
     // If the player has answered all the questions, update the level
     if (currentQuestionIndex >= questions.length) {
       levelCompleted = true;
+      currentQuestionIndex = 0;
       updatePlayerLevel();
     } else {
       resetTimer();
       startTimer();
     }
+  }
+
+  async function handleSubmit() {
+    const scores = await submitAnswer();
+    console.log("QuestionScore: " + score);
+    score = scores.score;
+    questionScore = scores.questionScore;
+    correctAnswer = questions[currentQuestionIndex].correctAnswer;
+    showNextButton = true;
   }
 
   async function submitAnswer() {
@@ -139,9 +152,16 @@
 
     try {
       const response = await axios(config);
-      playerDetails = response.data; // Update playerDetails with the updated player returned from the server
-      userAnswer = ""; // Reset the answer input field
-      return response.data.score; // Return the score points
+      playerDetails = response.data;
+      userAnswer = "";
+      const answeredQuestions = response.data.answeredQuestions;
+      if (answeredQuestions && answeredQuestions.length > 0) {
+        questionScore =
+          answeredQuestions[answeredQuestions.length - 1].questionScore;
+      } else {
+        questionScore = 0; // Default value when there are no answered questions
+      }
+      return { score: response.data.score, questionScore };
     } catch (error) {
       console.error("Failed to submit answer:", error);
     }
@@ -229,23 +249,27 @@
         {:else}
           <div class="answerClass">
             <p>The correct answer was: {correctAnswer}</p>
-            <p>Your Highscore now is:</p>
-            <div class="highscore">
+            <p>You gained: </p>
+            <div class="question-score">
               <Countup
                 initial={0}
-                value={score}
+                value={questionScore}
                 duration={1000}
                 step={1}
                 roundto={1}
                 format={true}
-              />
+              /> Points
+            </div>
+            <p>Your Highscore now is:</p>
+            <div class="highscore">
+              {score}
             </div>
           </div>
           <button on:click={handleNextQuestion} class="btn btn-primary"
             >Next</button
           >
         {/if}
-      {:else}
+      {:else if isLoading}
         <div class="loader-container">
           <div class="loader" />
         </div>
@@ -261,6 +285,7 @@
   }
 
   h2 {
+    font-size: 2.5rem;
     margin-bottom: 1rem;
   }
 
@@ -319,7 +344,7 @@
   }
 
   .highscore {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
     line-height: 1.2;
     margin-bottom: 0.5rem;
@@ -334,6 +359,14 @@
   }
 
   .answer-input {
+    margin-top: 10px;
+  }
+
+  .question-score {
+    font-size: 4rem; 
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
     margin-top: 10px;
   }
 </style>

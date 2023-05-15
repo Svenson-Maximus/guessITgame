@@ -68,6 +68,27 @@
                 console.log(error);
             });
     }
+
+    function deletePlayer(id) {
+    var config = {
+        method: "delete",
+        url: api_root + "/api/player/" + id,
+        headers: {
+            Authorization: "Bearer " + $jwt_token
+        },
+    };
+
+    axios(config)
+        .then(function (response) {
+            alert("Player deleted");
+            getPlayer();
+        })
+        .catch(function (error) {
+            alert("Could not delete Player");
+            console.log(error);
+        });
+}
+
 </script>
 
 
@@ -113,6 +134,7 @@
                 <td>{player.username}</td>
                 <td>{player.email}</td>
                 <td>{player.playerLevelState}</td>
+                <button type="button" class="btn btn-danger" on:click={() => deletePlayer(player.id)}>Delete</button>
             </tr>
         {/each}
     </tbody>

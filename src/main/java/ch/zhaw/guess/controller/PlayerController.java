@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +62,18 @@ public class PlayerController {
         if (optPlayer.isPresent()) {
             Player player = optPlayer.get();
             return new ResponseEntity<>(player, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/player/{id}")
+    public ResponseEntity<Void> deletePlayer(@PathVariable String id) {
+        Optional<Player> optPlayer = playerRepository.findById(id);
+
+        if (optPlayer.isPresent()) {
+            playerRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -60,20 +60,35 @@ public class ScoreCalculationTest {
                 Arguments.of(42, 100),
                 Arguments.of(43, 99),
                 Arguments.of(47, 89),
-                Arguments.of(53, 75)
-        );
+                Arguments.of(53, 75));
     }
 
     @ParameterizedTest
     @MethodSource("provideScoreTestData")
-    public void answerQuestionScoreTest(int playerAnswer, int expectedScore) {
+    public void answerQuestionTotalScoreTest(int playerAnswer, int expectedScore) {
         AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
 
         testPlayer = answerQuestionService.answerQuestion("1", answeredQuestionDTO);
 
-        int actualScore = testPlayer.getScore();
+        int actualTotalScore = testPlayer.getScore();
 
-        // Assert that the calculated score matches the expected score
-        assertEquals(expectedScore, actualScore);
+        // Assert that the calculated total score matches the expected score
+        assertEquals(expectedScore, actualTotalScore);
     }
+
+    @ParameterizedTest
+    @MethodSource("provideScoreTestData")
+    public void answerQuestionIndividualScoreTest(int playerAnswer, int expectedScore) {
+        AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
+
+        testPlayer = answerQuestionService.answerQuestion("1", answeredQuestionDTO);
+
+        // Get the score of the last answered question.
+        int actualQuestionScore = testPlayer.getAnsweredQuestions()
+                .get(testPlayer.getAnsweredQuestions().size() - 1).getQuestionScore();
+
+        // Assert that the calculated question score matches the expected score
+        assertEquals(expectedScore, actualQuestionScore);
+    }
+
 }
