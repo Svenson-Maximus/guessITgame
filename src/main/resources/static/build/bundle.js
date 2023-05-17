@@ -7134,13 +7134,13 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Delete";
     			t7 = space();
-    			add_location(td0, file$4, 133, 16, 3544);
-    			add_location(td1, file$4, 134, 16, 3588);
-    			add_location(td2, file$4, 135, 16, 3629);
+    			add_location(td0, file$4, 133, 16, 3543);
+    			add_location(td1, file$4, 134, 16, 3587);
+    			add_location(td2, file$4, 135, 16, 3628);
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-danger");
-    			add_location(button, file$4, 136, 16, 3681);
-    			add_location(tr, file$4, 132, 12, 3522);
+    			add_location(button, file$4, 136, 16, 3680);
+    			add_location(tr, file$4, 132, 12, 3521);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -7202,9 +7202,9 @@ var app = (function () {
     			attr_dev(a, "class", "page-link");
     			attr_dev(a, "href", "#/players?page=" + (/*i*/ ctx[16] + 1));
     			toggle_class(a, "active", /*currentPage*/ ctx[0] == /*i*/ ctx[16] + 1);
-    			add_location(a, file$4, 145, 16, 3974);
+    			add_location(a, file$4, 145, 16, 3973);
     			attr_dev(li, "class", "page-item");
-    			add_location(li, file$4, 144, 12, 3934);
+    			add_location(li, file$4, 144, 12, 3933);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -7337,49 +7337,49 @@ var app = (function () {
     			}
 
     			attr_dev(h10, "class", "mt-3");
-    			add_location(h10, file$4, 94, 0, 2419);
+    			add_location(h10, file$4, 94, 0, 2418);
     			attr_dev(label0, "class", "form-label");
     			attr_dev(label0, "for", "name");
-    			add_location(label0, file$4, 98, 12, 2544);
+    			add_location(label0, file$4, 98, 12, 2543);
     			attr_dev(input0, "class", "form-control");
     			attr_dev(input0, "id", "username");
     			attr_dev(input0, "type", "text");
-    			add_location(input0, file$4, 99, 12, 2611);
+    			add_location(input0, file$4, 99, 12, 2610);
     			attr_dev(div0, "class", "col");
-    			add_location(div0, file$4, 97, 8, 2513);
+    			add_location(div0, file$4, 97, 8, 2512);
     			attr_dev(div1, "class", "row mb-3");
-    			add_location(div1, file$4, 96, 4, 2481);
+    			add_location(div1, file$4, 96, 4, 2480);
     			attr_dev(label1, "class", "form-label");
     			attr_dev(label1, "for", "email");
-    			add_location(label1, file$4, 109, 12, 2874);
+    			add_location(label1, file$4, 109, 12, 2873);
     			attr_dev(input1, "class", "form-control");
     			attr_dev(input1, "id", "email");
     			attr_dev(input1, "type", "email");
-    			add_location(input1, file$4, 110, 12, 2940);
+    			add_location(input1, file$4, 110, 12, 2939);
     			attr_dev(div2, "class", "col");
-    			add_location(div2, file$4, 108, 8, 2843);
+    			add_location(div2, file$4, 108, 8, 2842);
     			attr_dev(div3, "class", "row mb-3");
-    			add_location(div3, file$4, 107, 4, 2811);
+    			add_location(div3, file$4, 107, 4, 2810);
     			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-primary");
-    			add_location(button, file$4, 118, 4, 3135);
+    			add_location(button, file$4, 118, 4, 3134);
     			attr_dev(form, "class", "mb-5");
-    			add_location(form, file$4, 95, 0, 2456);
-    			add_location(h11, file$4, 121, 0, 3233);
+    			add_location(form, file$4, 95, 0, 2455);
+    			add_location(h11, file$4, 121, 0, 3232);
     			attr_dev(th0, "scope", "col");
-    			add_location(th0, file$4, 125, 12, 3317);
+    			add_location(th0, file$4, 125, 12, 3316);
     			attr_dev(th1, "scope", "col");
-    			add_location(th1, file$4, 126, 12, 3356);
+    			add_location(th1, file$4, 126, 12, 3355);
     			attr_dev(th2, "scope", "col");
-    			add_location(th2, file$4, 127, 12, 3397);
-    			add_location(tr, file$4, 124, 8, 3299);
-    			add_location(thead, file$4, 123, 4, 3282);
-    			add_location(tbody, file$4, 130, 4, 3466);
+    			add_location(th2, file$4, 127, 12, 3396);
+    			add_location(tr, file$4, 124, 8, 3298);
+    			add_location(thead, file$4, 123, 4, 3281);
+    			add_location(tbody, file$4, 130, 4, 3465);
     			attr_dev(table, "class", "table");
-    			add_location(table, file$4, 122, 0, 3255);
+    			add_location(table, file$4, 122, 0, 3254);
     			attr_dev(ul, "class", "pagination");
-    			add_location(ul, file$4, 142, 4, 3855);
-    			add_location(nav, file$4, 141, 0, 3844);
+    			add_location(ul, file$4, 142, 4, 3854);
+    			add_location(nav, file$4, 141, 0, 3843);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7577,7 +7577,7 @@ var app = (function () {
 
     		axios$1(config).then(function (response) {
     			alert("Player created");
-    			getPlayers();
+    			getPlayer();
     		}).catch(function (error) {
     			alert("Could not create Player");
     			console.log(error);

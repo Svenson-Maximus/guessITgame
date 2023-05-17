@@ -61,7 +61,7 @@
         axios(config)
             .then(function (response) {
                 alert("Player created");
-                getPlayers();
+                getPlayer();
             })
             .catch(function (error) {
                 alert("Could not create Player");
