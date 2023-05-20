@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ScoreCalculationTest {
+class ScoreCalculationTest {
 
     // Inject the mocks into the AnswerQuestionService instance for testing
     @InjectMocks
@@ -65,7 +65,7 @@ public class ScoreCalculationTest {
 
     @ParameterizedTest
     @MethodSource("provideScoreTestData")
-    public void answerQuestionTotalScoreTest(int playerAnswer, int expectedScore) {
+    void answerQuestionTotalScoreTest(int playerAnswer, int expectedScore) {
         AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
 
         testPlayer = answerQuestionService.answerQuestion("1", answeredQuestionDTO);
@@ -78,7 +78,7 @@ public class ScoreCalculationTest {
 
     @ParameterizedTest
     @MethodSource("provideScoreTestData")
-    public void answerQuestionIndividualScoreTest(int playerAnswer, int expectedScore) {
+    void answerQuestionIndividualScoreTest(int playerAnswer, int expectedScore) {
         AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
 
         testPlayer = answerQuestionService.answerQuestion("1", answeredQuestionDTO);

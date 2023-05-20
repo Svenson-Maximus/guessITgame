@@ -5170,9 +5170,9 @@ var app = (function () {
     			div1 = element("div");
     			div0 = element("div");
     			attr_dev(div0, "class", "loader svelte-63pg8r");
-    			add_location(div0, file$7, 120, 8, 4248);
+    			add_location(div0, file$7, 120, 8, 4252);
     			attr_dev(div1, "class", "loader-container svelte-63pg8r");
-    			add_location(div1, file$7, 119, 4, 4208);
+    			add_location(div1, file$7, 119, 4, 4212);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -5224,13 +5224,13 @@ var app = (function () {
     			attr_dev(img, "class", "guessit-logo svelte-63pg8r");
     			if (!src_url_equal(img.src, img_src_value = "/images/background.gif")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "GuessITLogo");
-    			add_location(img, file$7, 83, 16, 2714);
+    			add_location(img, file$7, 83, 16, 2718);
     			attr_dev(div0, "class", "guessit");
-    			add_location(div0, file$7, 82, 12, 2675);
+    			add_location(div0, file$7, 82, 12, 2679);
     			attr_dev(div1, "class", "col col-fixed empty-column svelte-63pg8r");
-    			add_location(div1, file$7, 81, 8, 2621);
+    			add_location(div1, file$7, 81, 8, 2625);
     			attr_dev(div2, "class", "row");
-    			add_location(div2, file$7, 51, 4, 1387);
+    			add_location(div2, file$7, 51, 4, 1391);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -5366,27 +5366,27 @@ var app = (function () {
     			attr_dev(img, "class", "card-img-top robohash-img svelte-63pg8r");
     			attr_dev(img, "alt", "robohash");
     			if (!src_url_equal(img.src, img_src_value = /*playerDetails*/ ctx[0].roboHashUrl)) attr_dev(img, "src", img_src_value);
-    			add_location(img, file$7, 60, 24, 1757);
+    			add_location(img, file$7, 60, 24, 1761);
     			attr_dev(div0, "class", "card-header");
-    			add_location(div0, file$7, 59, 20, 1706);
+    			add_location(div0, file$7, 59, 20, 1710);
     			attr_dev(h5, "class", "card-title text-center");
     			set_style(h5, "text-decoration", "underline");
-    			add_location(h5, file$7, 67, 24, 2058);
+    			add_location(h5, file$7, 67, 24, 2062);
     			attr_dev(p0, "class", "card-text");
-    			add_location(p0, file$7, 73, 24, 2310);
-    			add_location(b0, file$7, 74, 27, 2362);
-    			add_location(p1, file$7, 74, 24, 2359);
-    			add_location(b1, file$7, 75, 27, 2416);
-    			add_location(p2, file$7, 75, 24, 2413);
-    			add_location(b2, file$7, 76, 27, 2494);
-    			add_location(p3, file$7, 76, 24, 2491);
+    			add_location(p0, file$7, 73, 24, 2314);
+    			add_location(b0, file$7, 74, 27, 2366);
+    			add_location(p1, file$7, 74, 24, 2363);
+    			add_location(b1, file$7, 75, 27, 2420);
+    			add_location(p2, file$7, 75, 24, 2417);
+    			add_location(b2, file$7, 76, 27, 2498);
+    			add_location(p3, file$7, 76, 24, 2495);
     			attr_dev(div1, "class", "card-body");
-    			add_location(div1, file$7, 66, 20, 2009);
+    			add_location(div1, file$7, 66, 20, 2013);
     			attr_dev(div2, "class", "card text-white bg-transparent border-light mb-3");
     			set_style(div2, "max-width", "18rem");
-    			add_location(div2, file$7, 55, 16, 1536);
+    			add_location(div2, file$7, 55, 16, 1540);
     			attr_dev(div3, "class", "col col-fixed svelte-63pg8r");
-    			add_location(div3, file$7, 53, 12, 1450);
+    			add_location(div3, file$7, 53, 12, 1454);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -5454,9 +5454,9 @@ var app = (function () {
     			a.textContent = "Play";
     			attr_dev(a, "href", "#/play/");
     			attr_dev(a, "class", "btn btn-primary svelte-63pg8r");
-    			add_location(a, file$7, 91, 24, 3065);
+    			add_location(a, file$7, 91, 24, 3069);
     			attr_dev(div, "class", "play-button-container svelte-63pg8r");
-    			add_location(div, file$7, 90, 20, 3004);
+    			add_location(div, file$7, 90, 20, 3008);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -5520,13 +5520,13 @@ var app = (function () {
     			}
 
     			attr_dev(div0, "class", "level-boxes svelte-63pg8r");
-    			add_location(div0, file$7, 102, 24, 3520);
+    			add_location(div0, file$7, 102, 24, 3524);
     			attr_dev(div1, "class", "card-body levels svelte-63pg8r");
-    			add_location(div1, file$7, 100, 20, 3418);
+    			add_location(div1, file$7, 100, 20, 3422);
     			attr_dev(div2, "class", "card text-white bg-transparent border-light mb-3");
-    			add_location(div2, file$7, 99, 16, 3334);
+    			add_location(div2, file$7, 99, 16, 3338);
     			attr_dev(div3, "class", "col col-fixed svelte-63pg8r");
-    			add_location(div3, file$7, 97, 12, 3248);
+    			add_location(div3, file$7, 97, 12, 3252);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
@@ -5597,7 +5597,7 @@ var app = (function () {
     			? 'active'
     			: '') + " svelte-63pg8r");
 
-    			add_location(div, file$7, 104, 32, 3724);
+    			add_location(div, file$7, 104, 32, 3728);
     			this.first = div;
     		},
     		m: function mount(target, anchor) {

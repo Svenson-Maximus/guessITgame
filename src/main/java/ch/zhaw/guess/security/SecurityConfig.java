@@ -37,7 +37,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers("/*").permitAll()
                 .requestMatchers("/api/me/player").permitAll()
-                .requestMatchers("/api/player").permitAll() // <-- Move this line up
+                .requestMatchers("/api/player").permitAll() 
                 .requestMatchers("/api/**").authenticated()
                 .requestMatchers("/build/**").permitAll()
                 .requestMatchers("/images/**").permitAll()

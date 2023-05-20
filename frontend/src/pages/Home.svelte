@@ -22,7 +22,7 @@
             console.error("Failed to fetch data:", error);
         }
     });
-
+    
     async function getPlayerDetails() {
         var config = {
             method: "get",

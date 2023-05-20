@@ -26,7 +26,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class AnswerQuestionServiceTest {
+class AnswerQuestionServiceTest {
 
     // Inject the mocks into the AnswerQuestionService instance for testing
     @InjectMocks
@@ -70,7 +70,7 @@ public class AnswerQuestionServiceTest {
     // Parameterized test for testing the difference calculation
     @ParameterizedTest
     @MethodSource("provideTestData")
-    public void answerQuestionTest(int playerAnswer, int expectedDifference) {
+    void answerQuestionTest(int playerAnswer, int expectedDifference) {
         AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
 
         Player updatedPlayer = answerQuestionService.answerQuestion("1", answeredQuestionDTO);
@@ -92,7 +92,7 @@ public class AnswerQuestionServiceTest {
     // Parameterized test for testing the deviation calculation
     @ParameterizedTest
     @MethodSource("provideDeviationTestData")
-    public void answerQuestionDeviationTest(int playerAnswer, double expectedDeviation) {
+    void answerQuestionDeviationTest(int playerAnswer, double expectedDeviation) {
         AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
         Player updatedPlayer = answerQuestionService.answerQuestion("1", answeredQuestionDTO);
 
@@ -114,7 +114,7 @@ public class AnswerQuestionServiceTest {
 
     @ParameterizedTest
     @MethodSource("provideAverageDeviationTestData")
-    public void averageDeviationTest(int playerAnswer, double expectedAverageDeviation) {
+    void averageDeviationTest(int playerAnswer, double expectedAverageDeviation) {
         AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO("1", playerAnswer);
     
         // Use the accumulator to store answered questions before setting them for the test player
