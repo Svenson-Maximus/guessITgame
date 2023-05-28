@@ -1,20 +1,18 @@
 <script>
     import axios from "axios";
     import { Confetti } from "svelte-confetti";
-    
 
     const api_root = window.location.origin;
 
     let completedPlayers = [];
     let allPlayers = [];
+    let notCompletedPlayers = [];
 
     $: {
-        
         getPlayer();
     }
 
     function getPlayer() {
-       
         var config = {
             method: "get",
             url: api_root + "/api/player",
@@ -28,7 +26,9 @@
                 completedPlayers = allPlayers.filter(
                     (player) => player.playerLevelState === "COMPLETED"
                 );
-                
+                notCompletedPlayers = allPlayers.filter(
+                    (player) => player.playerLevelState !== "COMPLETED"
+                );
             })
             .catch(function (error) {
                 alert("Could not get players");
@@ -60,6 +60,29 @@
     />
 </div>
 
+<div
+    style="
+  position: fixed;
+  top: -50px;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;"
+>
+    <Confetti
+        x={[-5, 5]}
+        y={[0, 0.1]}
+        delay={[500, 2000]}
+        infinite
+        duration="5000"
+        amount="200"
+        fallDistance="100vh"
+    />
+</div>
+
 <div class="container mt-5">
     <div class="row">
         <div class="col d-flex justify-content-center">
@@ -67,8 +90,7 @@
                 <img
                     class="robohash-img"
                     alt="robohash"
-                    src="{completedPlayers[1]
-                        ?.roboHashUrl}"
+                    src={completedPlayers[1]?.roboHashUrl}
                     width="150"
                     height="150"
                 />
@@ -85,8 +107,7 @@
                 <img
                     class="robohash-img"
                     alt="robohash"
-                    src="{completedPlayers[0]
-                        ?.roboHashUrl}"
+                    src={completedPlayers[0]?.roboHashUrl}
                     width="200"
                     height="200"
                 />
@@ -100,8 +121,7 @@
                 <img
                     class="robohash-img"
                     alt="robohash"
-                    src="{completedPlayers[2]
-                        ?.roboHashUrl}"
+                    src={completedPlayers[2]?.roboHashUrl}
                     width="150"
                     height="150"
                 />
@@ -114,6 +134,7 @@
         </div>
     </div>
 </div>
+
 <div class="container leaderboard-container">
     <div class="row">
         <div class="col-lg-6">
@@ -138,7 +159,7 @@
                                         <img
                                             class="robohash-img"
                                             alt="robohash"
-                                            src="{player.roboHashUrl}"
+                                            src={player.roboHashUrl}
                                             width="50"
                                             height="50"
                                         />
@@ -157,7 +178,7 @@
         <div class="col-lg-6">
             <div class="card text-white bg-transparent border-light mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">All Players</h5>
+                    <h5 class="card-title">Not Completed Players</h5>
                     <table class="table table-borderless custom-table">
                         <thead>
                             <tr>
@@ -169,14 +190,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {#each allPlayers as player, index}
+                            {#each notCompletedPlayers as player, index}
                                 <tr>
                                     <td>{index + 1}</td>
                                     <td>
                                         <img
                                             class="robohash-img"
                                             alt="robohash"
-                                            src="{player.roboHashUrl}"
+                                            src={player.roboHashUrl}
                                             width="50"
                                             height="50"
                                         />

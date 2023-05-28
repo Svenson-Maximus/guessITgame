@@ -83,6 +83,7 @@
       console.log("Filtered questions for level", playerLevel, ":", questions);
 
       isLoading = false;
+      stopTimer();
       startTimer();
     } catch (error) {
       alert("Could not get questions");
@@ -95,19 +96,26 @@
       timer--;
 
       if (timer <= 0) {
-        clearInterval(countdown);
-        timer = 0;
-        handleSubmit();
+        stopTimer();
+        console.log("handleTimer")
+        //handleSubmit();
+
       }
     }, 1000);
   }
 
-  function resetTimer() {
-    clearInterval(countdown);
+  function restartTimer() {
+    clearInterval(countdown); // Clear the previous timer
     timer = 60;
-  }
+    startTimer(); // Restart the timer
+}
+
+  function stopTimer(){
+    clearInterval(countdown); // Clear the timer using countdown --> delets timer id
+}
 
   function handleNextQuestion() {
+    stopTimer(); // Stop the current timer
     userAnswer = ""; // clear the input
     showNextButton = false;
     correctAnswer = null;
@@ -121,8 +129,7 @@
       currentQuestionIndex = 0;
       updatePlayerLevel();
     } else {
-      resetTimer();
-      startTimer();
+      restartTimer(); // Reset timer to 60 and start a new timer
     }
   }
 
@@ -225,13 +232,15 @@
         <button on:click={redirectToLeaderboard} class="btn btn-primary"
           >Leaderboard</button
         >
+        {stopTimer()}
       {:else if questions.length > 0 && currentQuestionIndex < questions.length}
         <div class="question-box">
           <h2>{questions[currentQuestionIndex].questionText}</h2>
         </div>
 
         {#if !showNextButton}
-          <form on:submit|preventDefault={handleSubmit}>
+          <!-- <form on:submit|preventDefault={handleSubmit}> -->
+            <form>
             <div class="form-group answer-input">
               <input
                 class="form-control"
@@ -243,7 +252,7 @@
               />
               <p>Time remaining:</p>
               <h2>{timer}</h2>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" on:click={handleSubmit} class="btn btn-primary">Submit</button>
             </div>
           </form>
         {:else}

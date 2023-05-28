@@ -100,13 +100,6 @@ var app = (function () {
         node.addEventListener(event, handler, options);
         return () => node.removeEventListener(event, handler, options);
     }
-    function prevent_default(fn) {
-        return function (event) {
-            event.preventDefault();
-            // @ts-ignore
-            return fn.call(this, event);
-        };
-    }
     function attr(node, attribute, value) {
         if (value == null)
             node.removeAttribute(attribute);
@@ -6218,7 +6211,7 @@ var app = (function () {
     const { console: console_1$2 } = globals;
     const file$5 = "src\\pages\\Play.svelte";
 
-    // (272:26) 
+    // (281:26) 
     function create_if_block_3(ctx) {
     	let div1;
     	let div0;
@@ -6228,9 +6221,9 @@ var app = (function () {
     			div1 = element("div");
     			div0 = element("div");
     			attr_dev(div0, "class", "loader svelte-4mha69");
-    			add_location(div0, file$5, 273, 10, 7882);
+    			add_location(div0, file$5, 282, 10, 8237);
     			attr_dev(div1, "class", "loader-container svelte-4mha69");
-    			add_location(div1, file$5, 272, 8, 7840);
+    			add_location(div1, file$5, 281, 8, 8195);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -6248,14 +6241,14 @@ var app = (function () {
     		block,
     		id: create_if_block_3.name,
     		type: "if",
-    		source: "(272:26) ",
+    		source: "(281:26) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (228:80) 
+    // (236:80) 
     function create_if_block_1$1(ctx) {
     	let div;
     	let h2;
@@ -6286,9 +6279,9 @@ var app = (function () {
     			if_block.c();
     			if_block_anchor = empty();
     			attr_dev(h2, "class", "svelte-4mha69");
-    			add_location(h2, file$5, 229, 10, 6434);
+    			add_location(h2, file$5, 237, 10, 6736);
     			attr_dev(div, "class", "question-box svelte-4mha69");
-    			add_location(div, file$5, 228, 8, 6396);
+    			add_location(div, file$5, 236, 8, 6698);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -6348,20 +6341,23 @@ var app = (function () {
     		block,
     		id: create_if_block_1$1.name,
     		type: "if",
-    		source: "(228:80) ",
+    		source: "(236:80) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (222:6) {#if levelCompleted}
+    // (229:6) {#if levelCompleted}
     function create_if_block$3(ctx) {
     	let h2;
     	let t1;
     	let button0;
     	let t3;
     	let button1;
+    	let t5;
+    	let t6_value = /*stopTimer*/ ctx[10]() + "";
+    	let t6;
     	let mounted;
     	let dispose;
 
@@ -6375,12 +6371,14 @@ var app = (function () {
     			t3 = space();
     			button1 = element("button");
     			button1.textContent = "Leaderboard";
+    			t5 = space();
+    			t6 = text(t6_value);
     			attr_dev(h2, "class", "svelte-4mha69");
-    			add_location(h2, file$5, 222, 8, 6081);
+    			add_location(h2, file$5, 229, 8, 6360);
     			attr_dev(button0, "class", "btn btn-primary svelte-4mha69");
-    			add_location(button0, file$5, 223, 8, 6116);
+    			add_location(button0, file$5, 230, 8, 6395);
     			attr_dev(button1, "class", "btn btn-primary svelte-4mha69");
-    			add_location(button1, file$5, 224, 8, 6197);
+    			add_location(button1, file$5, 231, 8, 6476);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -6388,6 +6386,8 @@ var app = (function () {
     			insert_dev(target, button0, anchor);
     			insert_dev(target, t3, anchor);
     			insert_dev(target, button1, anchor);
+    			insert_dev(target, t5, anchor);
+    			insert_dev(target, t6, anchor);
 
     			if (!mounted) {
     				dispose = [
@@ -6407,6 +6407,8 @@ var app = (function () {
     			if (detaching) detach_dev(button0);
     			if (detaching) detach_dev(t3);
     			if (detaching) detach_dev(button1);
+    			if (detaching) detach_dev(t5);
+    			if (detaching) detach_dev(t6);
     			mounted = false;
     			run_all$1(dispose);
     		}
@@ -6416,14 +6418,14 @@ var app = (function () {
     		block,
     		id: create_if_block$3.name,
     		type: "if",
-    		source: "(222:6) {#if levelCompleted}",
+    		source: "(229:6) {#if levelCompleted}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (249:8) {:else}
+    // (258:8) {:else}
     function create_else_block$1(ctx) {
     	let div2;
     	let p0;
@@ -6480,17 +6482,17 @@ var app = (function () {
     			t10 = space();
     			button = element("button");
     			button.textContent = "Next";
-    			add_location(p0, file$5, 250, 12, 7156);
-    			add_location(p1, file$5, 251, 12, 7216);
+    			add_location(p0, file$5, 259, 12, 7511);
+    			add_location(p1, file$5, 260, 12, 7571);
     			attr_dev(div0, "class", "question-score svelte-4mha69");
-    			add_location(div0, file$5, 252, 12, 7249);
-    			add_location(p2, file$5, 262, 12, 7547);
+    			add_location(div0, file$5, 261, 12, 7604);
+    			add_location(p2, file$5, 271, 12, 7902);
     			attr_dev(div1, "class", "highscore svelte-4mha69");
-    			add_location(div1, file$5, 263, 12, 7590);
+    			add_location(div1, file$5, 272, 12, 7945);
     			attr_dev(div2, "class", "answerClass svelte-4mha69");
-    			add_location(div2, file$5, 249, 10, 7117);
+    			add_location(div2, file$5, 258, 10, 7472);
     			attr_dev(button, "class", "btn btn-primary svelte-4mha69");
-    			add_location(button, file$5, 267, 10, 7686);
+    			add_location(button, file$5, 276, 10, 8041);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -6513,7 +6515,7 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", /*handleNextQuestion*/ ctx[10], false, false, false, false);
+    				dispose = listen_dev(button, "click", /*handleNextQuestion*/ ctx[11], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -6547,14 +6549,14 @@ var app = (function () {
     		block,
     		id: create_else_block$1.name,
     		type: "else",
-    		source: "(249:8) {:else}",
+    		source: "(258:8) {:else}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (233:8) {#if !showNextButton}
+    // (241:8) {#if !showNextButton}
     function create_if_block_2$1(ctx) {
     	let form;
     	let div;
@@ -6588,17 +6590,17 @@ var app = (function () {
     			attr_dev(input, "placeholder", "Enter your answer here");
     			attr_dev(input, "min", "0");
     			attr_dev(input, "step", "1");
-    			add_location(input, file$5, 235, 14, 6663);
-    			add_location(p, file$5, 243, 14, 6918);
+    			add_location(input, file$5, 244, 14, 6994);
+    			add_location(p, file$5, 252, 14, 7249);
     			attr_dev(h2, "class", "svelte-4mha69");
-    			add_location(h2, file$5, 244, 14, 6956);
-    			attr_dev(button, "type", "submit");
+    			add_location(h2, file$5, 253, 14, 7287);
+    			attr_dev(button, "type", "button");
     			attr_dev(button, "class", "btn btn-primary svelte-4mha69");
-    			add_location(button, file$5, 245, 14, 6988);
+    			add_location(button, file$5, 254, 14, 7319);
     			attr_dev(div, "class", "form-group answer-input svelte-4mha69");
-    			add_location(div, file$5, 234, 12, 6610);
+    			add_location(div, file$5, 243, 12, 6941);
     			attr_dev(form, "class", "svelte-4mha69");
-    			add_location(form, file$5, 233, 10, 6550);
+    			add_location(form, file$5, 242, 12, 6921);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, form, anchor);
@@ -6615,8 +6617,8 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[12]),
-    					listen_dev(form, "submit", prevent_default(/*handleSubmit*/ ctx[11]), false, true, false, false)
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[13]),
+    					listen_dev(button, "click", /*handleSubmit*/ ctx[12], false, false, false, false)
     				];
 
     				mounted = true;
@@ -6642,7 +6644,7 @@ var app = (function () {
     		block,
     		id: create_if_block_2$1.name,
     		type: "if",
-    		source: "(233:8) {#if !showNextButton}",
+    		source: "(241:8) {#if !showNextButton}",
     		ctx
     	});
 
@@ -6677,11 +6679,11 @@ var app = (function () {
     			div0 = element("div");
     			if (if_block) if_block.c();
     			attr_dev(div0, "class", "col-md-12 text-center");
-    			add_location(div0, file$5, 220, 4, 6008);
+    			add_location(div0, file$5, 227, 4, 6287);
     			attr_dev(div1, "class", "row");
-    			add_location(div1, file$5, 219, 2, 5985);
+    			add_location(div1, file$5, 226, 2, 6264);
     			attr_dev(div2, "class", "container svelte-4mha69");
-    			add_location(div2, file$5, 218, 0, 5958);
+    			add_location(div2, file$5, 225, 0, 6237);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -6789,7 +6791,7 @@ var app = (function () {
     function instance$5($$self, $$props, $$invalidate) {
     	let $jwt_token;
     	validate_store(jwt_token, 'jwt_token');
-    	component_subscribe($$self, jwt_token, $$value => $$invalidate(18, $jwt_token = $$value));
+    	component_subscribe($$self, jwt_token, $$value => $$invalidate(19, $jwt_token = $$value));
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Play', slots, []);
     	let allQuestions = []; // Array to store all questions
@@ -6862,6 +6864,7 @@ var app = (function () {
     			console.log("All questions:", allQuestions);
     			console.log("Filtered questions for level", playerLevel, ":", questions);
     			$$invalidate(9, isLoading = false);
+    			stopTimer();
     			startTimer();
     		} catch(error) {
     			alert("Could not get questions");
@@ -6875,21 +6878,26 @@ var app = (function () {
     				$$invalidate(8, timer--, timer);
 
     				if (timer <= 0) {
-    					clearInterval(countdown);
-    					$$invalidate(8, timer = 0);
-    					handleSubmit();
-    				}
+    					stopTimer();
+    					console.log("handleTimer");
+    				} //handleSubmit();
     			},
     			1000
     		);
     	}
 
-    	function resetTimer() {
-    		clearInterval(countdown);
+    	function restartTimer() {
+    		clearInterval(countdown); // Clear the previous timer
     		$$invalidate(8, timer = 60);
+    		startTimer(); // Restart the timer
+    	}
+
+    	function stopTimer() {
+    		clearInterval(countdown); // Clear the timer using countdown --> delets timer id
     	}
 
     	function handleNextQuestion() {
+    		stopTimer(); // Stop the current timer
     		$$invalidate(1, userAnswer = ""); // clear the input
     		$$invalidate(5, showNextButton = false);
     		$$invalidate(4, correctAnswer = null);
@@ -6902,8 +6910,7 @@ var app = (function () {
     			$$invalidate(2, currentQuestionIndex = 0);
     			updatePlayerLevel();
     		} else {
-    			resetTimer();
-    			startTimer();
+    			restartTimer(); // Reset timer to 60 and start a new timer
     		}
     	}
 
@@ -7013,7 +7020,8 @@ var app = (function () {
     		getPlayerDetails,
     		getQuestions,
     		startTimer,
-    		resetTimer,
+    		restartTimer,
+    		stopTimer,
     		handleNextQuestion,
     		handleSubmit,
     		submitAnswer,
@@ -7057,6 +7065,7 @@ var app = (function () {
     		questionScore,
     		timer,
     		isLoading,
+    		stopTimer,
     		handleNextQuestion,
     		handleSubmit,
     		input_input_handler
@@ -8238,23 +8247,23 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[4] = list[i];
-    	child_ctx[6] = i;
+    	child_ctx[5] = list[i];
+    	child_ctx[7] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[4] = list[i];
-    	child_ctx[6] = i;
+    	child_ctx[5] = list[i];
+    	child_ctx[7] = i;
     	return child_ctx;
     }
 
-    // (134:28) {#each completedPlayers as player, index}
+    // (155:28) {#each completedPlayers as player, index}
     function create_each_block_1(ctx) {
     	let tr;
     	let td0;
-    	let t0_value = /*index*/ ctx[6] + 1 + "";
+    	let t0_value = /*index*/ ctx[7] + 1 + "";
     	let t0;
     	let t1;
     	let td1;
@@ -8262,16 +8271,16 @@ var app = (function () {
     	let img_src_value;
     	let t2;
     	let td2;
-    	let t3_value = /*player*/ ctx[4].username + "";
+    	let t3_value = /*player*/ ctx[5].username + "";
     	let t3;
     	let t4;
     	let td3;
-    	let t5_value = /*player*/ ctx[4].score + "";
+    	let t5_value = /*player*/ ctx[5].score + "";
     	let t5;
     	let t6;
     	let t7;
     	let td4;
-    	let t8_value = /*player*/ ctx[4].averageDeviation + "";
+    	let t8_value = /*player*/ ctx[5].averageDeviation + "";
     	let t8;
     	let t9;
     	let t10;
@@ -8297,22 +8306,22 @@ var app = (function () {
     			t9 = text("%");
     			t10 = space();
     			attr_dev(td0, "class", "svelte-13uk91g");
-    			add_location(td0, file$2, 135, 36, 4170);
+    			add_location(td0, file$2, 156, 36, 4628);
     			attr_dev(img, "class", "robohash-img");
     			attr_dev(img, "alt", "robohash");
-    			if (!src_url_equal(img.src, img_src_value = /*player*/ ctx[4].roboHashUrl)) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*player*/ ctx[5].roboHashUrl)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "width", "50");
     			attr_dev(img, "height", "50");
-    			add_location(img, file$2, 137, 40, 4274);
+    			add_location(img, file$2, 158, 40, 4732);
     			attr_dev(td1, "class", "svelte-13uk91g");
-    			add_location(td1, file$2, 136, 36, 4228);
+    			add_location(td1, file$2, 157, 36, 4686);
     			attr_dev(td2, "class", "svelte-13uk91g");
-    			add_location(td2, file$2, 145, 36, 4714);
+    			add_location(td2, file$2, 166, 36, 5170);
     			attr_dev(td3, "class", "svelte-13uk91g");
-    			add_location(td3, file$2, 146, 36, 4778);
+    			add_location(td3, file$2, 167, 36, 5234);
     			attr_dev(td4, "class", "svelte-13uk91g");
-    			add_location(td4, file$2, 147, 36, 4846);
-    			add_location(tr, file$2, 134, 32, 4128);
+    			add_location(td4, file$2, 168, 36, 5302);
+    			add_location(tr, file$2, 155, 32, 4586);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -8335,13 +8344,13 @@ var app = (function () {
     			append_dev(tr, t10);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*completedPlayers*/ 1 && !src_url_equal(img.src, img_src_value = /*player*/ ctx[4].roboHashUrl)) {
+    			if (dirty & /*completedPlayers*/ 1 && !src_url_equal(img.src, img_src_value = /*player*/ ctx[5].roboHashUrl)) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*completedPlayers*/ 1 && t3_value !== (t3_value = /*player*/ ctx[4].username + "")) set_data_dev(t3, t3_value);
-    			if (dirty & /*completedPlayers*/ 1 && t5_value !== (t5_value = /*player*/ ctx[4].score + "")) set_data_dev(t5, t5_value);
-    			if (dirty & /*completedPlayers*/ 1 && t8_value !== (t8_value = /*player*/ ctx[4].averageDeviation + "")) set_data_dev(t8, t8_value);
+    			if (dirty & /*completedPlayers*/ 1 && t3_value !== (t3_value = /*player*/ ctx[5].username + "")) set_data_dev(t3, t3_value);
+    			if (dirty & /*completedPlayers*/ 1 && t5_value !== (t5_value = /*player*/ ctx[5].score + "")) set_data_dev(t5, t5_value);
+    			if (dirty & /*completedPlayers*/ 1 && t8_value !== (t8_value = /*player*/ ctx[5].averageDeviation + "")) set_data_dev(t8, t8_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(tr);
@@ -8352,18 +8361,18 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(134:28) {#each completedPlayers as player, index}",
+    		source: "(155:28) {#each completedPlayers as player, index}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (172:28) {#each allPlayers as player, index}
+    // (193:28) {#each notCompletedPlayers as player, index}
     function create_each_block(ctx) {
     	let tr;
     	let td0;
-    	let t0_value = /*index*/ ctx[6] + 1 + "";
+    	let t0_value = /*index*/ ctx[7] + 1 + "";
     	let t0;
     	let t1;
     	let td1;
@@ -8371,16 +8380,16 @@ var app = (function () {
     	let img_src_value;
     	let t2;
     	let td2;
-    	let t3_value = /*player*/ ctx[4].username + "";
+    	let t3_value = /*player*/ ctx[5].username + "";
     	let t3;
     	let t4;
     	let td3;
-    	let t5_value = /*player*/ ctx[4].score + "";
+    	let t5_value = /*player*/ ctx[5].score + "";
     	let t5;
     	let t6;
     	let t7;
     	let td4;
-    	let t8_value = /*player*/ ctx[4].playerLevelState + "";
+    	let t8_value = /*player*/ ctx[5].playerLevelState + "";
     	let t8;
     	let t9;
 
@@ -8404,22 +8413,22 @@ var app = (function () {
     			t8 = text(t8_value);
     			t9 = space();
     			attr_dev(td0, "class", "svelte-13uk91g");
-    			add_location(td0, file$2, 173, 36, 5987);
+    			add_location(td0, file$2, 194, 36, 6462);
     			attr_dev(img, "class", "robohash-img");
     			attr_dev(img, "alt", "robohash");
-    			if (!src_url_equal(img.src, img_src_value = /*player*/ ctx[4].roboHashUrl)) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*player*/ ctx[5].roboHashUrl)) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "width", "50");
     			attr_dev(img, "height", "50");
-    			add_location(img, file$2, 175, 40, 6091);
+    			add_location(img, file$2, 196, 40, 6566);
     			attr_dev(td1, "class", "svelte-13uk91g");
-    			add_location(td1, file$2, 174, 36, 6045);
+    			add_location(td1, file$2, 195, 36, 6520);
     			attr_dev(td2, "class", "svelte-13uk91g");
-    			add_location(td2, file$2, 183, 36, 6531);
+    			add_location(td2, file$2, 204, 36, 7004);
     			attr_dev(td3, "class", "svelte-13uk91g");
-    			add_location(td3, file$2, 184, 36, 6595);
+    			add_location(td3, file$2, 205, 36, 7068);
     			attr_dev(td4, "class", "svelte-13uk91g");
-    			add_location(td4, file$2, 185, 36, 6663);
-    			add_location(tr, file$2, 172, 32, 5945);
+    			add_location(td4, file$2, 206, 36, 7136);
+    			add_location(tr, file$2, 193, 32, 6420);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -8441,13 +8450,13 @@ var app = (function () {
     			append_dev(tr, t9);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*allPlayers*/ 2 && !src_url_equal(img.src, img_src_value = /*player*/ ctx[4].roboHashUrl)) {
+    			if (dirty & /*notCompletedPlayers*/ 2 && !src_url_equal(img.src, img_src_value = /*player*/ ctx[5].roboHashUrl)) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*allPlayers*/ 2 && t3_value !== (t3_value = /*player*/ ctx[4].username + "")) set_data_dev(t3, t3_value);
-    			if (dirty & /*allPlayers*/ 2 && t5_value !== (t5_value = /*player*/ ctx[4].score + "")) set_data_dev(t5, t5_value);
-    			if (dirty & /*allPlayers*/ 2 && t8_value !== (t8_value = /*player*/ ctx[4].playerLevelState + "")) set_data_dev(t8, t8_value);
+    			if (dirty & /*notCompletedPlayers*/ 2 && t3_value !== (t3_value = /*player*/ ctx[5].username + "")) set_data_dev(t3, t3_value);
+    			if (dirty & /*notCompletedPlayers*/ 2 && t5_value !== (t5_value = /*player*/ ctx[5].score + "")) set_data_dev(t5, t5_value);
+    			if (dirty & /*notCompletedPlayers*/ 2 && t8_value !== (t8_value = /*player*/ ctx[5].playerLevelState + "")) set_data_dev(t8, t8_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(tr);
@@ -8458,7 +8467,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(172:28) {#each allPlayers as player, index}",
+    		source: "(193:28) {#each notCompletedPlayers as player, index}",
     		ctx
     	});
 
@@ -8467,97 +8476,113 @@ var app = (function () {
 
     function create_fragment$2(ctx) {
     	let div0;
-    	let confetti;
+    	let confetti0;
     	let t0;
+    	let div1;
+    	let confetti1;
+    	let t1;
+    	let div7;
     	let div6;
     	let div5;
-    	let div4;
-    	let div1;
+    	let div2;
     	let img0;
     	let img0_src_value;
-    	let t1;
+    	let t2;
     	let h20;
-    	let t3;
-    	let p0;
-    	let t4_value = /*completedPlayers*/ ctx[0][1]?.username + "";
     	let t4;
+    	let p0;
+    	let t5_value = /*completedPlayers*/ ctx[0][1]?.username + "";
     	let t5;
-    	let t6_value = /*completedPlayers*/ ctx[0][1]?.score + "";
     	let t6;
+    	let t7_value = /*completedPlayers*/ ctx[0][1]?.score + "";
     	let t7;
     	let t8;
-    	let div2;
+    	let t9;
+    	let div3;
     	let img1;
     	let img1_src_value;
-    	let t9;
+    	let t10;
     	let h21;
-    	let t11;
-    	let p1;
-    	let t12_value = /*completedPlayers*/ ctx[0][0]?.username + "";
     	let t12;
+    	let p1;
+    	let t13_value = /*completedPlayers*/ ctx[0][0]?.username + "";
     	let t13;
-    	let t14_value = /*completedPlayers*/ ctx[0][0]?.score + "";
     	let t14;
+    	let t15_value = /*completedPlayers*/ ctx[0][0]?.score + "";
     	let t15;
     	let t16;
-    	let div3;
+    	let t17;
+    	let div4;
     	let img2;
     	let img2_src_value;
-    	let t17;
+    	let t18;
     	let h22;
-    	let t19;
-    	let p2;
-    	let t20_value = /*completedPlayers*/ ctx[0][2]?.username + "";
     	let t20;
+    	let p2;
+    	let t21_value = /*completedPlayers*/ ctx[0][2]?.username + "";
     	let t21;
-    	let t22_value = /*completedPlayers*/ ctx[0][2]?.score + "";
     	let t22;
+    	let t23_value = /*completedPlayers*/ ctx[0][2]?.score + "";
     	let t23;
     	let t24;
+    	let t25;
+    	let div15;
     	let div14;
-    	let div13;
+    	let div10;
     	let div9;
     	let div8;
-    	let div7;
     	let h50;
-    	let t26;
+    	let t27;
     	let table0;
     	let thead0;
     	let tr0;
     	let th0;
-    	let t28;
+    	let t29;
     	let th1;
-    	let t30;
+    	let t31;
     	let th2;
-    	let t32;
+    	let t33;
     	let th3;
-    	let t34;
+    	let t35;
     	let th4;
-    	let t36;
-    	let tbody0;
     	let t37;
+    	let tbody0;
+    	let t38;
+    	let div13;
     	let div12;
     	let div11;
-    	let div10;
     	let h51;
-    	let t39;
+    	let t40;
     	let table1;
     	let thead1;
     	let tr1;
     	let th5;
-    	let t41;
+    	let t42;
     	let th6;
-    	let t43;
+    	let t44;
     	let th7;
-    	let t45;
+    	let t46;
     	let th8;
-    	let t47;
+    	let t48;
     	let th9;
-    	let t49;
+    	let t50;
     	let tbody1;
     	let current;
 
-    	confetti = new Confetti({
+    	confetti0 = new Confetti({
+    			props: {
+    				x: [-5, 5],
+    				y: [0, 0.1],
+    				delay: [500, 2000],
+    				infinite: true,
+    				duration: "5000",
+    				amount: "200",
+    				fallDistance: "100vh"
+    			},
+    			$$inline: true
+    		});
+
+    	confetti1 = new Confetti({
     			props: {
     				x: [-5, 5],
     				y: [0, 0.1],
@@ -8578,7 +8603,7 @@ var app = (function () {
     		each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
     	}
 
-    	let each_value = /*allPlayers*/ ctx[1];
+    	let each_value = /*notCompletedPlayers*/ ctx[1];
     	validate_each_argument(each_value);
     	let each_blocks = [];
 
@@ -8589,104 +8614,107 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div0 = element("div");
-    			create_component(confetti.$$.fragment);
+    			create_component(confetti0.$$.fragment);
     			t0 = space();
+    			div1 = element("div");
+    			create_component(confetti1.$$.fragment);
+    			t1 = space();
+    			div7 = element("div");
     			div6 = element("div");
     			div5 = element("div");
-    			div4 = element("div");
-    			div1 = element("div");
+    			div2 = element("div");
     			img0 = element("img");
-    			t1 = space();
+    			t2 = space();
     			h20 = element("h2");
     			h20.textContent = "#2";
-    			t3 = space();
+    			t4 = space();
     			p0 = element("p");
-    			t4 = text(t4_value);
-    			t5 = text(" - ");
-    			t6 = text(t6_value);
-    			t7 = text(" Points");
-    			t8 = space();
-    			div2 = element("div");
-    			img1 = element("img");
+    			t5 = text(t5_value);
+    			t6 = text(" - ");
+    			t7 = text(t7_value);
+    			t8 = text(" Points");
     			t9 = space();
+    			div3 = element("div");
+    			img1 = element("img");
+    			t10 = space();
     			h21 = element("h2");
     			h21.textContent = "#1";
-    			t11 = space();
+    			t12 = space();
     			p1 = element("p");
-    			t12 = text(t12_value);
-    			t13 = text(" - ");
-    			t14 = text(t14_value);
-    			t15 = text(" Points");
-    			t16 = space();
-    			div3 = element("div");
-    			img2 = element("img");
+    			t13 = text(t13_value);
+    			t14 = text(" - ");
+    			t15 = text(t15_value);
+    			t16 = text(" Points");
     			t17 = space();
+    			div4 = element("div");
+    			img2 = element("img");
+    			t18 = space();
     			h22 = element("h2");
     			h22.textContent = "#3";
-    			t19 = space();
+    			t20 = space();
     			p2 = element("p");
-    			t20 = text(t20_value);
-    			t21 = text(" - ");
-    			t22 = text(t22_value);
-    			t23 = text(" Points");
-    			t24 = space();
+    			t21 = text(t21_value);
+    			t22 = text(" - ");
+    			t23 = text(t23_value);
+    			t24 = text(" Points");
+    			t25 = space();
+    			div15 = element("div");
     			div14 = element("div");
-    			div13 = element("div");
+    			div10 = element("div");
     			div9 = element("div");
     			div8 = element("div");
-    			div7 = element("div");
     			h50 = element("h5");
     			h50.textContent = "Completed Players";
-    			t26 = space();
+    			t27 = space();
     			table0 = element("table");
     			thead0 = element("thead");
     			tr0 = element("tr");
     			th0 = element("th");
     			th0.textContent = "Rank";
-    			t28 = space();
+    			t29 = space();
     			th1 = element("th");
     			th1.textContent = "Avatar";
-    			t30 = space();
+    			t31 = space();
     			th2 = element("th");
     			th2.textContent = "Username";
-    			t32 = space();
+    			t33 = space();
     			th3 = element("th");
     			th3.textContent = "Score";
-    			t34 = space();
+    			t35 = space();
     			th4 = element("th");
     			th4.textContent = "Average Deviation";
-    			t36 = space();
+    			t37 = space();
     			tbody0 = element("tbody");
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].c();
     			}
 
-    			t37 = space();
+    			t38 = space();
+    			div13 = element("div");
     			div12 = element("div");
     			div11 = element("div");
-    			div10 = element("div");
     			h51 = element("h5");
-    			h51.textContent = "All Players";
-    			t39 = space();
+    			h51.textContent = "Not Completed Players";
+    			t40 = space();
     			table1 = element("table");
     			thead1 = element("thead");
     			tr1 = element("tr");
     			th5 = element("th");
     			th5.textContent = "Rank";
-    			t41 = space();
+    			t42 = space();
     			th6 = element("th");
     			th6.textContent = "Avatar";
-    			t43 = space();
+    			t44 = space();
     			th7 = element("th");
     			th7.textContent = "Username";
-    			t45 = space();
+    			t46 = space();
     			th8 = element("th");
     			th8.textContent = "Score";
-    			t47 = space();
+    			t48 = space();
     			th9 = element("th");
     			th9.textContent = "Current Level";
-    			t49 = space();
+    			t50 = space();
     			tbody1 = element("tbody");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -8702,169 +8730,182 @@ var app = (function () {
     			set_style(div0, "justify-content", "center");
     			set_style(div0, "overflow", "hidden");
     			set_style(div0, "pointer-events", "none");
-    			add_location(div0, file$2, 39, 0, 944);
+    			add_location(div0, file$2, 39, 0, 1087);
+    			set_style(div1, "position", "fixed");
+    			set_style(div1, "top", "-50px");
+    			set_style(div1, "left", "0");
+    			set_style(div1, "height", "100vh");
+    			set_style(div1, "width", "100vw");
+    			set_style(div1, "display", "flex");
+    			set_style(div1, "justify-content", "center");
+    			set_style(div1, "overflow", "hidden");
+    			set_style(div1, "pointer-events", "none");
+    			add_location(div1, file$2, 62, 0, 1484);
     			attr_dev(img0, "class", "robohash-img");
     			attr_dev(img0, "alt", "robohash");
     			if (!src_url_equal(img0.src, img0_src_value = /*completedPlayers*/ ctx[0][1]?.roboHashUrl)) attr_dev(img0, "src", img0_src_value);
     			attr_dev(img0, "width", "150");
     			attr_dev(img0, "height", "150");
-    			add_location(img0, file$2, 66, 16, 1518);
-    			add_location(h20, file$2, 74, 16, 1793);
-    			add_location(p0, file$2, 75, 16, 1822);
-    			attr_dev(div1, "class", "text-center top-players svelte-13uk91g");
-    			add_location(div1, file$2, 65, 12, 1463);
+    			add_location(img0, file$2, 89, 16, 2058);
+    			add_location(h20, file$2, 96, 16, 2305);
+    			add_location(p0, file$2, 97, 16, 2334);
+    			attr_dev(div2, "class", "text-center top-players svelte-13uk91g");
+    			add_location(div2, file$2, 88, 12, 2003);
     			attr_dev(img1, "class", "robohash-img");
     			attr_dev(img1, "alt", "robohash");
     			if (!src_url_equal(img1.src, img1_src_value = /*completedPlayers*/ ctx[0][0]?.roboHashUrl)) attr_dev(img1, "src", img1_src_value);
     			attr_dev(img1, "width", "200");
     			attr_dev(img1, "height", "200");
-    			add_location(img1, file$2, 84, 16, 2143);
-    			add_location(h21, file$2, 92, 16, 2418);
-    			add_location(p1, file$2, 93, 16, 2447);
-    			attr_dev(div2, "class", "text-center top-players svelte-13uk91g");
-    			set_style(div2, "position", "relative");
-    			set_style(div2, "bottom", "20px");
-    			add_location(div2, file$2, 80, 12, 1998);
+    			add_location(img1, file$2, 106, 16, 2655);
+    			add_location(h21, file$2, 113, 16, 2902);
+    			add_location(p1, file$2, 114, 16, 2931);
+    			attr_dev(div3, "class", "text-center top-players svelte-13uk91g");
+    			set_style(div3, "position", "relative");
+    			set_style(div3, "bottom", "20px");
+    			add_location(div3, file$2, 102, 12, 2510);
     			attr_dev(img2, "class", "robohash-img");
     			attr_dev(img2, "alt", "robohash");
     			if (!src_url_equal(img2.src, img2_src_value = /*completedPlayers*/ ctx[0][2]?.roboHashUrl)) attr_dev(img2, "src", img2_src_value);
     			attr_dev(img2, "width", "150");
     			attr_dev(img2, "height", "150");
-    			add_location(img2, file$2, 99, 16, 2678);
-    			add_location(h22, file$2, 107, 16, 2953);
-    			add_location(p2, file$2, 108, 16, 2982);
-    			attr_dev(div3, "class", "text-center top-players svelte-13uk91g");
-    			add_location(div3, file$2, 98, 12, 2623);
-    			attr_dev(div4, "class", "col d-flex justify-content-center");
-    			add_location(div4, file$2, 64, 8, 1402);
-    			attr_dev(div5, "class", "row");
-    			add_location(div5, file$2, 63, 4, 1375);
-    			attr_dev(div6, "class", "container mt-5");
-    			add_location(div6, file$2, 62, 0, 1341);
+    			add_location(img2, file$2, 120, 16, 3162);
+    			add_location(h22, file$2, 127, 16, 3409);
+    			add_location(p2, file$2, 128, 16, 3438);
+    			attr_dev(div4, "class", "text-center top-players svelte-13uk91g");
+    			add_location(div4, file$2, 119, 12, 3107);
+    			attr_dev(div5, "class", "col d-flex justify-content-center");
+    			add_location(div5, file$2, 87, 8, 1942);
+    			attr_dev(div6, "class", "row");
+    			add_location(div6, file$2, 86, 4, 1915);
+    			attr_dev(div7, "class", "container mt-5");
+    			add_location(div7, file$2, 85, 0, 1881);
     			attr_dev(h50, "class", "card-title");
-    			add_location(h50, file$2, 121, 20, 3421);
+    			add_location(h50, file$2, 142, 20, 3879);
     			attr_dev(th0, "scope", "col");
     			attr_dev(th0, "class", "svelte-13uk91g");
-    			add_location(th0, file$2, 125, 32, 3640);
+    			add_location(th0, file$2, 146, 32, 4098);
     			attr_dev(th1, "scope", "col");
     			attr_dev(th1, "class", "svelte-13uk91g");
-    			add_location(th1, file$2, 126, 32, 3699);
+    			add_location(th1, file$2, 147, 32, 4157);
     			attr_dev(th2, "scope", "col");
     			attr_dev(th2, "class", "svelte-13uk91g");
-    			add_location(th2, file$2, 127, 32, 3760);
+    			add_location(th2, file$2, 148, 32, 4218);
     			attr_dev(th3, "scope", "col");
     			attr_dev(th3, "class", "svelte-13uk91g");
-    			add_location(th3, file$2, 128, 32, 3823);
+    			add_location(th3, file$2, 149, 32, 4281);
     			attr_dev(th4, "scope", "col");
     			attr_dev(th4, "class", "svelte-13uk91g");
-    			add_location(th4, file$2, 129, 32, 3883);
-    			add_location(tr0, file$2, 124, 28, 3602);
-    			add_location(thead0, file$2, 123, 24, 3565);
-    			add_location(tbody0, file$2, 132, 24, 4016);
+    			add_location(th4, file$2, 150, 32, 4341);
+    			add_location(tr0, file$2, 145, 28, 4060);
+    			add_location(thead0, file$2, 144, 24, 4023);
+    			add_location(tbody0, file$2, 153, 24, 4474);
     			attr_dev(table0, "class", "table table-borderless custom-table svelte-13uk91g");
-    			add_location(table0, file$2, 122, 20, 3488);
-    			attr_dev(div7, "class", "card-body");
-    			add_location(div7, file$2, 120, 16, 3376);
-    			attr_dev(div8, "class", "card text-white bg-transparent border-light mb-3");
-    			add_location(div8, file$2, 119, 12, 3296);
-    			attr_dev(div9, "class", "col-lg-6");
-    			add_location(div9, file$2, 118, 8, 3260);
+    			add_location(table0, file$2, 143, 20, 3946);
+    			attr_dev(div8, "class", "card-body");
+    			add_location(div8, file$2, 141, 16, 3834);
+    			attr_dev(div9, "class", "card text-white bg-transparent border-light mb-3");
+    			add_location(div9, file$2, 140, 12, 3754);
+    			attr_dev(div10, "class", "col-lg-6");
+    			add_location(div10, file$2, 139, 8, 3718);
     			attr_dev(h51, "class", "card-title");
-    			add_location(h51, file$2, 159, 20, 5254);
+    			add_location(h51, file$2, 180, 20, 5710);
     			attr_dev(th5, "scope", "col");
     			attr_dev(th5, "class", "svelte-13uk91g");
-    			add_location(th5, file$2, 163, 32, 5467);
+    			add_location(th5, file$2, 184, 32, 5933);
     			attr_dev(th6, "scope", "col");
     			attr_dev(th6, "class", "svelte-13uk91g");
-    			add_location(th6, file$2, 164, 32, 5526);
+    			add_location(th6, file$2, 185, 32, 5992);
     			attr_dev(th7, "scope", "col");
     			attr_dev(th7, "class", "svelte-13uk91g");
-    			add_location(th7, file$2, 165, 32, 5587);
+    			add_location(th7, file$2, 186, 32, 6053);
     			attr_dev(th8, "scope", "col");
     			attr_dev(th8, "class", "svelte-13uk91g");
-    			add_location(th8, file$2, 166, 32, 5650);
+    			add_location(th8, file$2, 187, 32, 6116);
     			attr_dev(th9, "scope", "col");
     			attr_dev(th9, "class", "svelte-13uk91g");
-    			add_location(th9, file$2, 167, 32, 5710);
-    			add_location(tr1, file$2, 162, 28, 5429);
-    			add_location(thead1, file$2, 161, 24, 5392);
-    			add_location(tbody1, file$2, 170, 24, 5839);
+    			add_location(th9, file$2, 188, 32, 6176);
+    			add_location(tr1, file$2, 183, 28, 5895);
+    			add_location(thead1, file$2, 182, 24, 5858);
+    			add_location(tbody1, file$2, 191, 24, 6305);
     			attr_dev(table1, "class", "table table-borderless custom-table svelte-13uk91g");
-    			add_location(table1, file$2, 160, 20, 5315);
-    			attr_dev(div10, "class", "card-body");
-    			add_location(div10, file$2, 158, 16, 5209);
-    			attr_dev(div11, "class", "card text-white bg-transparent border-light mb-3");
-    			add_location(div11, file$2, 157, 12, 5129);
-    			attr_dev(div12, "class", "col-lg-6");
-    			add_location(div12, file$2, 156, 8, 5093);
-    			attr_dev(div13, "class", "row");
-    			add_location(div13, file$2, 117, 4, 3233);
-    			attr_dev(div14, "class", "container leaderboard-container svelte-13uk91g");
-    			add_location(div14, file$2, 116, 0, 3182);
+    			add_location(table1, file$2, 181, 20, 5781);
+    			attr_dev(div11, "class", "card-body");
+    			add_location(div11, file$2, 179, 16, 5665);
+    			attr_dev(div12, "class", "card text-white bg-transparent border-light mb-3");
+    			add_location(div12, file$2, 178, 12, 5585);
+    			attr_dev(div13, "class", "col-lg-6");
+    			add_location(div13, file$2, 177, 8, 5549);
+    			attr_dev(div14, "class", "row");
+    			add_location(div14, file$2, 138, 4, 3691);
+    			attr_dev(div15, "class", "container leaderboard-container svelte-13uk91g");
+    			add_location(div15, file$2, 137, 0, 3640);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div0, anchor);
-    			mount_component(confetti, div0, null);
+    			mount_component(confetti0, div0, null);
     			insert_dev(target, t0, anchor);
-    			insert_dev(target, div6, anchor);
+    			insert_dev(target, div1, anchor);
+    			mount_component(confetti1, div1, null);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, div7, anchor);
+    			append_dev(div7, div6);
     			append_dev(div6, div5);
-    			append_dev(div5, div4);
-    			append_dev(div4, div1);
-    			append_dev(div1, img0);
-    			append_dev(div1, t1);
-    			append_dev(div1, h20);
-    			append_dev(div1, t3);
-    			append_dev(div1, p0);
-    			append_dev(p0, t4);
+    			append_dev(div5, div2);
+    			append_dev(div2, img0);
+    			append_dev(div2, t2);
+    			append_dev(div2, h20);
+    			append_dev(div2, t4);
+    			append_dev(div2, p0);
     			append_dev(p0, t5);
     			append_dev(p0, t6);
     			append_dev(p0, t7);
-    			append_dev(div4, t8);
-    			append_dev(div4, div2);
-    			append_dev(div2, img1);
-    			append_dev(div2, t9);
-    			append_dev(div2, h21);
-    			append_dev(div2, t11);
-    			append_dev(div2, p1);
-    			append_dev(p1, t12);
+    			append_dev(p0, t8);
+    			append_dev(div5, t9);
+    			append_dev(div5, div3);
+    			append_dev(div3, img1);
+    			append_dev(div3, t10);
+    			append_dev(div3, h21);
+    			append_dev(div3, t12);
+    			append_dev(div3, p1);
     			append_dev(p1, t13);
     			append_dev(p1, t14);
     			append_dev(p1, t15);
-    			append_dev(div4, t16);
-    			append_dev(div4, div3);
-    			append_dev(div3, img2);
-    			append_dev(div3, t17);
-    			append_dev(div3, h22);
-    			append_dev(div3, t19);
-    			append_dev(div3, p2);
-    			append_dev(p2, t20);
+    			append_dev(p1, t16);
+    			append_dev(div5, t17);
+    			append_dev(div5, div4);
+    			append_dev(div4, img2);
+    			append_dev(div4, t18);
+    			append_dev(div4, h22);
+    			append_dev(div4, t20);
+    			append_dev(div4, p2);
     			append_dev(p2, t21);
     			append_dev(p2, t22);
     			append_dev(p2, t23);
-    			insert_dev(target, t24, anchor);
-    			insert_dev(target, div14, anchor);
-    			append_dev(div14, div13);
-    			append_dev(div13, div9);
+    			append_dev(p2, t24);
+    			insert_dev(target, t25, anchor);
+    			insert_dev(target, div15, anchor);
+    			append_dev(div15, div14);
+    			append_dev(div14, div10);
+    			append_dev(div10, div9);
     			append_dev(div9, div8);
-    			append_dev(div8, div7);
-    			append_dev(div7, h50);
-    			append_dev(div7, t26);
-    			append_dev(div7, table0);
+    			append_dev(div8, h50);
+    			append_dev(div8, t27);
+    			append_dev(div8, table0);
     			append_dev(table0, thead0);
     			append_dev(thead0, tr0);
     			append_dev(tr0, th0);
-    			append_dev(tr0, t28);
+    			append_dev(tr0, t29);
     			append_dev(tr0, th1);
-    			append_dev(tr0, t30);
+    			append_dev(tr0, t31);
     			append_dev(tr0, th2);
-    			append_dev(tr0, t32);
+    			append_dev(tr0, t33);
     			append_dev(tr0, th3);
-    			append_dev(tr0, t34);
+    			append_dev(tr0, t35);
     			append_dev(tr0, th4);
-    			append_dev(table0, t36);
+    			append_dev(table0, t37);
     			append_dev(table0, tbody0);
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
@@ -8873,25 +8914,25 @@ var app = (function () {
     				}
     			}
 
-    			append_dev(div13, t37);
+    			append_dev(div14, t38);
+    			append_dev(div14, div13);
     			append_dev(div13, div12);
     			append_dev(div12, div11);
-    			append_dev(div11, div10);
-    			append_dev(div10, h51);
-    			append_dev(div10, t39);
-    			append_dev(div10, table1);
+    			append_dev(div11, h51);
+    			append_dev(div11, t40);
+    			append_dev(div11, table1);
     			append_dev(table1, thead1);
     			append_dev(thead1, tr1);
     			append_dev(tr1, th5);
-    			append_dev(tr1, t41);
+    			append_dev(tr1, t42);
     			append_dev(tr1, th6);
-    			append_dev(tr1, t43);
+    			append_dev(tr1, t44);
     			append_dev(tr1, th7);
-    			append_dev(tr1, t45);
+    			append_dev(tr1, t46);
     			append_dev(tr1, th8);
-    			append_dev(tr1, t47);
+    			append_dev(tr1, t48);
     			append_dev(tr1, th9);
-    			append_dev(table1, t49);
+    			append_dev(table1, t50);
     			append_dev(table1, tbody1);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -8907,22 +8948,22 @@ var app = (function () {
     				attr_dev(img0, "src", img0_src_value);
     			}
 
-    			if ((!current || dirty & /*completedPlayers*/ 1) && t4_value !== (t4_value = /*completedPlayers*/ ctx[0][1]?.username + "")) set_data_dev(t4, t4_value);
-    			if ((!current || dirty & /*completedPlayers*/ 1) && t6_value !== (t6_value = /*completedPlayers*/ ctx[0][1]?.score + "")) set_data_dev(t6, t6_value);
+    			if ((!current || dirty & /*completedPlayers*/ 1) && t5_value !== (t5_value = /*completedPlayers*/ ctx[0][1]?.username + "")) set_data_dev(t5, t5_value);
+    			if ((!current || dirty & /*completedPlayers*/ 1) && t7_value !== (t7_value = /*completedPlayers*/ ctx[0][1]?.score + "")) set_data_dev(t7, t7_value);
 
     			if (!current || dirty & /*completedPlayers*/ 1 && !src_url_equal(img1.src, img1_src_value = /*completedPlayers*/ ctx[0][0]?.roboHashUrl)) {
     				attr_dev(img1, "src", img1_src_value);
     			}
 
-    			if ((!current || dirty & /*completedPlayers*/ 1) && t12_value !== (t12_value = /*completedPlayers*/ ctx[0][0]?.username + "")) set_data_dev(t12, t12_value);
-    			if ((!current || dirty & /*completedPlayers*/ 1) && t14_value !== (t14_value = /*completedPlayers*/ ctx[0][0]?.score + "")) set_data_dev(t14, t14_value);
+    			if ((!current || dirty & /*completedPlayers*/ 1) && t13_value !== (t13_value = /*completedPlayers*/ ctx[0][0]?.username + "")) set_data_dev(t13, t13_value);
+    			if ((!current || dirty & /*completedPlayers*/ 1) && t15_value !== (t15_value = /*completedPlayers*/ ctx[0][0]?.score + "")) set_data_dev(t15, t15_value);
 
     			if (!current || dirty & /*completedPlayers*/ 1 && !src_url_equal(img2.src, img2_src_value = /*completedPlayers*/ ctx[0][2]?.roboHashUrl)) {
     				attr_dev(img2, "src", img2_src_value);
     			}
 
-    			if ((!current || dirty & /*completedPlayers*/ 1) && t20_value !== (t20_value = /*completedPlayers*/ ctx[0][2]?.username + "")) set_data_dev(t20, t20_value);
-    			if ((!current || dirty & /*completedPlayers*/ 1) && t22_value !== (t22_value = /*completedPlayers*/ ctx[0][2]?.score + "")) set_data_dev(t22, t22_value);
+    			if ((!current || dirty & /*completedPlayers*/ 1) && t21_value !== (t21_value = /*completedPlayers*/ ctx[0][2]?.username + "")) set_data_dev(t21, t21_value);
+    			if ((!current || dirty & /*completedPlayers*/ 1) && t23_value !== (t23_value = /*completedPlayers*/ ctx[0][2]?.score + "")) set_data_dev(t23, t23_value);
 
     			if (dirty & /*completedPlayers*/ 1) {
     				each_value_1 = /*completedPlayers*/ ctx[0];
@@ -8948,8 +8989,8 @@ var app = (function () {
     				each_blocks_1.length = each_value_1.length;
     			}
 
-    			if (dirty & /*allPlayers*/ 2) {
-    				each_value = /*allPlayers*/ ctx[1];
+    			if (dirty & /*notCompletedPlayers*/ 2) {
+    				each_value = /*notCompletedPlayers*/ ctx[1];
     				validate_each_argument(each_value);
     				let i;
 
@@ -8974,20 +9015,25 @@ var app = (function () {
     		},
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(confetti.$$.fragment, local);
+    			transition_in(confetti0.$$.fragment, local);
+    			transition_in(confetti1.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(confetti.$$.fragment, local);
+    			transition_out(confetti0.$$.fragment, local);
+    			transition_out(confetti1.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div0);
-    			destroy_component(confetti);
+    			destroy_component(confetti0);
     			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div6);
-    			if (detaching) detach_dev(t24);
-    			if (detaching) detach_dev(div14);
+    			if (detaching) detach_dev(div1);
+    			destroy_component(confetti1);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(div7);
+    			if (detaching) detach_dev(t25);
+    			if (detaching) detach_dev(div15);
     			destroy_each(each_blocks_1, detaching);
     			destroy_each(each_blocks, detaching);
     		}
@@ -9010,6 +9056,7 @@ var app = (function () {
     	const api_root = window.location.origin;
     	let completedPlayers = [];
     	let allPlayers = [];
+    	let notCompletedPlayers = [];
 
     	function getPlayer() {
     		var config = {
@@ -9018,8 +9065,9 @@ var app = (function () {
     		};
 
     		axios$1(config).then(function (response) {
-    			$$invalidate(1, allPlayers = response.data.content.sort((p1, p2) => p2.score - p1.score));
+    			allPlayers = response.data.content.sort((p1, p2) => p2.score - p1.score);
     			$$invalidate(0, completedPlayers = allPlayers.filter(player => player.playerLevelState === "COMPLETED"));
+    			$$invalidate(1, notCompletedPlayers = allPlayers.filter(player => player.playerLevelState !== "COMPLETED"));
     		}).catch(function (error) {
     			alert("Could not get players");
     			console.log(error);
@@ -9038,12 +9086,14 @@ var app = (function () {
     		api_root,
     		completedPlayers,
     		allPlayers,
+    		notCompletedPlayers,
     		getPlayer
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('completedPlayers' in $$props) $$invalidate(0, completedPlayers = $$props.completedPlayers);
-    		if ('allPlayers' in $$props) $$invalidate(1, allPlayers = $$props.allPlayers);
+    		if ('allPlayers' in $$props) allPlayers = $$props.allPlayers;
+    		if ('notCompletedPlayers' in $$props) $$invalidate(1, notCompletedPlayers = $$props.notCompletedPlayers);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -9054,7 +9104,7 @@ var app = (function () {
     		getPlayer();
     	}
 
-    	return [completedPlayers, allPlayers];
+    	return [completedPlayers, notCompletedPlayers];
     }
 
     class Leaderboard extends SvelteComponentDev {
