@@ -5,6 +5,8 @@ Welcome to GuessIT, an intriguing guessing game where your ability to estimate m
 
 ![GuessIT Logo](src/main/resources/static/images/guessItLogo.PNG) 
 
+Documentation: [here](Dokumentation%20GuessIt.pdf) 
+
 ## Table of Contents
 
 - [Features](#features)
