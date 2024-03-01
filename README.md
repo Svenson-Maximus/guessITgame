@@ -23,7 +23,7 @@ Documentation: [here](Dokumentation%20GuessIt.pdf)
 
 ## Technologies
 
-- **Backend**: Developed with the robust Spring Boot Framework.
+- **Backend**: Developed with the robust Java Spring Boot Framework.
 - **Frontend**: Interactive and sleek UI using Svelte.
 - **Database**: Uses MongoDB on Atlas for data persistence.
 - **Deployment**: The game was hosted on [Azure App Service](https://guess-it-game.azurewebsites.net/). Unfortunately, it's currently not available due to the university decommissioning the project.
